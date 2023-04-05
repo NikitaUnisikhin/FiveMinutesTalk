@@ -1,7 +1,7 @@
-namespace FiveMinutesTalk.Models;
+/*namespace FiveMinutesTalk.Models;
 
-public class TypeOfQuestion
+public class QuestionTypeModel
 {
     public int Id { get; set; }
     public required string Name { get; set; }
-}
+}*/
