@@ -38,33 +38,13 @@ function newField() {
     // Здесь создаем выбор типа вопроса
     let lbl = document.createElement("label");
     let spn = document.createElement("span");
-    spn.textContent = "Тип вопроса:";
+    spn.textContent = "Тип вопроса: ";
     let questionType = document.createElement("select");
     
-    let opt1 = document.createElement("option");
-    opt1.setAttribute("value", "Текст");
-    let nod1 = document.createTextNode("Текст");
-    opt1.appendChild(nod1);
-
-    let opt2 = document.createElement("option");
-    opt2.setAttribute("value", "Код");
-    let nod2 = document.createTextNode("Код");
-    opt2.appendChild(nod2);
-
-    let opt3 = document.createElement("option");
-    opt3.setAttribute("value", "Один из списка");
-    let nod3 = document.createTextNode("Один из списка");
-    opt3.appendChild(nod3);
-
-    let opt4 = document.createElement("option");
-    opt4.setAttribute("value", "Несколько из списка");
-    let nod4 = document.createTextNode("Несколько из списка");
-    opt4.appendChild(nod4);
-
-    questionType.appendChild(opt1);
-    questionType.appendChild(opt2);
-    questionType.appendChild(opt3);
-    questionType.appendChild(opt4);
+    questionType.options[0] = new Option("Текст", "Текст");
+    questionType.options[1] = new Option("Код", "Код");
+    questionType.options[2] = new Option("Один из списка", "Один из списка");
+    questionType.options[3] = new Option("Несколько из списка", "Несколько из списка");
     
     lbl.appendChild(spn);
     lbl.appendChild(questionType);
