@@ -22,17 +22,16 @@ function newField() {
     let div = document.createElement("div");
     div.setAttribute("class", "form-group");
     
-    
     // создаем новое поле с новым id, name ДОЛЖЕН СОВПАДАТЬ С ИМЕНЕМ ПОЛЯ В МОДЕЛИ!!!
     let field = document.createElement("input");
     field.setAttribute("class", "form-control");
-    field.setAttribute("id", "Questions[" + questionId++ + "]");
+    field.setAttribute("id", "Questions[" + questionId + "]");
     field.setAttribute("name", "Questions");
     field.setAttribute("type", "text");
     field.setAttribute("placeholder", "Введите текст вопроса");
 
     // а здесь я своими кривыми ручками создаю номера вопросов
-    const questionNumber = document.createTextNode(nextFieldNo + " ");
+    const questionNumber = document.createTextNode(String(nextFieldNo));
     div.appendChild(questionNumber);
     
     // Здесь создаем выбор типа вопроса
@@ -40,11 +39,18 @@ function newField() {
     let spn = document.createElement("span");
     spn.textContent = "Тип вопроса: ";
     let questionType = document.createElement("select");
+    questionType.id = String(questionId);
     
+    // Я посмотрел, что это неправильный вариант записи, но он мне больше понравился благодаря своей краткости и понятности
     questionType.options[0] = new Option("Текст", "Текст");
     questionType.options[1] = new Option("Код", "Код");
     questionType.options[2] = new Option("Один из списка", "Один из списка");
     questionType.options[3] = new Option("Несколько из списка", "Несколько из списка");
+    
+    // При изменении типа будем менять компонеты вопроса
+    questionType.addEventListener('change', function(questionType) {
+        changeComponents(questionType)
+    });
     
     lbl.appendChild(spn);
     lbl.appendChild(questionType);
@@ -61,11 +67,40 @@ function newField() {
     
     // добавляем поле в <div class="form-group"></div>
     div.appendChild(field);
+    
+    // Поле для ответа(здесь будут варианты выбора ответа и т.д.)
+    let div2 = document.createElement("div");
+    div2.innerText = "1111";
+    div.appendChild(div2);
+    
     // добавляем <div class="form-group"><input ... /></div> в главный контейнер
     container.appendChild(div);
+    
+    // Если удачно всё выполнилось до этого и создался новый вопрос, инкрементируем
+    questionId++;
 }
 
 function removeParnet(){
     let revDiv = this.parentElement;
     revDiv.remove();
+}
+
+function changeComponents(questionType){
+    let questType = questionType.currentTarget;
+    let selectedValue = questType.value;
+    let cont = document.getElementById("Questions[" + questType.id + "]");
+    let nextDiv = cont.nextSibling;
+    nextDiv.remove();
+    let newDiv = document.createElement("div");
+    
+    if (selectedValue === "Текст"){
+        newDiv.innerText = "Текст";
+    } else if (selectedValue === "Код"){
+        newDiv.innerText = "Код";
+    } else if (selectedValue === "Один из списка"){
+        newDiv.innerText = "Один из списка";
+    } else if (selectedValue === "Несколько из списка"){
+        newDiv.innerText = "Несколько из списка";
+    }
+    cont.after(newDiv);
 }
