@@ -70,7 +70,6 @@ function newField() {
     
     // Поле для ответа(здесь будут варианты выбора ответа и т.д.)
     let div2 = document.createElement("div");
-    div2.innerText = "1111";
     div.appendChild(div2);
     
     // добавляем <div class="form-group"><input ... /></div> в главный контейнер
@@ -85,9 +84,12 @@ function removeParnet(){
     revDiv.remove();
 }
 
+// Функция в зависимости от выбранного типа будет менять варианты ответа под вопросом
 function changeComponents(questionType){
+    // Получаем элемент на котором произошло событие
     let questType = questionType.currentTarget;
     let selectedValue = questType.value;
+    // здесь, зная id, мы получаем контейнер с вопросом(в дальнейшем я изменю этот костыль)
     let cont = document.getElementById("Questions[" + questType.id + "]");
     let nextDiv = cont.nextSibling;
     nextDiv.remove();
