@@ -28,6 +28,7 @@ function newField() {
     field.setAttribute("id", "Questions[" + questionId + "]");
     field.setAttribute("name", "Questions");
     field.setAttribute("type", "text");
+    field.setAttribute("asp-for", "Text");
     field.setAttribute("placeholder", "Введите текст вопроса");
 
     // а здесь я своими кривыми ручками создаю номера вопросов

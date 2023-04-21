@@ -1,11 +1,12 @@
-﻿@model QuestionModel
+﻿@model QuizModel
 
 <div class="text-center">
     @* без понятия, что за юзинг, не я делал 
     using (Html.BeginForm(FormMethod.Post))*@
     
     <h2 class="display-4">Новый опрос</h2>
-    
+    <input type="text" asp-for='Id' required placeholder="Введите id"/>
+    <input type="text" asp-for='Name' required placeholder="Введите название опроса"/>
     @* вот в этом контейнере мы будем хранить все поля, которые генерятся в newField(){если что это функция в JS файле site} *@
     <div id="questions" class="col-9"></div>
     <input id="addQuestion" type="button" value="Добавить вопрос"/>
