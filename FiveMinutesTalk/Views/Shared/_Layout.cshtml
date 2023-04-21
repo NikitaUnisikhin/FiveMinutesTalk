@@ -13,6 +13,17 @@
         <a class="navbar-logo" asp-area="" asp-controller="Home" asp-action="Index">
             <img class="logo" src="~/images/icon.svg" runat="server" alt="logo"/>
         </a>
+        <div class="right-navbar">
+            <form>
+                <div class="search">
+                    <img class="search-icon" src="images/search.svg" alt="search-icon" style="height: 20px; width: auto">
+                    <input type="search" placeholder="Поиск"/>
+                </div>
+            </form>
+            <button type="submit" class="profile-button">
+                <img src="images/profile.svg" alt="profile-icon">
+            </button>
+        </div>
     </nav>
 </header>
 
