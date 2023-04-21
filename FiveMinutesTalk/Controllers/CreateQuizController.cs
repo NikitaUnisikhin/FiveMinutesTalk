@@ -1,5 +1,6 @@
 using FiveMinutesTalk.Models;
 using Microsoft.AspNetCore.Mvc;
+using FiveMinutesTalk.Quizes;
 
 namespace FiveMinutesTalk.Controllers;
 
@@ -11,8 +12,9 @@ public class CreateQuizController : Controller
     }
 
     [HttpPost]
-    public IActionResult Check(QuestionModel question)
+    public IActionResult SaveChanges(QuestionModel question)
     {
+        Storage.AddQuiz(question);
         return Redirect("/");
     }
 }

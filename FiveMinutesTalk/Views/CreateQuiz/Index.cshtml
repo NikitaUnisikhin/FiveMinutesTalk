@@ -9,5 +9,7 @@
     @* вот в этом контейнере мы будем хранить все поля, которые генерятся в newField(){если что это функция в JS файле site} *@
     <div id="questions" class="col-9"></div>
     <input id="add" type="button" value="Добавить вопрос"/>
-    <input type="submit" value="Сохранить"/>
+    <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
+        <input type="submit" value="Сохранить"/>
+    </form>
 </div>
