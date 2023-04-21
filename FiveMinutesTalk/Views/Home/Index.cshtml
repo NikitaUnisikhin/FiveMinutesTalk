@@ -1,10 +1,13 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Главная";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Вы можете создать опрос</h1>
-    <form action="CreateQuiz">
-       <button>Создать опрос</button>
-      </form>
+<body>
+<div class="home-polls-text">
+    <h2>Опросы</h2>
+    <img class="divide" src="Images/line.svg" alt="line">
 </div>
+
+<form action="CreateQuiz">
+    <button id="create-poll"> <img src="~/images/plus-create-poll.svg" alt="plus">Создать</button>
+</form>
+</body>
