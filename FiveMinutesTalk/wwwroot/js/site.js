@@ -97,8 +97,10 @@ function changeComponents(questionType){
     
     if (selectedValue === "Текст"){
         newDiv.innerText = "Текст";
+        
     } else if (selectedValue === "Код"){
         newDiv.innerText = "Код";
+        
     } else if (selectedValue === "Один из списка"){
         // здесь создаем кнопку, которая добавляет новый label с ratio кнопкой и вводом
         let addRadio = document.createElement("input");
@@ -109,8 +111,16 @@ function changeComponents(questionType){
             addNewRatio(e)
         });
         newDiv.appendChild(addRadio);
+        
     } else if (selectedValue === "Несколько из списка"){
-        newDiv.innerText = "Несколько из списка";
+        let addCheckbox = document.createElement("input");
+        addCheckbox.setAttribute("value", "Добавить вариант ответа");
+        addCheckbox.setAttribute("type", "button");
+        addCheckbox.setAttribute("id", "addСheckbox[" + questType.id + "]");
+        addCheckbox.addEventListener("click", function(e) {
+            addNewCheckbox(e)
+        });
+        newDiv.appendChild(addCheckbox);
     }
     cont.after(newDiv);
 }
@@ -138,4 +148,28 @@ function addNewRatio(e){
     label.appendChild(ratioText);
     
     addRad.before(label);
+}
+
+// функция по добавлению новых label с checkbox и вводом
+function addNewCheckbox(e){
+    let addCheck = e.currentTarget;
+
+    let label = document.createElement("label");
+    label.setAttribute("id", addCheck.id);
+    label.setAttribute("class", "checkbox-label");
+
+    let checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("name", 'Checkbox[' + addCheck.id + ']')
+    checkbox.setAttribute("id", addCheck.id);
+
+    let checkboxText = document.createElement("input");
+    checkboxText.setAttribute("placeholder", "Напишите вариант ответа");
+    checkboxText.setAttribute("type", "text");
+    checkboxText.setAttribute("id", addCheck.id);
+
+    label.appendChild(checkbox);
+    label.appendChild(checkboxText);
+
+    addCheck.before(label);
 }
