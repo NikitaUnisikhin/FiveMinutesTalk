@@ -6,4 +6,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Domain" />
+      <Folder Include="Service" />
+      <Folder Include="wwwroot\sass" />
+    </ItemGroup>
+
 </Project>
