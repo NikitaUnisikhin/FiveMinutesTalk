@@ -14,7 +14,7 @@ function newField() {
     // определяем контейнер для хранения полей с вопросами
     let container = document.getElementById("questions");
     // получаем текущее количество input (полей для вопросов)
-    let fieldCount = container.getElementsByTagName("input").length;
+    let fieldCount = container.getElementsByClassName("form-group").length;
     // увеличиваем No для нового поля
     let nextFieldNo = fieldCount + 1;
 
@@ -41,11 +41,33 @@ function newField() {
     let questionType = document.createElement("select");
     questionType.id = String(questionId);
     
-    // Я посмотрел, что это неправильный вариант записи, но он мне больше понравился благодаря своей краткости и понятности
-    questionType.options[0] = new Option("Текст", "Текст");
-    questionType.options[1] = new Option("Код", "Код");
-    questionType.options[2] = new Option("Один из списка", "Один из списка");
-    questionType.options[3] = new Option("Несколько из списка", "Несколько из списка");
+    // создаем options для select
+    // изменил обратно, чтобы была возможность добавить аттрибут для типа вопросов
+    let opt1 = document.createElement("option");
+    opt1.setAttribute("value", "0");
+    let nod1 = document.createTextNode("Текст");
+    opt1.appendChild(nod1);
+
+    let opt2 = document.createElement("option");
+    opt2.setAttribute("value", "1");
+    let nod2 = document.createTextNode("Код");
+    opt2.appendChild(nod2);
+
+    let opt3 = document.createElement("option");
+    opt3.setAttribute("value", "2");
+    let nod3 = document.createTextNode("Один из списка");
+    opt3.appendChild(nod3);
+
+    let opt4 = document.createElement("option");
+    opt4.setAttribute("value", "3");
+    let nod4 = document.createTextNode("Несколько из списка");
+    opt4.appendChild(nod4);
+    
+    // добавляем options
+    questionType.appendChild(opt1);
+    questionType.appendChild(opt2);
+    questionType.appendChild(opt3);
+    questionType.appendChild(opt4);
     
     // При изменении типа будем менять компонеты вопроса
     questionType.addEventListener('change', function(questionType) {
@@ -95,13 +117,13 @@ function changeComponents(questionType){
     nextDiv.remove();
     let newDiv = document.createElement("div");
     
-    if (selectedValue === "Текст"){
+    if (selectedValue === "0"){
         newDiv.innerText = "Текст";
         
-    } else if (selectedValue === "Код"){
+    } else if (selectedValue === "1"){
         newDiv.innerText = "Код";
         
-    } else if (selectedValue === "Один из списка"){
+    } else if (selectedValue === "2"){
         // здесь создаем кнопку, которая добавляет новый label с ratio кнопкой и вводом
         let addRadio = document.createElement("input");
         addRadio.setAttribute("value", "Добавить вариант ответа");
@@ -112,7 +134,7 @@ function changeComponents(questionType){
         });
         newDiv.appendChild(addRadio);
         
-    } else if (selectedValue === "Несколько из списка"){
+    } else if (selectedValue === "3"){
         let addCheckbox = document.createElement("input");
         addCheckbox.setAttribute("value", "Добавить вариант ответа");
         addCheckbox.setAttribute("type", "button");
