@@ -1,7 +1,51 @@
+using FiveMinutesTalk.Domain;
+using FiveMinutesTalk.Domain.Entities;
+using FiveMinutesTalk.Domain.Entities.QuestionsTypes;
+using FiveMinutesTalk.Domain.Entities.Repositories.Abstract;
+using FiveMinutesTalk.Domain.Entities.Repositories.EntityFramework;
+using FiveMinutesTalk.Service;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Configuration.AddJsonFile("appsettings.json");
+
+builder.Configuration.Bind("Project", new Config());
+
+builder.Services.AddTransient<IRepository<Question>, EFQuestionsRepository>();
+builder.Services.AddTransient<IRepository<Quiz>, EFQuizzesRepository>();
+builder.Services.AddTransient<DataManager>();
+
+builder.Services.AddDbContext<AppDbContext>(x => x.UseNpgsql(Config.ConnectionString));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.User.RequireUniqueEmail = true;
+    options.Password.RequiredLength = 5;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireDigit = false;
+}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.Name = "auth";
+    options.Cookie.HttpOnly = true;
+    options.LoginPath = "/account/login";
+    options.AccessDeniedPath = "/account/accessdenied";
+    options.SlidingExpiration = true;
+});
+
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("AuthorizedUserArea", policy => policy.RequireRole("authorizedUser"));
+});
+
+builder.Services.AddControllersWithViews(x =>
+{
+    x.Conventions.Add(new AuthorizedUserAreaAuthorization("AuthorizedUser", "AuthorizedUserArea"));
+});
 
 var app = builder.Build();
 
@@ -17,6 +61,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCookiePolicy();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseAuthorization();
 
