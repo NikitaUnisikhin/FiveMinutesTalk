@@ -20,14 +20,14 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
         
         builder.Entity<IdentityRole>().HasData(new IdentityRole
         {
-            Id = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
-            Name = "authorizedUser",
-            NormalizedName = "AUTHORIZEDUSER"
+            Id = "A09B4B9F-27F3-47C4-B83B-CEE4C5C5C874",
+            Name = "admin",
+            NormalizedName = "ADMIN"
         });
 
         builder.Entity<IdentityUser>().HasData(new IdentityUser
         {
-            Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
+            Id = "BCF8F1A1-A9BA-480F-A16C-88DBDCFAA9AC",
             UserName = "admin",
             NormalizedUserName = "ADMIN",
             Email = "my@email.com",
@@ -39,7 +39,32 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
 
         builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
         {
-            RoleId = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
+            RoleId = "A09B4B9F-27F3-47C4-B83B-CEE4C5C5C874",
+            UserId = "BCF8F1A1-A9BA-480F-A16C-88DBDCFAA9AC"
+        });
+        
+        builder.Entity<IdentityRole>().HasData(new IdentityRole
+        {
+            Id = "C8F61226-0EE8-4AEB-9C57-BE198614A1E8",
+            Name = "authUser",
+            NormalizedName = "AUTHUSER"
+        });
+
+        builder.Entity<IdentityUser>().HasData(new IdentityUser
+        {
+            Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
+            UserName = "nikita",
+            NormalizedUserName = "NIKITA",
+            Email = "my@email.com",
+            NormalizedEmail = "MY@EMAIL.COM",
+            EmailConfirmed = true,
+            PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "nikita"),
+            SecurityStamp = string.Empty
+        });
+
+        builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+        {
+            RoleId = "C8F61226-0EE8-4AEB-9C57-BE198614A1E8",
             UserId = "3b62472e-4f66-49fa-a20f-e7685b9565d8"
         });
 

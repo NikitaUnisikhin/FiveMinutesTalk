@@ -151,6 +151,12 @@ namespace FiveMinutesTalk.Migrations
                     b.HasData(
                         new
                         {
+                            Id = "A09B4B9F-27F3-47C4-B83B-CEE4C5C5C874",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
                             Id = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
                             Name = "authorizedUser",
                             NormalizedName = "AUTHORIZEDUSER"
@@ -248,19 +254,35 @@ namespace FiveMinutesTalk.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
+                            Id = "BCF8F1A1-A9BA-480F-A16C-88DBDCFAA9AC",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ed2be62f-471e-4f6b-9a34-529110ea5613",
+                            ConcurrencyStamp = "1e2c0e0b-3294-4972-81cb-4c1f4aa1d7fa",
                             Email = "my@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MY@EMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAK+D5lOLBJdsKLfP2TOIEluBK2o3MmyEVejoXGe8bNUsw9aaentUY890IzjZg0EKw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHeq1YhIOi75OxaLaBzoXIOhlC5fWU5FKs0n108Ek6cAn70XqFsILl4fjBqPu3aIjA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "eaf5e408-c347-49b6-ac54-bccecd88bd8a",
+                            Email = "my@email.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MY@EMAIL.COM",
+                            NormalizedUserName = "NIKITA",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMUIES+Gb+0GRWKBDusvX4q4HQST0uRw3TqUNpBhr4RXHl+dDv5AgvEvbSzso79j4Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "nikita"
                         });
                 });
 
@@ -326,6 +348,11 @@ namespace FiveMinutesTalk.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
 
                     b.HasData(
+                        new
+                        {
+                            UserId = "BCF8F1A1-A9BA-480F-A16C-88DBDCFAA9AC",
+                            RoleId = "A09B4B9F-27F3-47C4-B83B-CEE4C5C5C874"
+                        },
                         new
                         {
                             UserId = "3b62472e-4f66-49fa-a20f-e7685b9565d8",

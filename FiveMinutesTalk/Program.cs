@@ -38,13 +38,14 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-builder.Services.AddAuthorization(options => {
-    options.AddPolicy("AuthorizedUserArea", policy => policy.RequireRole("authorizedUser"));
+builder.Services.AddAuthorization(x =>
+{
+    x.AddPolicy("AuthUserArea", policy => { policy.RequireRole("authUser"); });
 });
 
 builder.Services.AddControllersWithViews(x =>
 {
-    x.Conventions.Add(new AuthorizedUserAreaAuthorization("AuthorizedUser", "AuthorizedUserArea"));
+    x.Conventions.Add(new AuthUserAreaAuthorization("AuthUser", "AuthUserArea"));
 });
 
 var app = builder.Build();
@@ -67,6 +68,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "authUser",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
