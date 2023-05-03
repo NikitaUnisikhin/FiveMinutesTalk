@@ -1,13 +1,30 @@
-﻿@model QuestionModel
+﻿@model QuizModel
 
-<div class="text-center">
+<div class="poll-create">
     @* без понятия, что за юзинг, не я делал 
     using (Html.BeginForm(FormMethod.Post))*@
-    
-    <h2 class="display-4">Новый опрос</h2>
-    
+
+    <input type="text" asp-for="Name" class="name-poll" required value="Новый опрос" placeholder="Введите название"/>
+
     @* вот в этом контейнере мы будем хранить все поля, которые генерятся в newField(){если что это функция в JS файле site} *@
-    <div id="questions" class="col-9"></div>
-    <input id="addQuestion" type="button" value="Добавить вопрос"/>
-    <input type="submit" value="Сохранить"/>
+    <section class="question-block">
+        <section id="questions" class="col-9">
+            <div id="Form1" class="form-group">
+                <label>
+                    <span>Тип вопроса: </span>
+                    <select id="1">
+                        <option value="0">Текст</option>
+                        <option value="1">Код</option>
+                        <option value="2">Один из списка</option>
+                        <option value="3">Несколько из списка</option>
+                    </select>
+                </label>
+                <button class="close-button">X</button>
+                <input class="form-control" id="Question1" name="Question" type="text" placeholder="Введите текст вопроса">
+                <div id="Answer1">Текст</div>
+            </div>
+        </section>
+        <input id="addQuestion" type="button" value="Добавить вопрос"/>
+        <input type="submit" value="Сохранить"/>
+    </section>
 </div>
