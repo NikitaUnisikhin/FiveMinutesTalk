@@ -18,15 +18,18 @@ let baseForm = document.getElementById("Form1");
 
 let section = document.getElementById("questions");
 
+// Копируем изначальную форму
 const copied = baseForm.cloneNode(true);
 
 // Я предлагаю сделать глобальный id для вопросов, чтобы после удаления у нас не было совпадений id вопросов
 let questionId = 1;
 
+// У нас уже есть заранее склонированная форма, поэтому просто изменяем id в зависимости от questionId
 function newField() {
     questionId++;
     let newCopied = copied.cloneNode(true);
     newCopied.id = "Form" + questionId;
+    
     let select = newCopied.querySelector("select");
     select.id = String(questionId);
     select.addEventListener('change', function(questionType) {
@@ -35,9 +38,11 @@ function newField() {
     newCopied.querySelector("#Question1").id = "Question" + questionId;
     newCopied.querySelector("#Answer1").id = "Answer" + questionId;
     newCopied.querySelector(".close-button").addEventListener('click', removeParent);
+    
     section.appendChild(newCopied);
 }
 
+// Удаляет родителя...
 function removeParent(){
     let revDiv = this.parentElement;
     revDiv.remove();
@@ -48,10 +53,12 @@ function changeComponents(questionType){
     // Получаем элемент на котором произошло событие
     let questType = questionType.currentTarget;
     let selectedValue = questType.value;
-    // здесь, зная id, мы получаем контейнер с вопросом
-    console.log(questType.id)
+    
+    // Здесь, зная id, мы получаем контейнер с вопросом и удаляем его
     let cont = document.getElementById("Answer" + questType.id);
     cont.remove();
+    
+    // Тут же создаём новый
     let newDiv = document.createElement("div");
     newDiv.setAttribute("id", "Answer" + questType.id);
     
@@ -74,6 +81,7 @@ function changeComponents(questionType){
         newDiv.appendChild(addRadio);
         
     } else if (selectedValue === "3"){
+        // здесь создаем кнопку, которая добавляет новый label с checkbox кнопкой и вводом
         let addCheckbox = document.createElement("input");
         addCheckbox.setAttribute("value", "Добавить вариант ответа");
         addCheckbox.setAttribute("type", "button");
