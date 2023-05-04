@@ -11,7 +11,7 @@ public class CreateQuizController : Controller
     }
 
     [HttpPost]
-    public IActionResult Check(QuestionModel question)
+    public IActionResult SaveChanges(QuestionModel question)
     {
         return Redirect("/");
     }

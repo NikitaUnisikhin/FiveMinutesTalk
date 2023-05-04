@@ -7,7 +7,30 @@
 
     @*<input type="text" asp-for='Id' required placeholder="Введите id"/>*@
     <input type="text" asp-for="Name" class="name-poll" required value="Новый опрос" placeholder="Введите название"/>
+
+    <input type="text" asp-for="Name" class="name-poll" required value="Новый опрос" placeholder="Введите название"/>
+
     @* вот в этом контейнере мы будем хранить все поля, которые генерятся в newField(){если что это функция в JS файле site} *@
+    <section class="question-block">
+        <section id="questions" class="col-9">
+            <div id="Form1" class="form-group">
+                <label>
+                    <span>Тип вопроса: </span>
+                    <select id="1">
+                        <option value="0">Текст</option>
+                        <option value="1">Код</option>
+                        <option value="2">Один из списка</option>
+                        <option value="3">Несколько из списка</option>
+                    </select>
+                </label>
+                <button class="close-button">X</button>
+                <input class="form-control" id="Question1" name="Question" type="text" placeholder="Введите текст вопроса">
+                <div id="Answer1">Текст</div>
+            </div>
+        </section>
+        <input id="addQuestion" type="button" value="Добавить вопрос"/>
+        <input type="submit" value="Сохранить"/>
+    </section>
     <section class="question-block">
         <section id="questions" class="col-9"></section>
         <button id="add-question"> <img src="~/images/add-question.svg" alt="plus">Добавить вопрос</button>

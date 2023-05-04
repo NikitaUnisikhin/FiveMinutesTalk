@@ -199,3 +199,10 @@ select {
     right: 120px;
     top: 100px;
 }
+.radio-label {
+  display:block;
+}
+
+.checkbox-label {
+  display:block;
+}
