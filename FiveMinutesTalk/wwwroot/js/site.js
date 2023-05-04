@@ -1,5 +1,5 @@
 // Подключение кнопки добавления к функции
-document.querySelector('#addQuestion').addEventListener('click', newField);
+document.querySelector('#add-question').addEventListener('click', newField);
 
 // Подключение изначального select к функции
 document.querySelector('select').addEventListener('change', function (questionType) {
