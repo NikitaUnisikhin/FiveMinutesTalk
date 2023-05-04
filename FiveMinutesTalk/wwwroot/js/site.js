@@ -74,7 +74,6 @@ function changeComponents(questionType){
     newDiv.setAttribute("id", "Answer" + questType.id);
     
     if (selectedValue === "0"){
-        console.log(1);
         newDiv.innerText = "Текст";
         
     } else if (selectedValue === "1"){
@@ -102,8 +101,8 @@ function changeComponents(questionType){
         });
         newDiv.appendChild(addCheckbox);
     }
-    let form = document.getElementById("Form" + questType.id);
-    form.appendChild(newDiv);
+    let addQuest = document.getElementById("AddQuestion" + questType.id);
+    addQuest.before(newDiv);
 }
 
 // функция по добавлению новых label с ratio и вводом
