@@ -4,7 +4,9 @@
 // Write your JavaScript code.
 
 // Подключение кнопки добавления к функции
-document.querySelector('#addQuestion').addEventListener('click', newField);
+document.querySelector('#AddQuestion1').addEventListener('click', function(ev) {
+    newField(ev)
+});
 
 // Подключение изначального select к функции
 document.querySelector('select').addEventListener('change', function(questionType) {
@@ -25,7 +27,10 @@ const copied = baseForm.cloneNode(true);
 let questionId = 1;
 
 // У нас уже есть заранее склонированная форма, поэтому просто изменяем id в зависимости от questionId
-function newField() {
+function newField(ev) {
+    let addQue = ev.currentTarget;
+    let parent = addQue.parentNode;
+    console.log(parent);
     questionId++;
     let newCopied = copied.cloneNode(true);
     newCopied.id = "Form" + questionId;
@@ -39,7 +44,13 @@ function newField() {
     newCopied.querySelector("#Answer1").id = "Answer" + questionId;
     newCopied.querySelector(".close-button").addEventListener('click', removeParent);
     
-    section.appendChild(newCopied);
+    let addQuestion = newCopied.querySelector("#AddQuestion1")
+    addQuestion.id = "AddQuestion" + questionId;
+    addQuestion.addEventListener('click', function(ev) {
+        newField(ev)
+    });
+    
+    parent.after(newCopied);
 }
 
 // Удаляет родителя...
