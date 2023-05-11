@@ -5,7 +5,6 @@
     @* без понятия, что за юзинг, не я делал 
     using (Html.BeginForm(FormMethod.Post))*@
 
-    @*<input type="text" asp-for='Id' required placeholder="Введите id"/>*@
     <input type="text" asp-for="Name" class="name-poll" required value="Новый опрос" placeholder="Введите название"/>
 
     @* вот в этом контейнере мы будем хранить все поля, которые генерятся в newField(){если что это функция в JS файле site} *@
@@ -24,6 +23,7 @@
                 <button class="close-button">X</button>
                 <input class="form-control" id="Question1" name="Question" type="text" placeholder="Введите текст вопроса">
                 <div id="Answer1">Текст</div>
+                <input id="AddQuestion1" type="button" value="Добавить вопрос"/>
             </div>
         </section>
         <button id="add-question"> <img src="~/images/add-question.svg" alt="plus">Добавить вопрос</button>
