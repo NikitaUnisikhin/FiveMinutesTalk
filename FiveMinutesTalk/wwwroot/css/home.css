@@ -1,0 +1,81 @@
+/* Для главной страницы */
+
+#logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 10px;
+
+    position: relative;
+    width: 217px;
+    height: 81px;
+    left: 50px;
+    top: 10px;
+}
+
+#create-poll-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    gap: 15px;
+    color: white;
+    font-size: 20px;
+
+    position: fixed;
+    width: 180px;
+    height: 70px;
+    right: 120px;
+    bottom: 50px;
+
+    background: #69E167;
+
+    box-shadow: -1px -1px 10px rgba(0, 0, 0, 0.15), 5px 5px 10px rgba(0, 0, 0, 0.35);
+    border-radius: 100px;
+    border-color: transparent;
+}
+
+#home-hat {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    gap: 50px;
+
+    position: absolute;
+    width: 655px;
+    height: 45px;
+    right: 120px;
+    top: 40px;
+}
+
+#search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 10px;
+
+    width: 560px;
+    height: 20px;
+
+    background: #EBEBEB;
+    border-radius: 50px;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+#search ::placeholder {
+    font-size: 14px;
+    font-family: "Montserrat Light", serif;
+}
+
+#profile-button {
+    border: none;
+    background-color: transparent;
+}

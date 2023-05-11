@@ -1,8 +1,3 @@
-// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-
 // Подключение кнопки добавления к функции
 document.querySelector('#AddQuestion1').addEventListener('click', function(ev) {
     newField(ev)
@@ -17,8 +12,6 @@ document.querySelector('select').addEventListener('change', function(questionTyp
 document.querySelector(".close-button").addEventListener('click', removeParent);
 
 let baseForm = document.getElementById("Form1");
-
-let section = document.getElementById("questions");
 
 // Копируем изначальную форму
 const copied = baseForm.cloneNode(true);

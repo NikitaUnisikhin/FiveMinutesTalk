@@ -1,32 +1,25 @@
 ﻿@model QuizModel
 
 <body>
-<div class="poll-create">
-    @* без понятия, что за юзинг, не я делал 
-    using (Html.BeginForm(FormMethod.Post))*@
-
-    <input type="text" asp-for="Name" class="name-poll" required value="Новый опрос" placeholder="Введите название"/>
-
-    @* вот в этом контейнере мы будем хранить все поля, которые генерятся в newField(){если что это функция в JS файле site} *@
-    <section class="question-block">
-        <section id="questions" class="col-9">
-            <div id="Form1" class="form-group">
-                <label>
-                    <span>Тип вопроса: </span>
-                    <select id="1">
-                        <option value="0">Текст</option>
-                        <option value="1">Код</option>
-                        <option value="2">Один из списка</option>
-                        <option value="3">Несколько из списка</option>
-                    </select>
-                </label>
-                <button class="close-button">X</button>
-                <input class="form-control" id="Question1" name="Question" type="text" placeholder="Введите текст вопроса">
-                <div id="Answer1">Текст</div>
-                <input id="AddQuestion1" type="button" value="Добавить вопрос"/>
-            </div>
+<input type="text" asp-for="Name" id="name-poll" required value="Новый опрос" placeholder="Введите название"/>
+<section id="questions">
+    <div id="Form1" class="question-block">
+        <section id="question"></section>
+        <section id="hat-question">
+            <input class="form-control" id="Question1" name="Question" type="text" value="Название вопроса" placeholder="Введите название вопроса">
+            <label>
+                <span></span>
+                <select id="1">
+                    <option value="0">Текст</option>
+                    <option value="1">Код</option>
+                    <option value="2">Один из списка</option>
+                    <option value="3">Несколько из списка</option>
+                </select>
+            </label>
         </section>
-        <button id="add-question"> <img src="~/images/add-question.svg" alt="plus">Добавить вопрос</button>
-    </section>
-</div>
+        <div id="Answer1">Текст</div>
+        <button id="AddQuestion1"> <img src="~/images/add-question.svg" alt="plus">Добавить вопрос</button>
+        <button class="close-button">X</button>
+    </div>
+</section>
 </body>

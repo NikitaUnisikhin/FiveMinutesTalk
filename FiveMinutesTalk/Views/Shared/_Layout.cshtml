@@ -5,29 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - FiveMinutesTalk</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/create-poll.css" asp-append-version="true"/>
 </head>
 <body>
 <header>
-    <nav class="navbar">
-        <a class="navbar-logo" asp-area="" asp-controller="Home" asp-action="Index">
-            <img class="logo" src="~/images/icon.svg" runat="server" alt="logo"/>
-        </a>
-        <div class="right-navbar">
-            <form>
-                <div class="search">
-                    <img class="search-icon" src="images/search.svg" alt="search-icon" style="height: 20px; width: auto">
-                    <input type="search" placeholder="Поиск"/>
-                </div>
-            </form>
-            <button type="submit" class="profile-button">
-                <img src="images/profile.svg" alt="profile-icon">
-            </button>
-        </div>
-    </nav>
+    <a asp-area="" asp-controller="Home" asp-action="Index">
+        <img id="logo" src="~/images/icon.svg" runat="server" alt="logo"/>
+    </a>
 </header>
+
 <div class="container">
-    <main role="main" class="pb-3">
+    <main role="main">
         @RenderBody()
     </main>
 </div>

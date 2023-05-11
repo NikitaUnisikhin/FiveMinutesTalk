@@ -5,11 +5,6 @@ html {
     min-height: 100%;
 }
 
-.search ::placeholder {
-    font-size: 14px;
-    font-family: "Montserrat Light", serif;
-}
-
 @media (min-width: 768px) {
     html {
         font-size: 16px;
@@ -40,74 +35,6 @@ body {
     font-family: "Montserrat Light", serif;
 }
 
-#create-poll {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0 40px;
-    gap: 15px;
-    color: white;
-    font-size: 20px;
-
-    position: fixed;
-    width: 180px;
-    height: 70px;
-    right: 120px;
-    bottom: 50px;
-
-    background: #69E167;
-
-    box-shadow: -1px -1px 10px rgba(0, 0, 0, 0.15), 5px 5px 10px rgba(0, 0, 0, 0.35);
-    border-radius: 100px;
-    border-color: transparent;
-}
-
-.navbar {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    left: 40px;
-    top: 10px;
-    grid-gap: 30%;
-    align-items: center;
-}
-
-.home-polls-text {
-    position: relative;
-    left: 40px;
-    top: 50px;
-}
-
-.empty-polls {
-    position: relative;
-    text-align: center;
-    top: 100px;
-}
-
-.logo {
-    height: 70px;
-    width: auto;
-}
-
-.search {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 10px 15px;
-    gap: 10px;
-
-    width: 560px;
-    height: 20px;
-
-    background: #EBEBEB;
-    border-radius: 50px;
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
 input:focus {
     outline: none;
 }
@@ -117,33 +44,6 @@ button, input, select {
     border: none;
     align-items: center;
     font-family: "Montserrat SemiBold", serif;
-}
-
-.right-navbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0px;
-    gap: 50px;
-}
-
-.profile-button {
-    border: none;
-    background-color: transparent;
-}
-
-.poll-create {
-    position: relative;
-    text-align: center;
-    top: 50px;
-}
-
-.poll-create .name-poll {
-    font-size: 30px;
-    height: 30px;
-    background-color: transparent;
-    border: none;
 }
 
 #add-question {
@@ -156,16 +56,6 @@ button, input, select {
     height: 40px;
     border-radius: 100px;
 
-}
-
-#questions {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;    
-    align-items: center;
-    padding: 0;
-    gap: 30px;
-    position: relative;
 }
 
 select {
@@ -187,22 +77,52 @@ select {
 
 }
 
-.question-block {
+.form-group {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     padding: 0;
-    gap: 100px;
+    gap: 30px;
 
-    position: absolute;
     width: 838px;
-    right: 120px;
-    top: 100px;
+    height: 250px;
 }
+
+#hat-question {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 20px;
+
+    width: 828px;
+    height: 45px;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+#question {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0 10px 0 0;
+    gap: 5px;
+
+    width: 838px;
+    height: 94px;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
 .radio-label {
-  display:block;
+    display: block;
 }
 
 .checkbox-label {
-  display:block;
+    display: block;
 }
