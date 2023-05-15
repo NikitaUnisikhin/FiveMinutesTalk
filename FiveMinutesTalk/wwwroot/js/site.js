@@ -63,14 +63,15 @@ function changeComponents(questionType){
     // Получаем элемент на котором произошло событие
     let questType = questionType.currentTarget;
     let selectedValue = questType.value;
+    let id = questType.id;
     
     // Здесь, зная id, мы получаем контейнер с вопросом и удаляем его
-    let cont = document.getElementById("Answer" + questType.id);
+    let cont = document.getElementById("Answer" + id);
     cont.remove();
     
     // Тут же создаём новый
     let newDiv = document.createElement("div");
-    newDiv.setAttribute("id", "Answer" + questType.id);
+    newDiv.setAttribute("id", "Answer" + id);
     
     if (selectedValue === "0"){
         newDiv.innerText = "Текст";
@@ -83,9 +84,10 @@ function changeComponents(questionType){
         let addRadio = document.createElement("input");
         addRadio.setAttribute("value", "Добавить вариант ответа");
         addRadio.setAttribute("type", "button");
-        addRadio.setAttribute("id", "AddRadio" + questType.id);
+        addRadio.setAttribute("id", "AddRadio" + id);
+        let col = 0;
         addRadio.addEventListener("click", function(e) {
-            addNewRadio(e)
+            addNewRadio(e, id, col++)
         });
         addRadio.setAttribute("class", "add-variant");
         newDiv.appendChild(addRadio);
@@ -95,35 +97,36 @@ function changeComponents(questionType){
         let addCheckbox = document.createElement("input");
         addCheckbox.setAttribute("value", "Добавить вариант ответа");
         addCheckbox.setAttribute("type", "button");
-        addCheckbox.setAttribute("id", "AddСheckbox" + questType.id);
+        addCheckbox.setAttribute("id", "AddСheckbox" + id);
+        let col = 0;
         addCheckbox.addEventListener("click", function(e) {
-            addNewCheckbox(e)
+            addNewCheckbox(e, id, col++)
         });
         addCheckbox.setAttribute("class", "add-variant");
         newDiv.appendChild(addCheckbox);
     }
-    let addQuest = document.getElementById("AddQuestion" + questType.id);
+    let addQuest = document.getElementById("AddQuestion" + id);
     addQuest.before(newDiv);
 }
 
 // функция по добавлению новых label с ratio и вводом
-function addNewRadio(e){
+function addNewRadio(e, id, col){
     // получаем из события нажатия, на каком объекте это произошло
     let addRad = e.currentTarget;
     
     let label = document.createElement("label");
-    label.setAttribute("id", addRad.id);
+    label.setAttribute("id", "Label" + id + `-${col}`);
     label.setAttribute("class", "radio-label");
     
     let radio = document.createElement("input");
     radio.setAttribute("type", "radio");
-    radio.setAttribute("name", addRad.id)
-    radio.setAttribute("id", addRad.id);
+    radio.setAttribute("name", "Radio" + id)
+    radio.setAttribute("id", "Radio" + id + `-${col}`);
     
     let radioText = document.createElement("input");
     radioText.setAttribute("placeholder", "Текст");
     radioText.setAttribute("type", "text");
-    radioText.setAttribute("id", addRad.id);
+    radioText.setAttribute("id", "RadioText" + id + `-${col}`);
     
     label.appendChild(radio);
     label.appendChild(radioText);
@@ -132,23 +135,23 @@ function addNewRadio(e){
 }
 
 // функция по добавлению новых label с checkbox и вводом
-function addNewCheckbox(e){
+function addNewCheckbox(e, id, col){
     let addCheck = e.currentTarget;
 
     let label = document.createElement("label");
-    label.setAttribute("id", addCheck.id);
+    label.setAttribute("id", "Label" + id + `-${col}`);
     label.setAttribute("class", "checkbox-label");
 
     let checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
-    checkbox.setAttribute("name", addCheck.id)
-    checkbox.setAttribute("id", addCheck.id);
+    checkbox.setAttribute("name", "Checkbox" + id)
+    checkbox.setAttribute("id", "Checkbox" + id + `-${col}`);
     checkbox.setAttribute("class", "checkbox")
 
     let checkboxText = document.createElement("input");
     checkboxText.setAttribute("placeholder", "Текст");
     checkboxText.setAttribute("type", "text");
-    checkboxText.setAttribute("id", addCheck.id);
+    checkboxText.setAttribute("id", "CheckboxText" + id + `-${col}`);
     
     /*let questionsArrayIndex = document.getElementsByClassName('checkbox-label').length;
     let answersArrayIndex = d
