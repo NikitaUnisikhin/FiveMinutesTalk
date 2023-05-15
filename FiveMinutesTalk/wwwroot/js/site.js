@@ -1,4 +1,4 @@
-// Подключение кнопки добавления к функции
+﻿// Подключение кнопки добавления к функции
 document.querySelector('#AddQuestion1').addEventListener('click', function(ev) {
     newField(ev)
 });
@@ -27,6 +27,12 @@ function newField(ev) {
     questionId++;
     let newCopied = copied.cloneNode(true);
     newCopied.id = "Form" + questionId;
+    
+    let arrayIndex = questionId - 1;
+    let formControl = newCopied.getElementsByClassName('form-control')[0];
+    formControl.name = `questions[${arrayIndex}].Text`;
+    let formSelect = newCopied.getElementsByClassName('form-select')[0];
+    formSelect.name = `questions[${arrayIndex}].Type`;    
     
     let select = newCopied.querySelector("select");
     select.id = String(questionId);
@@ -143,6 +149,10 @@ function addNewCheckbox(e){
     checkboxText.setAttribute("placeholder", "Текст");
     checkboxText.setAttribute("type", "text");
     checkboxText.setAttribute("id", addCheck.id);
+    
+    /*let questionsArrayIndex = document.getElementsByClassName('checkbox-label').length;
+    let answersArrayIndex = d
+    checkboxText.setAttribute("name", `questions[${arrayIndex}].AnswerOptions[]`)*/
 
     label.appendChild(checkbox);
     label.appendChild(checkboxText);
