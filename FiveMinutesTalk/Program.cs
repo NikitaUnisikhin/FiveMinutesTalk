@@ -15,6 +15,7 @@ builder.Configuration.Bind("Project", new Config());
 
 builder.Services.AddTransient<IRepository<Question>, EFQuestionsRepository>();
 builder.Services.AddTransient<IRepository<Quiz>, EFQuizzesRepository>();
+builder.Services.AddTransient<IRepository<QuizQuestion>, EFQuizQuestionsRepository>();
 builder.Services.AddTransient<DataManager>();
 
 builder.Services.AddDbContext<AppDbContext>(x => x.UseNpgsql(Config.ConnectionString));
@@ -40,12 +41,12 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddAuthorization(x =>
 {
-    x.AddPolicy("AuthUserArea", policy => { policy.RequireRole("authUser"); });
+    x.AddPolicy("UserArea", policy => { policy.RequireRole("user"); });
 });
 
 builder.Services.AddControllersWithViews(x =>
 {
-    x.Conventions.Add(new AuthUserAreaAuthorization("AuthUser", "AuthUserArea"));
+    x.Conventions.Add(new UserAreaAuthorization("User", "UserArea"));
 });
 
 var app = builder.Build();
@@ -70,7 +71,7 @@ app.UseAuthorization();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "authUser",
+    name: "user",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(

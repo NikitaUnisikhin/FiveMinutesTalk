@@ -2,27 +2,27 @@ using FiveMinutesTalk.Domain.Entities.Repositories.Abstract;
 
 namespace FiveMinutesTalk.Domain.Entities.Repositories.EntityFramework;
 
-public class EFQuizzesRepository : IRepository<Quiz>
+public class EFQuizQuestionsRepository : IRepository<QuizQuestion>
 {
     private readonly AppDbContext context;
 
-    public EFQuizzesRepository(AppDbContext context)
+    public EFQuizQuestionsRepository(AppDbContext context)
     {
         this.context = context;
     }
     
-    public IQueryable<Quiz> GetItems()
+    public IQueryable<QuizQuestion> GetItems()
     {
-        return context.Quizzes;
+        return context.QuizQuestions;
     }
 
-    public Quiz GetItemById(Guid id)
+    public QuizQuestion GetItemById(Guid id)
     {
-        return context.Quizzes
+        return context.QuizQuestions
             .FirstOrDefault(x => x.Id == id);
     }
 
-    public void SaveItem(Quiz entity)
+    public void SaveItem(QuizQuestion entity)
     {
         context.Add(entity);
         context.SaveChanges();
@@ -30,10 +30,11 @@ public class EFQuizzesRepository : IRepository<Quiz>
 
     public void DeleteItem(Guid id)
     {
-        context.Quizzes.Remove(new Quiz()
+        context.QuizQuestions.Remove(new QuizQuestion()
         {
             Id = id
         });
         context.SaveChanges();
     }
+   
 }

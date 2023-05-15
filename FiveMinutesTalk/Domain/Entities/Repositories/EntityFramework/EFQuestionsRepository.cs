@@ -1,6 +1,5 @@
 using FiveMinutesTalk.Domain.Entities.QuestionsTypes;
 using FiveMinutesTalk.Domain.Entities.Repositories.Abstract;
-using Microsoft.EntityFrameworkCore;
 
 namespace FiveMinutesTalk.Domain.Entities.Repositories.EntityFramework;
 
@@ -26,8 +25,7 @@ public class EFQuestionsRepository : IRepository<Question>
 
     public void SaveItem(Question entity)
     {
-        context.Entry(entity).State = entity.Id == default ? 
-            EntityState.Added : EntityState.Modified;
+        context.Add(entity);
         context.SaveChanges();
     }
 
