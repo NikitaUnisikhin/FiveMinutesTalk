@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace FiveMinutesTalk.Service;
 
-public class AuthUserAreaAuthorization : IControllerModelConvention
+public class UserAreaAuthorization : IControllerModelConvention
 {
     private readonly string area;
     private readonly string policy;
 
-    public AuthUserAreaAuthorization(string area, string policy)
+    public UserAreaAuthorization(string area, string policy)
     {
         this.area = area;
         this.policy = policy;

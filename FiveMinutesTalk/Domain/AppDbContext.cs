@@ -8,12 +8,12 @@ namespace FiveMinutesTalk.Domain;
 
 public class AppDbContext : IdentityDbContext<IdentityUser>
 {
-    public DbSet<Quiz> Quizzes;
-    public DbSet<Question> Questions;
-    public DbSet<QuizQuestion> QuizQuestions;
+    public DbSet<Quiz> Quizzes { get; set; }
+    public DbSet<Question> Questions { get; set; }
+    public DbSet<QuizQuestion> QuizQuestions { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -46,8 +46,8 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
         builder.Entity<IdentityRole>().HasData(new IdentityRole
         {
             Id = "C8F61226-0EE8-4AEB-9C57-BE198614A1E8",
-            Name = "authUser",
-            NormalizedName = "AUTHUSER"
+            Name = "user",
+            NormalizedName = "USER"
         });
 
         builder.Entity<IdentityUser>().HasData(new IdentityUser

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FiveMinutesTalk.Controllers;
 
-[Authorize]
 public class AccountController : Controller
 {
     private readonly UserManager<IdentityUser> userManager;
@@ -17,16 +16,48 @@ public class AccountController : Controller
         signInManager = signinMgr;
     }
 
-    [AllowAnonymous]
-    public IActionResult Login(string returnUrl)
+    [HttpGet]
+    public IActionResult Register()
+    {
+        return View();
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Register(RegisterViewModel model)
+    {
+        if(ModelState.IsValid)
+        {
+            var user = new IdentityUser()
+            {
+                UserName = model.Email,
+                Email = model.Email
+            };
+
+            var result = await userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await signInManager.SignInAsync(user, false);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+        }
+        return View(model);
+    }
+    
+    public IActionResult Login(string returnUrl = null)
     {
         ViewBag.returnUrl = returnUrl;
         return View(new LoginViewModel());
     }
-    
+
     [HttpPost]
-    [AllowAnonymous]
-    public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
+    public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
     {
         if (ModelState.IsValid)
         {

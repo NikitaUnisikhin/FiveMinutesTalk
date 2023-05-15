@@ -8,10 +8,13 @@ public class DataManager
 {
     public IRepository<Question> Questions { get; set; }
     public IRepository<Quiz> Quizzes { get; set; }
+    public IRepository<QuizQuestion> QuizQuestions { get; set; }
 
-    public DataManager(IRepository<Question> questions, IRepository<Quiz> quizzes)
+    public DataManager(IRepository<Question> questions, IRepository<Quiz> quizzes, 
+        IRepository<QuizQuestion> quizQuestions)
     {
         Questions = questions;
         Quizzes = quizzes;
+        QuizQuestions = quizQuestions;
     }
 }

@@ -5,11 +5,11 @@ namespace FiveMinutesTalk.Models;
 public class LoginViewModel
 {
     [Microsoft.Build.Framework.Required]
-    [Display(Name = "Логин")]
+    [Display(Name = "Email")]
     public string UserName { get; set; }
 
     [Required] 
-    //[UIHint("password")]
+    [UIHint("password")]
     [Display(Name = "Пароль")]
     public string Password { get; set; }
     

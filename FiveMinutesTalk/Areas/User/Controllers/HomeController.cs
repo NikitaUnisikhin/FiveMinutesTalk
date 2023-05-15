@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FiveMinutesTalk.Areas.Admin.Controllers;
 
-[Area("AuthUser")]
+[Area("User")]
 public class HomeController : Controller
 {
     public IActionResult Index()
     {
-        return View("~/Areas/AuthUser/Views/Index.cshtml");
+        return View("~/Areas/User/Views/Index.cshtml");
     }
 }
