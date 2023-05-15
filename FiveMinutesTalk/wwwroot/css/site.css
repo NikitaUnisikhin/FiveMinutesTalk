@@ -1,14 +1,8 @@
 html {
-    font-size: 20px;
+    font-size: 16px;
     font-family: "Montserrat", serif;
     position: relative;
     min-height: 100%;
-}
-
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -44,85 +38,4 @@ button, input, select {
     border: none;
     align-items: center;
     font-family: "Montserrat SemiBold", serif;
-}
-
-#add-question {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0 1px;
-    gap: 15px;
-    width: 170px;
-    height: 40px;
-    border-radius: 100px;
-
-}
-
-select {
-    box-sizing: border-box;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    text-align: center;
-
-    width: 220px;
-    height: 35px;
-
-    /* green */
-
-    border: 1px solid #69E167;
-    border-radius: 15px;
-
-    /* Inside auto layout */
-
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    gap: 30px;
-
-    width: 838px;
-    height: 250px;
-}
-
-#hat-question {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0;
-    gap: 20px;
-
-    width: 828px;
-    height: 45px;
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-#question {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 0 10px 0 0;
-    gap: 5px;
-
-    width: 838px;
-    height: 94px;
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-.radio-label {
-    display: block;
-}
-
-.checkbox-label {
-    display: block;
 }

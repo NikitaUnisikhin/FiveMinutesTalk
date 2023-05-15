@@ -1,25 +1,25 @@
 ﻿@model QuizModel
 
 <body>
-<input type="text" asp-for="Name" id="name-poll" required value="Новый опрос" placeholder="Введите название"/>
-<section id="questions">
-    <div id="Form1" class="question-block">
-        <section id="question"></section>
-        <section id="hat-question">
-            <input class="form-control" id="Question1" name="Question" type="text" value="Название вопроса" placeholder="Введите название вопроса">
-            <label>
-                <span></span>
-                <select id="1">
-                    <option value="0">Текст</option>
-                    <option value="1">Код</option>
-                    <option value="2">Один из списка</option>
-                    <option value="3">Несколько из списка</option>
-                </select>
-            </label>
-        </section>
-        <div id="Answer1">Текст</div>
-        <button id="AddQuestion1"> <img src="~/images/add-question.svg" alt="plus">Добавить вопрос</button>
-        <button class="close-button">X</button>
-    </div>
+<section id="create-poll-content">
+    <input type="text" asp-for="Name" id="name-poll" required value="Новый опрос" placeholder="Введите название"/>
+    <section id="questions">
+        <div id="Form1" class="question-block">
+            <section id="hat-question">
+                <input class="form-control" id="Question1" name="Question" type="text" value="Название вопроса" placeholder="Введите название вопроса">
+                <label>
+                    <select id="1">
+                        <option value="0">Текст</option>
+                        <option value="1">Код</option>
+                        <option value="2">Один из списка</option>
+                        <option value="3">Несколько из списка</option>
+                    </select>
+                </label>
+            </section>
+            <div id="Answer1">Текст</div>
+            <button id="AddQuestion1" class="add-question"> <img src="~/images/add-question.svg" alt="plus">Добавить вопрос</button>
+            <button class="close-button">X</button>
+        </div>
+    </section>
 </section>
 </body>

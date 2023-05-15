@@ -81,6 +81,7 @@ function changeComponents(questionType){
         addRadio.addEventListener("click", function(e) {
             addNewRadio(e)
         });
+        addRadio.setAttribute("class", "add-variant");
         newDiv.appendChild(addRadio);
         
     } else if (selectedValue === "3"){
@@ -92,6 +93,7 @@ function changeComponents(questionType){
         addCheckbox.addEventListener("click", function(e) {
             addNewCheckbox(e)
         });
+        addCheckbox.setAttribute("class", "add-variant");
         newDiv.appendChild(addCheckbox);
     }
     let addQuest = document.getElementById("AddQuestion" + questType.id);
@@ -113,7 +115,7 @@ function addNewRadio(e){
     radio.setAttribute("id", addRad.id);
     
     let radioText = document.createElement("input");
-    radioText.setAttribute("placeholder", "Напишите вариант ответа");
+    radioText.setAttribute("placeholder", "Текст");
     radioText.setAttribute("type", "text");
     radioText.setAttribute("id", addRad.id);
     
@@ -135,9 +137,10 @@ function addNewCheckbox(e){
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("name", addCheck.id)
     checkbox.setAttribute("id", addCheck.id);
+    checkbox.setAttribute("class", "checkbox")
 
     let checkboxText = document.createElement("input");
-    checkboxText.setAttribute("placeholder", "Напишите вариант ответа");
+    checkboxText.setAttribute("placeholder", "Текст");
     checkboxText.setAttribute("type", "text");
     checkboxText.setAttribute("id", addCheck.id);
 
