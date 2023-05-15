@@ -134,6 +134,23 @@ function addNewRadio(e, id, col){
     addRad.before(label);
 }
 
+// обработка взаимодействия с чекбоксом
+let countCorrectAnswers = new Map();
+function checkMark(checkboxId, questionIndex, answerIndex){
+    let checkbox = document.getElementById(checkboxId);
+    if (checkbox.checked === true){
+        if (countCorrectAnswers[questionIndex] === undefined)
+            countCorrectAnswers[questionIndex] = 0;
+        countCorrectAnswers[questionIndex]++;
+        checkbox.name = `questions[${questionIndex}].CorrectAnswers[${countCorrectAnswers[questionIndex] - 1}]`
+        checkbox.value = answerIndex;
+    }
+    else {
+        countCorrectAnswers[questionIndex]--;
+        checkbox.name = '';
+    }
+}
+
 // функция по добавлению новых label с checkbox и вводом
 function addNewCheckbox(e, id, col){
     let addCheck = e.currentTarget;
@@ -147,15 +164,15 @@ function addNewCheckbox(e, id, col){
     checkbox.setAttribute("name", "Checkbox" + id)
     checkbox.setAttribute("id", "Checkbox" + id + `-${col}`);
     checkbox.setAttribute("class", "checkbox")
+    checkbox.onclick = () => {
+        checkMark(checkbox.id, id - 1, col);
+    };
 
     let checkboxText = document.createElement("input");
     checkboxText.setAttribute("placeholder", "Текст");
     checkboxText.setAttribute("type", "text");
     checkboxText.setAttribute("id", "CheckboxText" + id + `-${col}`);
-    
-    /*let questionsArrayIndex = document.getElementsByClassName('checkbox-label').length;
-    let answersArrayIndex = d
-    checkboxText.setAttribute("name", `questions[${arrayIndex}].AnswerOptions[]`)*/
+    checkboxText.setAttribute("name", `questions[${id - 1}].AnswerOptions[${col}]`);
 
     label.appendChild(checkbox);
     label.appendChild(checkboxText);
