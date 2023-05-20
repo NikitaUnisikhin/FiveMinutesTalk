@@ -18,13 +18,14 @@ const copied = baseForm.cloneNode(true);
 
 // Я предлагаю сделать глобальный id для вопросов, чтобы после удаления у нас не было совпадений id вопросов
 let questionId = 1;
+let numberQuestion = 1;
 
 // У нас уже есть заранее склонированная форма, поэтому просто изменяем id в зависимости от questionId
 function newField(ev) {
     let addQue = ev.currentTarget;
     let parent = addQue.parentNode;
-    console.log(parent);
     questionId++;
+    numberQuestion++;
     let newCopied = copied.cloneNode(true);
     newCopied.id = "Form" + questionId;
     
@@ -48,13 +49,20 @@ function newField(ev) {
     addQuestion.addEventListener('click', function(ev) {
         newField(ev)
     });
-    
+
+    newCopied.querySelector("#hat-question").querySelector(".number-question").textContent = `${numberQuestion}.`;
     parent.after(newCopied);
 }
 
 // Удаляет родителя...
 function removeParent(){
     let revDiv = this.parentElement;
+    for (let i = Number(revDiv.id.slice(4)) + 1; i <= questionId; i++){
+        let current = document.getElementById(`Form${i}`);
+        let currentNum = Number(current.querySelector("#hat-question").querySelector(".number-question").textContent[0]);
+        current.querySelector("#hat-question").querySelector(".number-question").textContent = `${currentNum - 1}.`;
+    }
+    numberQuestion -= 1;
     revDiv.remove();
 }
 
