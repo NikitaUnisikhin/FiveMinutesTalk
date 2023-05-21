@@ -8,7 +8,7 @@
         <section id="questions">
             <div id="Form1" class="question-block">
                 <section id="Question1" class="question">
-                    <section id="hat-question">
+                    <section class="hat-question">
                         <div class="number-question">1.</div>
                         <input class="form-control" name="questions[0].Text" name="Question" type="text" value="Название вопроса" placeholder="Введите название вопроса">
                         <label>
@@ -32,8 +32,22 @@
                         <input id="Text1" class="text-question" type="text" placeholder="Ответ">
                     </div>
                 </section>
+                <section class="bottom-question">
+                    <label class="obligatory">
+                        <input type="checkbox">
+                        <div style="font-size: 14px">Обязательный вопрос</div>
+                    </label>
+                    <section class="right-part">
+                        <button class="right-answer">
+                            <div style="font-family: 'Montserrat SemiBold',serif; color: #69E167">++</div>
+                            <div style="font-family: Montserrat,serif">Правильный ответ</div>
+                        </button>
+                        <button class="close-button" formmethod="dialog">
+                            <img src="images/bin.svg" alt="bin"/>
+                        </button>
+                    </section>
+                </section>
                 <button id="AddQuestion1" formmethod="dialog" class="add-question"> <img src="~/images/add-question.svg" alt="plus">Добавить вопрос</button>
-                <button class="close-button" formmethod="dialog">X</button>
             </div>
         </section>
     </section>
