@@ -25,7 +25,6 @@
     position: absolute;
     width: 800px;
     top: 250px;
-
 }
 
 .question-block {
@@ -37,7 +36,8 @@
     gap: 30px;
 
     width: 800px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
+    height: 350px;
 }
 
 .add-question {
@@ -199,13 +199,13 @@ select {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: fixed;
     align-items: center;
     padding: 0;
     gap: 25px;
-
-    position: absolute;
+    
     width: 160px;
-    height: 253px;
+    height: 300px;
     left: 60px;
     top: 250px;
 }
@@ -215,10 +215,10 @@ select {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0px;
+    padding: 0;
 
     width: 160px;
-    height: 62px;
+    height: 65px;
     border-radius: 15px;
     background-color: white;
 }

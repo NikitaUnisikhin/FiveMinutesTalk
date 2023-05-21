@@ -43,15 +43,15 @@ function newField(ev) {
     });
     newCopied.querySelector("#Question1").id = "Question" + questionId;
     newCopied.querySelector("#Answer1").id = "Answer" + questionId;
-    newCopied.querySelector(".close-button").addEventListener('click', removeParent);
+    newCopied.querySelector(".bottom-question").querySelector(".right-part").querySelector(".close-button").addEventListener('click', removeParent);
 
     let addQuestion = newCopied.querySelector("#AddQuestion1")
     addQuestion.id = "AddQuestion" + questionId;
     addQuestion.addEventListener('click', function (ev) {
         newField(ev)
     });
-    
-    newCopied.querySelector("#hat-question").querySelector(".number-question").textContent = `${numberQuestion}.`;
+
+    newCopied.querySelector(".hat-question").querySelector(".number-question").textContent = `${numberQuestion}.`;
     parent.after(newCopied);
 }
 
@@ -129,7 +129,7 @@ function changeComponents(questionType) {
         addCheckbox.addEventListener("click", function (e) {
             addNewCheckbox(e, id, col++)
         });
-        
+
         addCheckbox.setAttribute("class", "add-checkbox");
         newDiv.appendChild(addCheckbox);
         addCheckbox.click();
