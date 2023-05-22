@@ -5,6 +5,25 @@ html {
     min-height: 100%;
 }
 
+@font-face {
+    font-weight: 400; /* Соответствует значению normal */
+    font-family: Montserrat;
+    src: url("fonts/Montserrat-Regular.ttf");
+}
+
+@font-face {
+    font-weight: 400; /* Соответствует значению bold */
+    font-family: Montserrat;
+    src: url("fonts/Montserrat-SemiBold.ttf");
+}
+
+@font-face {
+    font-weight: 400; /* Соответствует значению light */
+    font-family: Montserrat;
+    src: url("fonts/Montserrat-Light.ttf");
+}
+
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }

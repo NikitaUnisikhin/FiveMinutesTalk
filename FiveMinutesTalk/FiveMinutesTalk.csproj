@@ -40,4 +40,8 @@
       <_ContentIncludedByDefault Remove="Areas\AuthorizedUser\Views\Home\Index.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\fonts\" />
+    </ItemGroup>
+
 </Project>
