@@ -14,9 +14,14 @@
                         <label>
                             <select id="1" asp-for="Type" name="questions[0].Type" class="form-select">
                                 @{
+                                    var types = new Dictionary<string, string>()
+                                    {
+                                        ["MultipleAnswersQuestion"] = "Несколько вариантов ответа",
+                                        ["OpenQuestion"] = "Открытый вопрос"
+                                    };
                                     foreach (var type in Enum.GetValues(typeof(QuestionTypeEnum)))
                                     {
-                                        <option value="@type.ToString()">@type.ToString()</option>
+                                        <option value="@type.ToString()">@types[type.ToString()]</option>
                                     }
                                 }
                             </select>
