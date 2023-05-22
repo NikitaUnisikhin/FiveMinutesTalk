@@ -10,10 +10,9 @@
                 <section id="Question1" class="question">
                     <section class="hat-question">
                         <div class="number-question">1.</div>
-                        <input class="form-control" name="questions[0].Text" type="text" value="Название вопроса" 
-                               placeholder="Введите название вопроса">
+                        <input class="form-control" name="questions[0].Text" name="Question" type="text" value="Название вопроса" placeholder="Введите название вопроса">
                         <label>
-                            <select id="1" asp-for="Type" class="form-select">
+                            <select id="1" asp-for="Type" name="questions[0].Type" class="form-select">
                                 @{
                                     var value = 0;
                                     foreach (var type in Enum.GetValues(typeof(QuestionTypeEnum)))
@@ -48,20 +47,20 @@
             </div>
         </section>
     </section>
-</form>
-<section id="create-poll-hat">
-    <button type="submit">
-        <img src="images/eye.svg" alt="eye-icon">
-    </button>
-    <button type="submit" id="save-poll">Сохранить</button>
-    <button type="submit">
-        <img src="images/more.svg" alt="more-icon">
-    </button>
-    <button type="submit" id="profile-button">
-        <img src="images/profile.svg" alt="profile-icon">
-    </button>
-</section>
 
+    <section id="create-poll-hat">
+        <button type="submit">
+            <img src="images/eye.svg" alt="eye-icon">
+        </button>
+        <button type="submit" id="save-poll">Сохранить</button>
+        <button type="submit">
+            <img src="images/more.svg" alt="more-icon">
+        </button>
+        <button type="submit" id="profile-button">
+            <img src="images/profile.svg" alt="profile-icon">
+        </button>
+    </section>
+</form>
 <section id="tabs">
     <button type="submit" class="tab" id="tab-questions">Вопросы</button>
     <button type="submit" class="tab" id="tab-answer">Ответы</button>
