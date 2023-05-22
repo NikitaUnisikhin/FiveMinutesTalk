@@ -172,7 +172,7 @@ function checkMark(checkboxId, questionIndex, answerIndex) {
         if (countCorrectAnswers[questionIndex] === undefined)
             countCorrectAnswers[questionIndex] = 0;
         countCorrectAnswers[questionIndex]++;
-        checkbox.name = `questions[${questionIndex}].CorrectAnswers[${countCorrectAnswers[questionIndex] - 1}]`
+        checkbox.name = `questions[${questionIndex}].CorrectAnswers`
         checkbox.value = answerIndex;
     } else {
         countCorrectAnswers[questionIndex]--;
@@ -201,7 +201,7 @@ function addNewCheckbox(e, id, col) {
     checkboxText.setAttribute("placeholder", "Текст");
     checkboxText.setAttribute("type", "text");
     checkboxText.setAttribute("id", "CheckboxText" + id + `-${col}`);
-    checkboxText.setAttribute("name", `questions[${id - 1}].AnswerOptions[${col}]`);
+    checkboxText.setAttribute("name", `questions[${id - 1}].AnswerOptions`);
     checkboxText.setAttribute("class", "checkbox-text");
 
     label.appendChild(checkbox);
