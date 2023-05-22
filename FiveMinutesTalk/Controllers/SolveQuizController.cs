@@ -1,4 +1,5 @@
 using FiveMinutesTalk.Domain;
+using FiveMinutesTalk.Domain.Entities.Repositories.EntityFramework;
 using FiveMinutesTalk.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +8,7 @@ namespace FiveMinutesTalk.Controllers;
 public class SolveQuizController : Controller
 {
     private readonly DataManager dataManager;
-
+    
     public SolveQuizController(DataManager dataManager)
     {
         this.dataManager = dataManager;
@@ -17,9 +18,11 @@ public class SolveQuizController : Controller
     [HttpGet]
     public IActionResult Index(Guid token)
     {
-        ViewBag.Token = token;
         ViewBag.DataMangager = dataManager;
-        return View(dataManager.Quizzes.GetItemById(token));
+        ViewBag.QuizTitle = dataManager.Quizzes.GetItemById(token).Title;
+        var questionsIds = ((EFQuizQuestionsRepository)dataManager.QuizQuestions)
+            .GetQuestionsIdByQuizId(token);
+        return View(questionsIds);
     }
 
     [HttpPost]

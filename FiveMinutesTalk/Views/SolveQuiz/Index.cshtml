@@ -1,10 +1,5 @@
-﻿@using FiveMinutesTalk.Domain.Entities.Repositories.EntityFramework
-@using FiveMinutesTalk.Domain.Entities.QuestionsTypes
-@model FiveMinutesTalk.Domain.Entities.Quiz
-@{
-    var questionsIds = ((EFQuizQuestionsRepository)ViewBag.DataMangager.QuizQuestions)
-        .GetQuestionsIdByQuizId(ViewBag.Token);
-}
+﻿@using FiveMinutesTalk.Domain.Entities.QuestionsTypes
+@model Guid[]
 
 <script>
     function checkCheckbox(checkbox, optionNumber){
@@ -17,13 +12,14 @@
     }
 </script>
 <div class="text-center">
-    <h2 class="display-4">@Model.Title</h2>
+    <h2 class="display-4">@ViewBag.QuizTitle</h2>
     <form method="post" asp-controller="SolveQuiz" asp-action="SaveResult">
         @{
             var questionNumber = 0;
-            foreach (var id in questionsIds)
+            foreach (var id in Model)
             {
                 var question = (Question)ViewBag.DataMangager.Questions.GetItemById(id);
+                <input type="text" readonly name="answers[@questionNumber].QuestionId" value="@question.Id" hidden="hidden">
                 var questionContainerId = $"question_{questionNumber}";
                 <div id=@questionContainerId>
                     <div class="text">@question.Text</div>
