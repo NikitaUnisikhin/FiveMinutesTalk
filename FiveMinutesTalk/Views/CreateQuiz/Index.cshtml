@@ -21,10 +21,6 @@
                                         value += 3;
                                     }
                                 }
-                                @*<option value="0">Текст</option>
-                            <option value="1">Код</option>
-                            <option value="2">Один из списка</option>
-                            <option value="3">Несколько из списка</option>*@
                             </select>
                         </label>
                     </section>
@@ -38,7 +34,7 @@
                         <div style="font-size: 14px">Обязательный вопрос</div>
                     </label>
                     <section class="right-part">
-                        <button class="right-answer">
+                        <button class="right-answer" formmethod="dialog">
                             <div style="font-family: 'Montserrat SemiBold',serif; color: #69E167">++</div>
                             <div style="font-family: Montserrat,serif">Правильный ответ</div>
                         </button>
@@ -64,11 +60,10 @@
             <img src="images/profile.svg" alt="profile-icon">
         </button>
     </section>
-
-    <section id="tabs">
-        <button type="submit" class="tab" id="tab-questions">Вопросы</button>
-        <button type="submit" class="tab" id="tab-answer">Ответы</button>
-        <button type="submit" class="tab" id="tab-settings">Настройки</button>
-    </section>
 </form>
+<section id="tabs">
+    <button type="submit" class="tab" id="tab-questions">Вопросы</button>
+    <button type="submit" class="tab" id="tab-answer">Ответы</button>
+    <button type="submit" class="tab" id="tab-settings">Настройки</button>
+</section>
 </body>
