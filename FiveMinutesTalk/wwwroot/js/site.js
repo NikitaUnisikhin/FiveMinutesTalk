@@ -94,15 +94,14 @@ function changeComponents(questionType) {
     // Тут же создаём новый
     let newDiv = document.createElement("div");
     newDiv.setAttribute("id", "Answer" + id);
-
-    if (selectedValue === "0") {
+    if (selectedValue === "OpenQuestion") {
         let text = document.createElement("input");
         text.setAttribute("placeholder", "Ответ");
         text.setAttribute("class", "text-question");
         text.setAttribute("id", "Text" + id);
         newDiv.appendChild(text);
 
-    } else if (selectedValue === "1") {
+    /*} else if (selectedValue === "1") {
         newDiv.innerText = "Код";
 
     } else if (selectedValue === "2") {
@@ -117,9 +116,9 @@ function changeComponents(questionType) {
         });
         addRadio.setAttribute("class", "add-variant");
         newDiv.appendChild(addRadio);
-        addRadio.click();
+        addRadio.click();*/
 
-    } else if (selectedValue === "3") {
+    } else if (selectedValue === "MultipleAnswersQuestion") {
         // здесь создаем кнопку, которая добавляет новый label с checkbox кнопкой и вводом
         let addCheckbox = document.createElement("input");
         addCheckbox.setAttribute("value", "Добавить вариант ответа");

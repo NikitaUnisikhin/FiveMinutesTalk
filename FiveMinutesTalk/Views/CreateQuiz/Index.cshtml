@@ -14,11 +14,9 @@
                         <label>
                             <select id="1" asp-for="Type" name="questions[0].Type" class="form-select">
                                 @{
-                                    var value = 0;
                                     foreach (var type in Enum.GetValues(typeof(QuestionTypeEnum)))
                                     {
-                                        <option value="@value">@type.ToString()</option>
-                                        value += 3;
+                                        <option value="@type.ToString()">@type.ToString()</option>
                                     }
                                 }
                             </select>
