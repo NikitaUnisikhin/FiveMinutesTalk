@@ -1,0 +1,66 @@
+﻿@using FiveMinutesTalk.Domain.Entities.Repositories.EntityFramework
+@using FiveMinutesTalk.Domain.Entities.QuestionsTypes
+@model FiveMinutesTalk.Domain.Entities.Quiz
+@{
+    var questionsIds = ((EFQuizQuestionsRepository)ViewBag.DataMangager.QuizQuestions)
+        .GetQuestionsIdByQuizId(ViewBag.Token);
+}
+
+<script>
+    function checkCheckbox(checkbox, optionNumber){
+        if (checkbox.checked) {
+            checkbox.value = optionNumber;
+        }
+        else {
+            checkbox.value = -1;
+        }
+    }
+</script>
+<div class="text-center">
+    <h2 class="display-4">@Model.Title</h2>
+    <form method="post" asp-controller="SolveQuiz" asp-action="SaveResult">
+        @{
+            var questionNumber = 0;
+            foreach (var id in questionsIds)
+            {
+                var question = (Question)ViewBag.DataMangager.Questions.GetItemById(id);
+                var questionContainerId = $"question_{questionNumber}";
+                <div id=@questionContainerId>
+                    <div class="text">@question.Text</div>
+                    @if (question.Type == QuestionTypeEnum.OpenQuestion)
+                    {
+                        var inputId = $"answer_{questionNumber}";
+                        <label>
+                            Введите ваш ответ:
+                            <input class="form-control" type="text" id=@inputId placeholder="Ответ" 
+                                   name="answers[@questionNumber].Answers">
+                        </label>
+                    }
+                    else if (question.Type == QuestionTypeEnum.MultipleAnswersQuestion)
+                    {
+                        <label>
+                            Выберите правльны(й/e) ответ(ы):
+                            @{
+                                var optionNumber = 0;
+                                foreach (var option in question.AnswerOptions)
+                                {
+                                    var optionId = $"option_{questionNumber}_{optionNumber}";
+                                        <div id=@optionId>
+                                            <input type="checkbox" 
+                                                   onchange="checkCheckbox(this, @optionNumber)" 
+                                                   name = "answers[@questionNumber].Answers"
+                                                   value=-1>
+                                        <a>@option</a>
+                                    </div>
+                                    optionNumber++;
+                                }
+                            }
+                        </label>
+                    }
+                </div>
+                questionNumber++;
+            }
+            <button>Отправить ответы</button>
+        }
+    </form>
+</div>
