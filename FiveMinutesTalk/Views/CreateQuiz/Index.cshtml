@@ -2,15 +2,16 @@
 @model QuestionModel
 
 <body>
+<section>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
-    <section id="create-poll-content">
+    <div class="page" id="create-poll-content">
         <input type="text" name="quizTitle" id="name-poll" required value="Новый опрос" placeholder="Введите название"/>
         <section id="questions">
             <div id="Form1" class="question-block">
                 <section id="Question1" class="question">
                     <section class="hat-question">
                         <div class="number-question">1.</div>
-                        <input class="form-control" name="questions[0].Text" name="Question" type="text" value="Название вопроса" placeholder="Введите название вопроса">
+                        <input class="name-question" name="questions[0].Text" name="Question" type="text" value="Название вопроса" placeholder="Введите название вопроса">
                         <label>
                             <select id="1" asp-for="Type" name="questions[0].Type" class="form-select">
                                 @{
@@ -46,7 +47,7 @@
                 <button id="AddQuestion1" formmethod="dialog" class="add-question"> <img src="~/images/add-question.svg" alt="plus">Добавить вопрос</button>
             </div>
         </section>
-    </section>
+    </div>
 
     <section id="create-poll-hat">
         <button type="submit">
@@ -61,9 +62,16 @@
         </button>
     </section>
 </form>
-<section id="tabs">
-    <button type="submit" class="tab" id="tab-questions">Вопросы</button>
-    <button type="submit" class="tab" id="tab-answer">Ответы</button>
-    <button type="submit" class="tab" id="tab-settings">Настройки</button>
+
+<div id="tabs">
+    <input type="radio" class="tab" id="tab-questions" name="tab-group" checked>
+    <label for="tab-questions" class="tab-label" onclick="openPage('create-poll-content')">Вопросы</label>
+
+    <input type="radio" class="tab" id="tab-answer" onclick="openPage('answers')" name="tab-group">
+    <label for="tab-answer" class="tab-label">Ответы</label>
+
+    <input type="radio" class="tab" id="tab-settings" onclick="openPage('settings')" name="tab-group">
+    <label for="tab-settings" class="tab-label">Настройки</label>
+</div>
 </section>
 </body>

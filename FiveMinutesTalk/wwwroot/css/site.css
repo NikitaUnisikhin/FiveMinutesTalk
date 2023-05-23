@@ -8,25 +8,21 @@ html {
 @font-face {
     font-weight: 400; /* Соответствует значению normal */
     font-family: Montserrat;
-    src: url("fonts/Montserrat-Regular.ttf");
+    src: local("fonts/Montserrat-Regular.ttf");
 }
 
 @font-face {
     font-weight: 400; /* Соответствует значению bold */
-    font-family: Montserrat;
+    font-family: "Montserrat SemiBold";
     src: url("fonts/Montserrat-SemiBold.ttf");
 }
 
 @font-face {
     font-weight: 400; /* Соответствует значению light */
-    font-family: Montserrat;
+    font-family: "Montserrat Light";
     src: url("fonts/Montserrat-Light.ttf");
 }
 
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
 
 body {
     margin-bottom: 60px;
@@ -57,6 +53,48 @@ button, input, select {
     border: none;
     align-items: center;
     font-family: "Montserrat SemiBold", serif;
+    font-size: 13px;
 }
+
+button, select{
+    cursor: pointer;
+}
+
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 2px solid #808080;
+    width: 18px;
+    height: 18px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    background-position: center center;
+    border-radius: 3px;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #69E167;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+    border-color: #69E167;
+    background-repeat: no-repeat;
+    background-size: 70% 70%;
+}
+
+select {
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    text-align: center;
+
+    width: 220px;
+    height: 35px;
+
+    border: 1px solid #69E167;
+    border-radius: 15px;
+}
+
 
 

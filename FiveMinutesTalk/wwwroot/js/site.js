@@ -21,6 +21,9 @@ const copied = baseForm.cloneNode(true);
 let questionId = 1;
 let numberQuestion = 1;
 
+let pages = document.getElementsByClassName("page");
+pages[0].style.display = "flex";
+
 // У нас уже есть заранее склонированная форма, поэтому просто изменяем id в зависимости от questionId
 function newField(ev) {
     let addQue = ev.currentTarget;
@@ -31,7 +34,7 @@ function newField(ev) {
     newCopied.id = "Form" + questionId;
 
     let arrayIndex = questionId - 1;
-    let formControl = newCopied.getElementsByClassName('form-control')[0];
+    let formControl = newCopied.getElementsByClassName('name-question')[0];
     formControl.name = `questions[${arrayIndex}].Text`;
     let formSelect = newCopied.getElementsByClassName('form-select')[0];
     formSelect.name = `questions[${arrayIndex}].Type`;
@@ -192,7 +195,6 @@ function addNewCheckbox(e, id, col) {
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("name", "Checkbox" + id)
     checkbox.setAttribute("id", "Checkbox" + id + `-${col}`);
-    checkbox.setAttribute("class", "checkbox")
     checkbox.onclick = () => {
         checkMark(checkbox.id, id - 1, col);
     };
@@ -208,4 +210,12 @@ function addNewCheckbox(e, id, col) {
     label.appendChild(checkboxText);
 
     addCheck.before(label);
+}
+
+function openPage(id) {
+    for (let i = 0; i < pages.length; i++) {
+        pages[i].style.display = "none";
+    }
+    
+    document.getElementById(id).style.display = "flex";
 }

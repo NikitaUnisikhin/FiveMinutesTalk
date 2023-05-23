@@ -1,7 +1,52 @@
-#create-poll-content {
+/*========Шапка========*/
+
+#create-poll-hat {
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 25px;
+
+    position: absolute;
+    width: 328px;
+    height: 50px;
+    right: 5%;
+    top: 40px;
+}
+
+#save-poll {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 45px;
+    gap: 15px;
+
+    width: 160px;
+    height: 50px;
+    color: white;
+
+    background: #69E167;
+    border-radius: 15px;
+}
+
+/*========Структура вопросов========*/
+.page{
+    display: none;
+}
+#create-poll-content {
     align-items: center;
     justify-content: center;
+}
+
+#questions {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+
+    position: absolute;
+    width: 800px;
+    top: 250px;
 }
 
 #name-poll {
@@ -17,16 +62,6 @@
     line-height: 44px;
 }
 
-#questions {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0;
-
-    position: absolute;
-    width: 800px;
-    top: 250px;
-}
-
 .question-block {
     display: flex;
     flex-wrap: wrap;
@@ -35,34 +70,7 @@
     justify-content: center;
     gap: 30px;
 
-    width: 800px;
-    margin-bottom: 50px;
-    height: 350px;
-}
-
-.add-question {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0 1px;
-    gap: 15px;
-    width: 170px;
-    height: 40px;
-    border-radius: 100px;
-}
-
-select {
-    box-sizing: border-box;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    text-align: center;
-
-    width: 220px;
-    height: 35px;
-
-    border: 1px solid #69E167;
-    border-radius: 15px;
+    margin-bottom: 70px;
 }
 
 .question {
@@ -84,11 +92,83 @@ select {
 
     width: 800px;
     height: 45px;
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 }
+
+.number-question {
+    color: #69E167;
+    font-family: "Montserrat SemiBold", serif;
+}
+
+.name-question {
+    width: 541px;
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+
+    display: flex;
+    align-items: flex-start;
+
+}
+
+.bottom-question {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 350px;
+
+    width: 800px;
+    height: 64px;
+}
+
+.bottom-question > .obligatory {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 10px;
+
+    width: 250px;
+    height: 40px;
+}
+
+.bottom-question > .right-part {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0;
+    gap: 50px;
+
+    width: 250px;
+    height: 44px;
+}
+
+.right-part > .right-answer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 10px;
+
+    width: 182px;
+    height: 44px;
+}
+
+.add-question {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 1px;
+    gap: 15px;
+    width: 170px;
+    height: 40px;
+    border-radius: 100px;
+}
+
+/*========Типы вопросов========*/
 
 .text-question {
     box-sizing: border-box;
@@ -100,20 +180,7 @@ select {
 
     width: 770px;
     height: 40px;
-
     border-bottom: 1px solid #69E167;
-}
-
-.checkbox {
-    width: 18px;
-    height: 18px;
-}
-
-.checkbox:checked {
-    width: 18px;
-    height: 18px;
-    accent-color: #69E167;
-
 }
 
 .checkbox-label, .radio-label {
@@ -122,14 +189,7 @@ select {
     align-items: center;
     padding: 0;
     gap: 10px;
-
-    width: 789px;
     height: 40px;
-
-    flex: none;
-    order: 0;
-    align-self: stretch;
-    flex-grow: 0;
 }
 
 .add-checkbox {
@@ -146,54 +206,7 @@ select {
     color: rgba(0, 0, 0, 0.5);
 }
 
-.form-control {
-    width: 541px;
-
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-
-    /* identical to box height */
-
-    display: flex;
-    align-items: flex-start;
-
-}
-
-.number-question {
-    color: #69E167;
-    font-family: "Montserrat SemiBold", serif;
-}
-
-#save-poll {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 45px;
-    gap: 15px;
-
-    width: 160px;
-    height: 50px;
-    color: white;
-
-    background: #69E167;
-    border-radius: 15px;
-}
-
-#create-poll-hat {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0;
-    gap: 25px;
-
-    position: absolute;
-    width: 328px;
-    height: 50px;
-    right: 5%;
-    top: 40px;
-}
+/*========Табы========*/
 
 #tabs {
     display: flex;
@@ -203,14 +216,18 @@ select {
     align-items: center;
     padding: 0;
     gap: 25px;
-    
+
     width: 160px;
     height: 300px;
     left: 60px;
     top: 250px;
 }
 
-#tabs button {
+.tab {
+    display: none;
+}
+
+.tab:checked + .tab-label {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -220,55 +237,21 @@ select {
     width: 160px;
     height: 65px;
     border-radius: 15px;
-    background-color: white;
-}
-
-#tabs button.active {
     background-color: #C1F3C1;
 }
 
-.bottom-question {
+.tab-label {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    gap: 350px;
-
-    width: 800px;
-    height: 64px;
-}
-
-.obligatory {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     padding: 0;
-    gap: 10px;
+    font-family: "Montserrat SemiBold", serif;
+    font-size: 13px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
 
-    width: 250px;
-    height: 40px;
-}
-
-.right-part {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0;
-    gap: 50px;
-
-    width: 250px;
-    height: 44px;
-}
-
-.right-answer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px;
-    gap: 10px;
-
-    width: 182px;
-    height: 44px;
+    width: 160px;
+    height: 65px;
+    background-color: white;
 }
