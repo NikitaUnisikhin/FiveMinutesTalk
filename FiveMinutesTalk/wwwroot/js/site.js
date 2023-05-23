@@ -75,7 +75,7 @@ function changeChildren(parent, value) {
 
 // Удаляет родителя...
 function removeParent() {
-    let revDiv = this.parentElement;
+    let revDiv = this.parentElement.parentElement;
     arrayRemove(questions, revDiv);
     console.log(questions)
     changeChildren(revDiv, -1);

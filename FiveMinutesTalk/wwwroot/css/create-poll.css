@@ -31,9 +31,10 @@
 }
 
 /*========Структура вопросов========*/
-.page{
+.page {
     display: none;
 }
+
 #create-poll-content {
     align-items: center;
     justify-content: center;
@@ -213,14 +214,13 @@
     flex-direction: column;
     justify-content: center;
     position: fixed;
-    align-items: center;
     padding: 0;
     gap: 25px;
 
     width: 160px;
     height: 300px;
     left: 60px;
-    top: 250px;
+    top: 33%;
 }
 
 .tab {

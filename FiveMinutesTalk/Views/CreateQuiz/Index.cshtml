@@ -3,7 +3,7 @@
 
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
-    <section id="create-poll-content">
+    <div class="page" id="create-poll-content">
         <input type="text" name="quizTitle" id="name-poll" required value="Новый опрос" placeholder="Введите название"/>
         <section id="questions">
             <div id="Form1" class="question-block">
@@ -11,18 +11,17 @@
                     <section class="hat-question">
                         <div class="number-question">1.</div>
                         <input class="name-question" name="questions[0].Text" name="Question" type="text" value="Название вопроса" placeholder="Введите название вопроса">
-                        <input class="form-control" name="questions[0].Text" type="text" value="Название вопроса" placeholder="Введите название вопроса">
                         <label>
                             <select id="1" asp-for="Type" name="questions[0].Type" class="form-select">
                                 @{
                                     var types = new Dictionary<string, string>()
                                     {
-                                        ["MultipleAnswersQuestion"] = "Несколько вариантов ответа",
-                                        ["OpenQuestion"] = "Открытый вопрос"
+                                        ["MultipleAnswersQuestion"] = "Несколько из списка",
+                                        ["OpenQuestion"] = "Текст"
                                     };
                                     foreach (var type in Enum.GetValues(typeof(QuestionTypeEnum)))
                                     {
-                                        <option value="@type.ToString()">@types[type.ToString()]</option>
+                                        <option value="@type.ToString()">@types[type.ToString()!]</option>
                                     }
                                 }
                             </select>
@@ -50,7 +49,7 @@
                 <button id="AddQuestion1" formmethod="dialog" class="add-question"> <img src="~/images/add-question.svg" alt="plus">Добавить вопрос</button>
             </div>
         </section>
-    </section>
+    </div>
 
     <section id="create-poll-hat">
         <button type="submit">
@@ -76,5 +75,4 @@
     <input type="radio" class="tab" id="tab-settings" onclick="openPage('settings')" name="tab-group">
     <label for="tab-settings" class="tab-label">Настройки</label>
 </div>
-</section>
 </body>
