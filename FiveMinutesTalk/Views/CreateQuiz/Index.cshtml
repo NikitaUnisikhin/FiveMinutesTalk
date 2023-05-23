@@ -2,9 +2,8 @@
 @model QuestionModel
 
 <body>
-<section>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
-    <div class="page" id="create-poll-content">
+    <section id="create-poll-content">
         <input type="text" name="quizTitle" id="name-poll" required value="Новый опрос" placeholder="Введите название"/>
         <section id="questions">
             <div id="Form1" class="question-block">
@@ -12,14 +11,18 @@
                     <section class="hat-question">
                         <div class="number-question">1.</div>
                         <input class="name-question" name="questions[0].Text" name="Question" type="text" value="Название вопроса" placeholder="Введите название вопроса">
+                        <input class="form-control" name="questions[0].Text" type="text" value="Название вопроса" placeholder="Введите название вопроса">
                         <label>
                             <select id="1" asp-for="Type" name="questions[0].Type" class="form-select">
                                 @{
-                                    var value = 0;
+                                    var types = new Dictionary<string, string>()
+                                    {
+                                        ["MultipleAnswersQuestion"] = "Несколько вариантов ответа",
+                                        ["OpenQuestion"] = "Открытый вопрос"
+                                    };
                                     foreach (var type in Enum.GetValues(typeof(QuestionTypeEnum)))
                                     {
-                                        <option value="@value">@type.ToString()</option>
-                                        value += 3;
+                                        <option value="@type.ToString()">@types[type.ToString()]</option>
                                     }
                                 }
                             </select>
@@ -47,7 +50,7 @@
                 <button id="AddQuestion1" formmethod="dialog" class="add-question"> <img src="~/images/add-question.svg" alt="plus">Добавить вопрос</button>
             </div>
         </section>
-    </div>
+    </section>
 
     <section id="create-poll-hat">
         <button type="submit">
