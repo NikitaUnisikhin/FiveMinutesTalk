@@ -22,6 +22,30 @@ namespace FiveMinutesTalk.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("FiveMinutesTalk.Domain.Entities.QuestionAnswer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string[]>("Answers")
+                        .IsRequired()
+                        .HasColumnType("text[]");
+
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("QuestionType")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("QuizId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuestionAnswers");
+                });
+
             modelBuilder.Entity("FiveMinutesTalk.Domain.Entities.QuestionsTypes.Question", b =>
                 {
                     b.Property<Guid>("Id")
@@ -256,13 +280,13 @@ namespace FiveMinutesTalk.Migrations
                         {
                             Id = "BCF8F1A1-A9BA-480F-A16C-88DBDCFAA9AC",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "400c1326-4033-4ce1-9666-88f1d9911ba8",
+                            ConcurrencyStamp = "72a39814-dbc9-4d2b-95f2-4cf9f585c35e",
                             Email = "my@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MY@EMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHhnATdDK7Bc34dqklE3X1uggHzwB+pApY4gf4f34Yg+iuJx86FYmNDkmFBN/Hl5Yw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKpgVO7KeDoj+3lp+ncbx92kqeNAfmtFAN5N/Dev1mLB6oF17r3EeTxej4kB/8v+XQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -272,13 +296,13 @@ namespace FiveMinutesTalk.Migrations
                         {
                             Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5c3db82c-1261-48c8-977a-cf889c35b337",
+                            ConcurrencyStamp = "3835c7a6-1f1e-4884-b16f-598faf1b1177",
                             Email = "my@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MY@EMAIL.COM",
                             NormalizedUserName = "NIKITA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF8U0QG6gbObU9wQlQ4b5y46fue4mgQpa3A9ncBjkRN0Gg5fBymS0n+Ky2N4Q/RZCg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH4jIZzEHv1Qg/ZbWxmNb5KNH8AcOFJ7pDYdsMktlEgSvc/oNU6K27tBefR6akFJmQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

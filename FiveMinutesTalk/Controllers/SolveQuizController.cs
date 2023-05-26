@@ -19,7 +19,9 @@ public class SolveQuizController : Controller
     public IActionResult Index(Guid token)
     {
         ViewBag.DataMangager = dataManager;
-        ViewBag.QuizTitle = dataManager.Quizzes.GetItemById(token).Title;
+        var quiz = dataManager.Quizzes.GetItemById(token);
+        ViewBag.QuizTitle = quiz.Title;
+        ViewBag.QuidId = quiz.Id;
         var questionsIds = ((EFQuizQuestionsRepository)dataManager.QuizQuestions)
             .GetQuestionsIdByQuizId(token);
         return View(questionsIds);
@@ -28,6 +30,8 @@ public class SolveQuizController : Controller
     [HttpPost]
     public IActionResult SaveResult(QuestionAnswerModel[] answers)
     {
+        foreach (var answer in answers)
+            dataManager.QuestionAnswers.SaveItem(answer);
         return View("GetResult");
     }
 }

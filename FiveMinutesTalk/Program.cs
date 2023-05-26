@@ -16,6 +16,7 @@ builder.Configuration.Bind("Project", new Config());
 builder.Services.AddTransient<IRepository<Question>, EFQuestionsRepository>();
 builder.Services.AddTransient<IRepository<Quiz>, EFQuizzesRepository>();
 builder.Services.AddTransient<IRepository<QuizQuestion>, EFQuizQuestionsRepository>();
+builder.Services.AddTransient<IRepository<QuestionAnswer>, EFQuestionAnswersRepository>();
 builder.Services.AddTransient<DataManager>();
 
 builder.Services.AddDbContext<AppDbContext>(x => x.UseNpgsql(Config.ConnectionString));

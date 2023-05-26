@@ -11,6 +11,7 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
     public DbSet<Quiz> Quizzes { get; set; }
     public DbSet<Question> Questions { get; set; }
     public DbSet<QuizQuestion> QuizQuestions { get; set; }
+    public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
     

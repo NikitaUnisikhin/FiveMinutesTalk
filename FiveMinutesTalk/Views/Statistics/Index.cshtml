@@ -1,0 +1,65 @@
+@using FiveMinutesTalk.Domain.Entities.Repositories.EntityFramework
+@using FiveMinutesTalk.Domain
+@using FiveMinutesTalk.Domain.Entities
+@using FiveMinutesTalk.Domain.Entities.QuestionsTypes
+@model Guid
+
+<div>
+    <h2>Статистика по опросу "@ViewBag.QuizTitle"</h2>
+    @{
+        var answersIds = ((EFQuestionAnswersRepository)ViewBag.DataManager.QuestionAnswers)
+            .GetQuestionAnswerIdByQuizId(Model);
+        var statisticsContainer = new Dictionary<Guid, StatisticsContainer>();
+        foreach (var answerId in answersIds)
+        {
+            QuestionAnswer answer = ViewBag.DataManager.QuestionAnswers.GetItemById(answerId);
+            if (!statisticsContainer.ContainsKey(answer.QuestionId))
+            {
+                statisticsContainer[answer.QuestionId] = new StatisticsContainer()
+                {
+                    QuestionType = answer.QuestionType
+                };
+            }
+            statisticsContainer[answer.QuestionId].Answers = statisticsContainer[answer.QuestionId]
+                .Answers.Concat(answer.Answers).ToList();
+        }
+
+        foreach (var questionStatistics in statisticsContainer)
+        {
+            <div>
+            @{
+                Question question = ViewBag.DataManager.Questions.GetItemById(questionStatistics.Key);
+                <h3>@question.Text</h3>
+                if (questionStatistics.Value.QuestionType == QuestionTypeEnum.OpenQuestion)
+                {
+                    @foreach (var answer in questionStatistics.Value.Answers)
+                    {
+                        <div>@answer</div>
+                    }
+                }
+                else if (questionStatistics.Value.QuestionType == QuestionTypeEnum.MultipleAnswersQuestion)
+                {
+                    var countQuestionAnswers = new Dictionary<string, int>();
+                    var allCount = questionStatistics.Value.Answers.Count;
+                    @foreach (var answer in questionStatistics.Value.Answers)
+                    {
+                        if (!countQuestionAnswers.ContainsKey(answer))
+                            countQuestionAnswers[answer] = 0;
+                        countQuestionAnswers[answer]++;
+                    }
+                    @foreach (var answerWithCount in countQuestionAnswers)
+                    {
+                        if (answerWithCount.Key == "-1")
+                            continue;
+                        var percent = " | " + answerWithCount.Value / (double)allCount * 100 + " %";
+                        <div>
+                            <a>@question.AnswerOptions[int.Parse(answerWithCount.Key)]</a>
+                            <a>@percent</a>
+                        </div>                                                
+                    }
+                }
+            }
+            </div>
+        }
+    }
+</div>
