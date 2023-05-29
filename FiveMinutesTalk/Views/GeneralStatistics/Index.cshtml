@@ -51,7 +51,7 @@
                     {
                         if (answerWithCount.Key == "-1")
                             continue;
-                        var percent = " | " + answerWithCount.Value / (double)allCount * 100 + " %";
+                        var percent = " | " + Math.Round(answerWithCount.Value / (double)allCount * 100, 2) + " %";
                         <div>
                             <a>@question.AnswerOptions[int.Parse(answerWithCount.Key)]</a>
                             <a>@percent</a>
