@@ -1,4 +1,5 @@
 using FiveMinutesTalk.Domain;
+using FiveMinutesTalk.Domain.Entities;
 using FiveMinutesTalk.Domain.Entities.Repositories.EntityFramework;
 using FiveMinutesTalk.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -30,8 +31,27 @@ public class SolveQuizController : Controller
     [HttpPost]
     public IActionResult SaveResult(QuestionAnswerModel[] answers)
     {
+        if (answers.Length == 0)
+            View("GetResult");
+        
+        var quizAnswerId = Guid.NewGuid();
+        dataManager.QuizAnswers.SaveItem(new QuizAnswer()
+        {
+            Id = quizAnswerId,
+            QuizId = answers[0].QuizId
+        });
+
         foreach (var answer in answers)
+        {
             dataManager.QuestionAnswers.SaveItem(answer);
+            dataManager.QuizQuestionAnswers.SaveItem(new QuizQuestionAnswer()
+            {
+                Id = Guid.NewGuid(),
+                QuestionAnswerId = answer.Id,
+                QuizAnswerId = quizAnswerId
+            });
+        }
+
         return View("GetResult");
     }
 }

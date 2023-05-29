@@ -46,5 +46,4 @@ public class EFQuizQuestionsRepository : IRepository<QuizQuestion>
         });
         context.SaveChanges();
     }
-   
 }

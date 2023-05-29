@@ -116,6 +116,20 @@ namespace FiveMinutesTalk.Migrations
                         });
                 });
 
+            modelBuilder.Entity("FiveMinutesTalk.Domain.Entities.QuizAnswer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("QuizId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuizAnswers");
+                });
+
             modelBuilder.Entity("FiveMinutesTalk.Domain.Entities.QuizQuestion", b =>
                 {
                     b.Property<Guid>("Id")
@@ -145,6 +159,23 @@ namespace FiveMinutesTalk.Migrations
                             QuestionId = new Guid("92ef0486-b6c5-4706-a9c8-2c994f43159d"),
                             QuizId = new Guid("4043b854-c29f-4dca-900c-0387de52d250")
                         });
+                });
+
+            modelBuilder.Entity("FiveMinutesTalk.Domain.Entities.QuizQuestionAnswer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("QuestionAnswerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("QuizAnswerId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuizQuestionAnswers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -280,13 +311,13 @@ namespace FiveMinutesTalk.Migrations
                         {
                             Id = "BCF8F1A1-A9BA-480F-A16C-88DBDCFAA9AC",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "72a39814-dbc9-4d2b-95f2-4cf9f585c35e",
+                            ConcurrencyStamp = "3f563c82-7698-4bcb-a0df-938c90372511",
                             Email = "my@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MY@EMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKpgVO7KeDoj+3lp+ncbx92kqeNAfmtFAN5N/Dev1mLB6oF17r3EeTxej4kB/8v+XQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECzPFP8BD9Bzh4Qj6RSImEfVfH4yZD2k0CNd+DPieUFQVroOaUwTsU8vn4LDIByOlQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -296,13 +327,13 @@ namespace FiveMinutesTalk.Migrations
                         {
                             Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3835c7a6-1f1e-4884-b16f-598faf1b1177",
+                            ConcurrencyStamp = "9e79f088-551f-4b23-b19a-b1536f94b457",
                             Email = "my@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MY@EMAIL.COM",
                             NormalizedUserName = "NIKITA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEH4jIZzEHv1Qg/ZbWxmNb5KNH8AcOFJ7pDYdsMktlEgSvc/oNU6K27tBefR6akFJmQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN5ZBebkCZOwcoyDlUe8hCxkC0LEcRgi9uG2e/MoKN03DvZjXyd9bonrUORVlgTAXA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

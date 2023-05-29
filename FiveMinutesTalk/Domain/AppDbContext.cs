@@ -12,7 +12,9 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
     public DbSet<Question> Questions { get; set; }
     public DbSet<QuizQuestion> QuizQuestions { get; set; }
     public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
-
+    public DbSet<QuizQuestionAnswer> QuizQuestionAnswers { get; set; }
+    public DbSet<QuizAnswer> QuizAnswers { get; set; }
+        
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
     
     protected override void OnModelCreating(ModelBuilder builder)
