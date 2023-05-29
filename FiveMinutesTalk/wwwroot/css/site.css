@@ -13,25 +13,6 @@ html {
     
 }
 
-@font-face {
-    font-weight: 400; /* Соответствует значению normal */
-    font-family: Montserrat;
-    src: local("fonts/Montserrat-Regular.ttf");
-}
-
-@font-face {
-    font-weight: 400; /* Соответствует значению bold */
-    font-family: "Montserrat SemiBold";
-    src: url("fonts/Montserrat-SemiBold.ttf");
-}
-
-@font-face {
-    font-weight: 400; /* Соответствует значению light */
-    font-family: "Montserrat Light";
-    src: url("fonts/Montserrat-Light.ttf");
-}
-
-
 body {
     margin-bottom: 60px;
 }
