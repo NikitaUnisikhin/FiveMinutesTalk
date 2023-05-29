@@ -26,7 +26,7 @@
     height: 50px;
     color: white;
 
-    background: #69E167;
+    background: var(--green);
     border-radius: 15px;
 }
 
@@ -96,7 +96,7 @@
 }
 
 .number-question {
-    color: #69E167;
+    color: var(--green);
     font-family: "Montserrat SemiBold", serif;
 }
 
@@ -181,7 +181,7 @@
 
     width: 770px;
     height: 40px;
-    border-bottom: 1px solid #69E167;
+    border-bottom: 1px solid var(--green);
 }
 
 .checkbox-label, .radio-label {
@@ -237,7 +237,7 @@
     width: 160px;
     height: 65px;
     border-radius: 15px;
-    background-color: #C1F3C1;
+    background-color: var(--light-green);
 }
 
 .tab-label {

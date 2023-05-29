@@ -30,7 +30,7 @@
     right: 120px;
     bottom: 50px;
 
-    background: #69E167;
+    background: var(--green);
 
     box-shadow: -1px -1px 10px rgba(0, 0, 0, 0.15), 5px 5px 10px rgba(0, 0, 0, 0.35);
     border-radius: 100px;
@@ -62,7 +62,7 @@
     width: 560px;
     height: 20px;
 
-    background: #EBEBEB;
+    background: var(--light-grey);
     border-radius: 50px;
 
     flex: none;

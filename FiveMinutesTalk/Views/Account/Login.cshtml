@@ -1,27 +1,20 @@
 ﻿@model LoginViewModel
-<div>
-    <h1>Вход в личный кабинет</h1>
-    <div class="div-box">
-        <form asp-area="" asp-controller="Account" asp-action="Login" method="post" asp-route-returnUrl="@ViewBag.returnUrl">
-            <div asp-validation-summary="All"></div>
-            <div>
-                <label asp-for="UserName"></label>
-                <input asp-for="UserName" />
-                <span asp-validation-for="UserName"></span>
-            </div>
-            <div>
-                <label asp-for="Password"></label>
-                <input asp-for="Password" />
-                <span asp-validation-for="Password"></span>
-            </div>
-            <div>
-                <label asp-for="RememberMe"></label>
-                <input asp-for="RememberMe" />
-                <span asp-validation-for="RememberMe"></span>
-            </div>
-            <div>
-                <input type="submit" value="Войти" />
-            </div>
-        </form>
+<body>
+<form asp-area="" asp-controller="Account" asp-action="Login" method="post" asp-route-returnUrl="@ViewBag.returnUrl">
+    <img src="/images/login.svg" alt="login" style="top: 25%; position: absolute; left: 5%">
+    <div class="frame-login">
+        <h2>Вход</h2>
+        <section style="display: flex; align-items: center; flex-direction: column; gap: 40px; padding: 0">
+            <section class="inputs-login">
+                <input asp-for="UserName" class="login-input" placeholder="Email" type="email" required/>
+                <input asp-for="Password" class="login-input" placeholder="Пароль" type="password" required/>
+            </section>
+            <button type="submit" class="login-button">Войти</button>
+        </section>
+        <div class="not-register">
+            <div>Нет аккаунта?</div>
+            <button style="color: #69E167;">Зарегистрироваться</button>
+        </div>
     </div>
-</div>
+</form>
+</body>

@@ -1,0 +1,62 @@
+.login-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+
+    width: auto;
+    height: 70px;
+    padding: 0 60px;
+
+    background: var(--green);
+    border-radius: 100px;
+    color: white;
+    font-size: 18px;
+}
+
+.frame-login {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 400px;
+    height: auto;
+    left: 55%;
+    top: 25%;
+    padding: 10px 30px 25px;
+    gap: 50px;
+
+
+    border: 3px solid var(--green);
+    border-radius: 20px;
+}
+
+.inputs-login{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.login-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 16px;
+    font-family: "Montserrat Regular", serif;
+
+    width: 380px;
+    height: 34px;
+
+    border-bottom: 1px solid var(--green);
+}
+
+.not-register {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    font-size: 13px;
+}

@@ -1,24 +1,22 @@
 @model RegisterViewModel
 
-<h2>Регистрация нового пользователя</h2>
-<form method="post" asp-controller="Account" asp-action="Register">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="Email"></label><br />
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
-    </div>
-    <div>
-        <label asp-for="Password"></label><br />
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <label asp-for="PasswordConfirm"></label><br />
-        <input asp-for="PasswordConfirm" />
-        <span asp-validation-for="PasswordConfirm"></span>
-    </div>
-    <div>
-        <input type="submit" value="Регистрация" />
+<body>
+<form asp-controller="Account" asp-action="Register" method="post">
+    <img src="/images/login.svg" alt="login" style="top: 25%; position: absolute; left: 5%">
+    <div class="frame-login">
+        <h2>Регистрация</h2>
+        <section style="display: flex; align-items: center; flex-direction: column; gap: 40px; padding: 0; height: auto">
+            <section class="inputs-login">
+                <input asp-for="Email" class="login-input" placeholder="Email" type="email" required/>
+                <input asp-for="Password" class="login-input" placeholder="Пароль" type="password" required/>
+                <input asp-for="PasswordConfirm" class="login-input" placeholder="Подтвердите пароль" type="password" required/>
+            </section>
+            <button type="submit" class="login-button">Зарегистрироваться</button>
+        </section>
+        <div class="not-register">
+            <div>Уже есть аккаунт?</div>
+            <button style="color: #69E167;">Войти</button>
+        </div>
     </div>
 </form>
+</body>
