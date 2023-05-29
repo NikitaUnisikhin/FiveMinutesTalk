@@ -19,17 +19,25 @@ const copied = baseForm.cloneNode(true);
 
 // Я предлагаю сделать глобальный id для вопросов, чтобы после удаления у нас не было совпадений id вопросов
 let questionId = 1;
-let numberQuestion = 1;
 
 let pages = document.getElementsByClassName("page");
 pages[0].style.display = "flex";
+
+$("input").focus(function () {
+    if (this.value === this.defaultValue) {
+        this.select();
+    }
+});
+
+const getNumber = (element) => {
+    return Number(element.querySelector(".hat-question").querySelector(".number-question").querySelector(".number").textContent);
+}
 
 // У нас уже есть заранее склонированная форма, поэтому просто изменяем id в зависимости от questionId
 function newField(ev) {
     let addQue = ev.currentTarget;
     let parent = addQue.parentNode;
     questionId++;
-    numberQuestion++;
     let newCopied = copied.cloneNode(true);
     newCopied.id = "Form" + questionId;
 
@@ -53,30 +61,27 @@ function newField(ev) {
     addQuestion.addEventListener('click', function (ev) {
         newField(ev)
     });
-
-    newCopied.querySelector(".hat-question").querySelector(".number-question").textContent = `${numberQuestion}.`;
+    
+    questions.splice(getNumber(addQue.parentElement), 0, newCopied);
+    changeNumberQuestions();
     parent.after(newCopied);
 }
 
-function arrayRemove(arr, value) {
-
-    return arr.filter(function (ele) {
-        return ele.id !== value.id;
-    });
-}
-
-function changeChildren(parent, value) {
-    for (let i = Number(parent.id.slice(4)) + 1; i <= questionId; i++) {
-        let current = document.getElementById(`Form${i}`);
-        let currentNum = Number(current.querySelector("#hat-question").querySelector(".number-question").textContent[0]);
-        current.querySelector("#hat-question").querySelector(".number-question").textContent = `${currentNum + value}.`;
+function changeNumberQuestions() {
+    for (let i = 0; i < questions.length; i++) {
+        questions[i].querySelector(".hat-question").querySelector(".number-question").querySelector(".number").textContent = `${i + 1}`;
     }
 }
 
 // Удаляет родителя...
 function removeParent() {
-    let revDiv = this.parentElement.parentElement;
-    console.log(revDiv)
+    let revDiv = this.parentElement.parentElement.parentElement;
+    let numberQuestion = getNumber(revDiv);
+    if (numberQuestion === 1)
+        return;
+    
+    questions.splice(numberQuestion - 1, 1);
+    changeNumberQuestions();
     revDiv.remove();
 }
 
@@ -101,22 +106,22 @@ function changeComponents(questionType) {
         text.setAttribute("id", "Text" + id);
         newDiv.appendChild(text);
 
-    /*} else if (selectedValue === "1") {
-        newDiv.innerText = "Код";
-
-    } else if (selectedValue === "2") {
-        // здесь создаем кнопку, которая добавляет новый label с radio кнопкой и вводом
-        let addRadio = document.createElement("input");
-        addRadio.setAttribute("value", "Добавить вариант ответа");
-        addRadio.setAttribute("type", "button");
-        addRadio.setAttribute("id", "AddRadio" + id);
-        let col = 0;
-        addRadio.addEventListener("click", function (e) {
-            addNewRadio(e, id, col++)
-        });
-        addRadio.setAttribute("class", "add-variant");
-        newDiv.appendChild(addRadio);
-        addRadio.click();*/
+        /*} else if (selectedValue === "1") {
+            newDiv.innerText = "Код";
+    
+        } else if (selectedValue === "2") {
+            // здесь создаем кнопку, которая добавляет новый label с radio кнопкой и вводом
+            let addRadio = document.createElement("input");
+            addRadio.setAttribute("value", "Добавить вариант ответа");
+            addRadio.setAttribute("type", "button");
+            addRadio.setAttribute("id", "AddRadio" + id);
+            let col = 0;
+            addRadio.addEventListener("click", function (e) {
+                addNewRadio(e, id, col++)
+            });
+            addRadio.setAttribute("class", "add-variant");
+            newDiv.appendChild(addRadio);
+            addRadio.click();*/
 
     } else if (selectedValue === "MultipleAnswersQuestion") {
         // здесь создаем кнопку, которая добавляет новый label с checkbox кнопкой и вводом
@@ -212,6 +217,6 @@ function openPage(id) {
     for (let i = 0; i < pages.length; i++) {
         pages[i].style.display = "none";
     }
-    
+
     document.getElementById(id).style.display = "flex";
 }

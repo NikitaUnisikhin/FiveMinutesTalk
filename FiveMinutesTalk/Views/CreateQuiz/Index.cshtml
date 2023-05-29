@@ -4,13 +4,16 @@
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <div class="page" id="create-poll-content">
-        <input type="text" name="quizTitle" id="name-poll" required placeholder="Новый опрос" />
+        <input type="text" name="quizTitle" id="name-poll" required value="Новый опрос" placeholder="Введите название опроса"/>
         <section id="questions">
             <div id="Form1" class="question-block">
                 <section id="Question1" class="question">
                     <section class="hat-question">
-                        <div class="number-question">1.</div>
-                        <input class="name-question" name="questions[0].Text" name="Question" type="text" placeholder="Название вопроса">
+                        <section class="number-question">
+                            <div class="number">1</div>
+                            <div class="dot">.</div>
+                        </section>
+                        <input class="name-question" name="questions[0].Text" name="Question" type="text" value="Новый вопрос" placeholder="Введите название вопроса">
                         <label>
                             <select id="1" asp-for="Type" name="questions[0].Type" class="form-select">
                                 @{

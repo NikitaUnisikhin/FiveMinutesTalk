@@ -52,7 +52,7 @@
 
 #name-poll {
     position: absolute;
-    width: 300px;
+    width: 500px;
     height: 44px;
     text-align: center;
 
@@ -97,6 +97,11 @@
 }
 
 .number-question {
+    display: flex;
+    flex-direction: row;
+}
+
+.number-question > div{
     color: var(--green);
     font-family: "Montserrat SemiBold", serif;
 }
