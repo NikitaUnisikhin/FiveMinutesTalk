@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
 
-:root{
+:root {
     --green: #69E167;
     --light-green: #C1F3C1;
     --grey: #808080;
@@ -12,7 +12,7 @@ html {
     font-family: "Montserrat", serif;
     position: relative;
     min-height: 100%;
-    
+
 }
 
 body {
@@ -39,7 +39,7 @@ input:focus {
     outline: none;
 }
 
-button, input, select {
+button, input, select, a {
     background-color: transparent;
     border: none;
     align-items: center;
@@ -47,8 +47,13 @@ button, input, select {
     font-size: 13px;
 }
 
-button, select {
+button, select, a {
     cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: var(--green);
 }
 
 

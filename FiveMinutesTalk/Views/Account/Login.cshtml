@@ -1,4 +1,9 @@
 ﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Вход";
+}
+
 <body>
 <form asp-area="" asp-controller="Account" asp-action="Login" method="post" asp-route-returnUrl="@ViewBag.returnUrl">
     <img src="/images/login.svg" alt="login" style="top: 25%; position: absolute; left: 5%">
@@ -11,9 +16,9 @@
             </section>
             <button type="submit" class="login-button">Войти</button>
         </section>
-        <div class="not-register">
+        <div class="bottom-navigation"> 
             <div>Нет аккаунта?</div>
-            <button style="color: #69E167;">Зарегистрироваться</button>
+            <a href="/account/register">Зарегистрироваться</a>
         </div>
     </div>
 </form>

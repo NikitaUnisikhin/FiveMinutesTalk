@@ -54,9 +54,10 @@
     border-bottom: 1px solid var(--green);
 }
 
-.not-register {
+.bottom-navigation {
     display: flex;
     align-items: center;
     flex-direction: row;
     font-size: 13px;
+    gap: 5px;
 }

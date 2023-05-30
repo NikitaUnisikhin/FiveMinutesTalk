@@ -1,5 +1,9 @@
 @model RegisterViewModel
 
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
 <body>
 <form asp-controller="Account" asp-action="Register" method="post">
     <img src="/images/login.svg" alt="login" style="top: 25%; position: absolute; left: 5%">
@@ -8,14 +12,14 @@
         <section style="display: flex; align-items: center; flex-direction: column; gap: 40px; padding: 0; height: auto">
             <section class="inputs-login">
                 <input asp-for="Email" class="login-input" placeholder="Email" type="email" required/>
-                <input asp-for="Password" class="login-input" placeholder="Пароль" type="password" required/>
-                <input asp-for="PasswordConfirm" class="login-input" placeholder="Подтвердите пароль" type="password" required/>
+                <input asp-for="Password" class="login-input" placeholder="Пароль" type="password" id="reg-password" onChange="validatePassword()" required/>
+                <input asp-for="PasswordConfirm" class="login-input" placeholder="Подтвердите пароль" type="password" id="reg-password-confirm" onChange="validatePassword()" required/>
             </section>
             <button type="submit" class="login-button">Зарегистрироваться</button>
         </section>
-        <div class="not-register">
+        <div class="bottom-navigation">
             <div>Уже есть аккаунт?</div>
-            <button style="color: #69E167;">Войти</button>
+            <a href="/account/login">Войти</a>
         </div>
     </div>
 </form>

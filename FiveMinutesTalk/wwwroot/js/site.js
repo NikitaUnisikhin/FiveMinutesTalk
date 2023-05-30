@@ -23,11 +23,25 @@ let questionId = 1;
 let pages = document.getElementsByClassName("page");
 pages[0].style.display = "flex";
 
+// При нажатии на ввод введеный уже текст выделяется
 $("input").focus(function () {
     if (this.value === this.defaultValue) {
         this.select();
     }
 });
+
+// Проверка на совпадение паролей
+function validatePassword() {
+    let password = document.getElementById("reg-password");
+    let confirm_password = document.getElementById("reg-password-confirm");
+    
+    if (password.value !== confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
+    } else {
+        confirm_password.setCustomValidity('');
+    }
+}
+
 
 const getNumber = (element) => {
     return Number(element.querySelector(".hat-question").querySelector(".number-question").querySelector(".number").textContent);
@@ -61,12 +75,13 @@ function newField(ev) {
     addQuestion.addEventListener('click', function (ev) {
         newField(ev)
     });
-    
+
     questions.splice(getNumber(addQue.parentElement), 0, newCopied);
     changeNumberQuestions();
     parent.after(newCopied);
 }
 
+// Обновляет номера вопросов
 function changeNumberQuestions() {
     for (let i = 0; i < questions.length; i++) {
         questions[i].querySelector(".hat-question").querySelector(".number-question").querySelector(".number").textContent = `${i + 1}`;
@@ -79,7 +94,7 @@ function removeParent() {
     let numberQuestion = getNumber(revDiv);
     if (numberQuestion === 1)
         return;
-    
+
     questions.splice(numberQuestion - 1, 1);
     changeNumberQuestions();
     revDiv.remove();
