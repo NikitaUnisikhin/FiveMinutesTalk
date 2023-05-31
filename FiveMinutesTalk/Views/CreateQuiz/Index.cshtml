@@ -4,7 +4,7 @@
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <div class="page" id="create-poll-content">
-        <input type="text" name="quizTitle" id="name-poll" required value="Новый опрос" placeholder="Введите название опроса"/>
+        <input type="text" name="quizTitle" id="name-poll" required value="Новый опрос" placeholder="Введите название опроса" onFocus="this.select()"/>
         <section id="questions">
             <div id="Form1" class="question-block">
                 <section id="Question1" class="question">
@@ -13,7 +13,7 @@
                             <div class="number">1</div>
                             <div class="dot">.</div>
                         </section>
-                        <input class="name-question" name="questions[0].Text" name="Question" type="text" value="Новый вопрос" placeholder="Введите название вопроса">
+                        <input class="name-question" name="questions[0].Text" name="Question" type="text" value="Новый вопрос" placeholder="Введите название вопроса" onFocus="this.select()">
                         <label>
                             <select id="1" asp-for="Type" name="questions[0].Type" class="form-select">
                                 @{

@@ -23,12 +23,7 @@ let questionId = 1;
 let pages = document.getElementsByClassName("page");
 pages[0].style.display = "flex";
 
-// При нажатии на ввод введеный уже текст выделяется
-$("input").focus(function () {
-    if (this.value === this.defaultValue) {
-        this.select();
-    }
-});
+
 
 // Проверка на совпадение паролей
 function validatePassword() {
@@ -70,7 +65,7 @@ function newField(ev) {
     newCopied.querySelector("#Answer1").id = "Answer" + questionId;
     newCopied.querySelector(".bottom-question").querySelector(".right-part").querySelector(".close-button").addEventListener('click', removeParent);
 
-    let addQuestion = newCopied.querySelector("#AddQuestion1")
+    let addQuestion = newCopied.querySelector("#AddQuestion1");
     addQuestion.id = "AddQuestion" + questionId;
     addQuestion.addEventListener('click', function (ev) {
         newField(ev)
