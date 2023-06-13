@@ -3,9 +3,9 @@
 
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
-    <div class="page" id="create-poll-content">
+    <div id="create-poll-content">
         <input type="text" name="quizTitle" id="name-poll" required value="Новый опрос" placeholder="Введите название опроса" onFocus="this.select()"/>
-        <section id="questions">
+        <section class="page" id="questions">
             <div id="Form1" class="question-block">
                 <section id="Question1" class="question">
                     <section class="hat-question">
@@ -52,6 +52,21 @@
                 <button id="AddQuestion1" formmethod="dialog" class="add-question"> <img src="/images/add-question.svg" alt="plus">Добавить вопрос</button>
             </div>
         </section>
+
+        <section class="page" id="settings">
+            <div class="options">
+                <section class="option">
+                    <div class="bold-text">Начало опроса:</div>
+                    <input type="datetime-local"/>
+                </section>
+
+                <section class="option">
+                    <div class="bold-text">Конец опроса: </div>
+                    <input type="datetime-local"/>
+                </section>
+            </div>
+            <img src="images/settings.svg" alt="settings-image"/>
+        </section>
     </div>
 
     <section id="create-poll-hat">
@@ -70,7 +85,7 @@
 
 <div id="tabs">
     <input type="radio" class="tab" id="tab-questions" name="tab-group" checked>
-    <label for="tab-questions" class="tab-label" onclick="openPage('create-poll-content')">Вопросы</label>
+    <label for="tab-questions" class="tab-label" onclick="openPage('questions')">Вопросы</label>
 
     <input type="radio" class="tab" id="tab-answer" onclick="openPage('answers')" name="tab-group">
     <label for="tab-answer" class="tab-label">Ответы</label>

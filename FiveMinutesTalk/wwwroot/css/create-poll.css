@@ -36,6 +36,7 @@
 }
 
 #create-poll-content {
+    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -47,7 +48,7 @@
 
     position: absolute;
     width: 800px;
-    top: 250px;
+    top: 35%;
 }
 
 #name-poll {
@@ -56,7 +57,7 @@
     height: 44px;
     text-align: center;
 
-    top: 150px;
+    top: 20%;
 
     font-style: normal;
     font-weight: 600;
@@ -371,4 +372,32 @@
         bottom: 0;
         opacity: 0;
     }
+}
+
+/*========Настройки========*/
+
+#settings {
+    align-items: center;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 20%;
+}
+
+#settings .options {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    position: absolute;
+    top: 38%;
+}
+
+.option {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    top: 35%;
+    left: 20%;
+    align-items: center;
+    font-size: 14px;
 }

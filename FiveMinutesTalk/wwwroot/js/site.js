@@ -21,7 +21,7 @@ const copied = baseForm.cloneNode(true);
 let questionId = 1;
 
 let pages = document.getElementsByClassName("page");
-pages[0].style.display = "flex";
+openPage("questions");
 
 
 // Проверка на совпадение паролей
