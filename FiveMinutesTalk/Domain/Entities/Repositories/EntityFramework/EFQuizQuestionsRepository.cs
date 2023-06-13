@@ -1,4 +1,6 @@
+using FiveMinutesTalk.Domain.Entities.QuestionsTypes;
 using FiveMinutesTalk.Domain.Entities.Repositories.Abstract;
+using Microsoft.Build.Experimental.ProjectCache;
 
 namespace FiveMinutesTalk.Domain.Entities.Repositories.EntityFramework;
 
@@ -16,6 +18,14 @@ public class EFQuizQuestionsRepository : IRepository<QuizQuestion>
         return context.QuizQuestions;
     }
 
+    public Guid[] GetQuestionsIdByQuizId(Guid id)
+    {
+        return context.QuizQuestions
+            .Where(x => x.QuizId == id)
+            .Select(x => x.QuestionId)
+            .ToArray();
+    }
+    
     public QuizQuestion GetItemById(Guid id)
     {
         return context.QuizQuestions
@@ -36,5 +46,4 @@ public class EFQuizQuestionsRepository : IRepository<QuizQuestion>
         });
         context.SaveChanges();
     }
-   
 }
