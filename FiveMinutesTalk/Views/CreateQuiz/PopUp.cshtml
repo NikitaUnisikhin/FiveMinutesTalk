@@ -1,0 +1,19 @@
+@model QuestionModel
+
+<section id="overlay">
+    <section id="popup">
+        <div class="hat">
+            <h1>Ваш опрос сохранён!</h1>
+            <hr class="solid" style="width: 800px; margin-left: 0">
+        </div>
+        <section class="content">
+            <div class="bold-text">Ссылка:</div>
+            <div id="quiz-id" style="border-bottom: 2px solid var(--green);">@ViewBag.QuizId</div>
+            <button type="submit" onclick="copyText()" class="copy-text">
+                <img src="/images/copy.svg" alt="copy-icon">
+            </button>
+            <span id="snackbar">Скопировано</span>
+        </section>
+        <button class="close light-text" onclick="closePopUp()" aria-hidden="true">&times;</button>
+    </section>
+</section>

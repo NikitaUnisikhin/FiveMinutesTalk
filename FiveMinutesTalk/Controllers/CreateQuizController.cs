@@ -59,6 +59,6 @@ public class CreateQuizController : Controller
             });
         }
 
-        return View("QuizCreate");
+        return View("PopUp");
     }
 }

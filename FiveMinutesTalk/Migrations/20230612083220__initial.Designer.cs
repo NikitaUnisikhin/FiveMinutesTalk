@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FiveMinutesTalk.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230426081419__addRoleAuthorizedUser")]
-    partial class _addRoleAuthorizedUser
+    [Migration("20230612083220__initial")]
+    partial class _initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,7 +48,7 @@ namespace FiveMinutesTalk.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Question");
+                    b.ToTable("Questions");
 
                     b.HasData(
                         new
@@ -84,7 +84,7 @@ namespace FiveMinutesTalk.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Quiz");
+                    b.ToTable("Quizzes");
 
                     b.HasData(
                         new
@@ -109,7 +109,7 @@ namespace FiveMinutesTalk.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuizQuestion");
+                    b.ToTable("QuizQuestions");
 
                     b.HasData(
                         new
@@ -154,9 +154,15 @@ namespace FiveMinutesTalk.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
-                            Name = "authorizedUser",
-                            NormalizedName = "AUTHORIZEDUSER"
+                            Id = "A09B4B9F-27F3-47C4-B83B-CEE4C5C5C874",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "C8F61226-0EE8-4AEB-9C57-BE198614A1E8",
+                            Name = "user",
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -251,19 +257,35 @@ namespace FiveMinutesTalk.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
+                            Id = "BCF8F1A1-A9BA-480F-A16C-88DBDCFAA9AC",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ed2be62f-471e-4f6b-9a34-529110ea5613",
+                            ConcurrencyStamp = "b8f27bbd-a241-42cf-8230-7fefcb6e6932",
                             Email = "my@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MY@EMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAK+D5lOLBJdsKLfP2TOIEluBK2o3MmyEVejoXGe8bNUsw9aaentUY890IzjZg0EKw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEO/5WEWF/bRWArqLR3tYrsHDtUxFDaDlfDqKo8PUTcnoHXjzX0hPLNxl4B10vtRVRw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f4a7a18a-1861-45e7-bfc7-994bf944348a",
+                            Email = "my@email.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MY@EMAIL.COM",
+                            NormalizedUserName = "NIKITA",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIxxFzW05iHqWVtdT115M3J4gFL90iQGMxH+2esgNMnrIkst1R+KQmrqQcTwsD/qag==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "nikita"
                         });
                 });
 
@@ -331,8 +353,13 @@ namespace FiveMinutesTalk.Migrations
                     b.HasData(
                         new
                         {
+                            UserId = "BCF8F1A1-A9BA-480F-A16C-88DBDCFAA9AC",
+                            RoleId = "A09B4B9F-27F3-47C4-B83B-CEE4C5C5C874"
+                        },
+                        new
+                        {
                             UserId = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
-                            RoleId = "44546e06-8719-4ad8-b88a-f271ae9d6eab"
+                            RoleId = "C8F61226-0EE8-4AEB-9C57-BE198614A1E8"
                         });
                 });
 

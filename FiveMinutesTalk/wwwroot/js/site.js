@@ -24,12 +24,11 @@ let pages = document.getElementsByClassName("page");
 pages[0].style.display = "flex";
 
 
-
 // Проверка на совпадение паролей
 function validatePassword() {
     let password = document.getElementById("reg-password");
     let confirm_password = document.getElementById("reg-password-confirm");
-    
+
     if (password.value !== confirm_password.value) {
         confirm_password.setCustomValidity("Passwords Don't Match");
     } else {
@@ -230,3 +229,24 @@ function openPage(id) {
 
     document.getElementById(id).style.display = "flex";
 }
+
+function openPopUp() {
+    document.getElementById("overlay").style.display = "flex";
+}
+
+function closePopUp() {
+    document.getElementById("overlay").style.display = "none";
+}
+
+function copyText() {
+    let copyText = document.getElementById("quiz-id").textContent;
+    navigator.clipboard.writeText(copyText);
+
+    let sb = document.getElementById("snackbar");
+
+    sb.className = "show";
+    setTimeout(() => {
+        sb.className = sb.className.replace("show", "");
+    }, 2900);
+}
+

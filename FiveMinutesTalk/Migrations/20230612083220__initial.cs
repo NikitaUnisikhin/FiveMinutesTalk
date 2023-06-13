@@ -54,7 +54,7 @@ namespace FiveMinutesTalk.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Question",
+                name: "Questions",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -65,24 +65,11 @@ namespace FiveMinutesTalk.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Question", x => x.Id);
+                    table.PrimaryKey("PK_Questions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Quiz",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Title = table.Column<string>(type: "text", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Quiz", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "QuizQuestion",
+                name: "QuizQuestions",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -91,7 +78,20 @@ namespace FiveMinutesTalk.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QuizQuestion", x => x.Id);
+                    table.PrimaryKey("PK_QuizQuestions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Quizzes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Quizzes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -201,7 +201,25 @@ namespace FiveMinutesTalk.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Question",
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "A09B4B9F-27F3-47C4-B83B-CEE4C5C5C874", null, "admin", "ADMIN" },
+                    { "C8F61226-0EE8-4AEB-9C57-BE198614A1E8", null, "user", "USER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "3b62472e-4f66-49fa-a20f-e7685b9565d8", 0, "f4a7a18a-1861-45e7-bfc7-994bf944348a", "my@email.com", true, false, null, "MY@EMAIL.COM", "NIKITA", "AQAAAAIAAYagAAAAEIxxFzW05iHqWVtdT115M3J4gFL90iQGMxH+2esgNMnrIkst1R+KQmrqQcTwsD/qag==", null, false, "", false, "nikita" },
+                    { "BCF8F1A1-A9BA-480F-A16C-88DBDCFAA9AC", 0, "b8f27bbd-a241-42cf-8230-7fefcb6e6932", "my@email.com", true, false, null, "MY@EMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEO/5WEWF/bRWArqLR3tYrsHDtUxFDaDlfDqKo8PUTcnoHXjzX0hPLNxl4B10vtRVRw==", null, false, "", false, "admin" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Questions",
                 columns: new[] { "Id", "AnswerOptions", "CorrectAnswers", "Text", "Type" },
                 values: new object[,]
                 {
@@ -210,17 +228,26 @@ namespace FiveMinutesTalk.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Quiz",
-                columns: new[] { "Id", "EndDate", "Title" },
-                values: new object[] { new Guid("4043b854-c29f-4dca-900c-0387de52d250"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Как хорошо ты знаешь создателей?" });
-
-            migrationBuilder.InsertData(
-                table: "QuizQuestion",
+                table: "QuizQuestions",
                 columns: new[] { "Id", "QuestionId", "QuizId" },
                 values: new object[,]
                 {
                     { new Guid("51006146-de9b-4d6e-a2d0-deb2c1874434"), new Guid("8b95163b-8485-40d6-bafd-51785ad6e9d2"), new Guid("4043b854-c29f-4dca-900c-0387de52d250") },
                     { new Guid("b1fcff97-0713-4815-b3a8-40232db7ff90"), new Guid("92ef0486-b6c5-4706-a9c8-2c994f43159d"), new Guid("4043b854-c29f-4dca-900c-0387de52d250") }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Quizzes",
+                columns: new[] { "Id", "EndDate", "Title" },
+                values: new object[] { new Guid("4043b854-c29f-4dca-900c-0387de52d250"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Как хорошо ты знаешь создателей?" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { "C8F61226-0EE8-4AEB-9C57-BE198614A1E8", "3b62472e-4f66-49fa-a20f-e7685b9565d8" },
+                    { "A09B4B9F-27F3-47C4-B83B-CEE4C5C5C874", "BCF8F1A1-A9BA-480F-A16C-88DBDCFAA9AC" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -280,13 +307,13 @@ namespace FiveMinutesTalk.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Question");
+                name: "Questions");
 
             migrationBuilder.DropTable(
-                name: "Quiz");
+                name: "QuizQuestions");
 
             migrationBuilder.DropTable(
-                name: "QuizQuestion");
+                name: "Quizzes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

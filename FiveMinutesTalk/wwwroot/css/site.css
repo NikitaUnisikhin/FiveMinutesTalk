@@ -5,6 +5,8 @@
     --light-green: #C1F3C1;
     --grey: #808080;
     --light-grey: #EBEBEB;
+    --black: #000000;
+    --white: #FFFFFF;
 }
 
 html {
@@ -19,20 +21,17 @@ body {
     margin-bottom: 60px;
 }
 
-.h1 {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 36px;
-    line-height: 44px;
-    color: #000000;
+h1 {
+    font-size: 25px;
 }
 
-.h2 {
-    color: rgba(0, 0, 0, 0.8);
-}
 
 .light-text {
     font-family: "Montserrat Light", serif;
+}
+
+.bold-text {
+    font-family: "Montserrat SemiBold", serif;
 }
 
 input:focus {
