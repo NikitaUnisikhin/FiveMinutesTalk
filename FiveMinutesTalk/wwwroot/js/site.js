@@ -72,6 +72,7 @@ function newField(ev) {
 
     questions.splice(getNumber(addQue.parentElement), 0, newCopied);
     changeNumberQuestions();
+    setupSelector(newCopied.querySelector('.custom-select'));
     parent.after(newCopied);
 }
 
@@ -248,5 +249,44 @@ function copyText() {
     setTimeout(() => {
         sb.className = sb.className.replace("show", "");
     }, 2900);
+}
+
+//Делаем нормальный селектор
+document.querySelectorAll('.custom-select').forEach(setupSelector);
+
+function setupSelector(selector) {
+    selector.addEventListener('mousedown', e => {
+        if (window.innerWidth >= 420) {
+            e.preventDefault();
+
+            const select = selector.children[0];
+            const dropDown = document.createElement('ul');
+            dropDown.className = "selector-options";
+
+            [...select.children].forEach(option => {
+                const dropDownOption = document.createElement('li');
+                dropDownOption.textContent = option.textContent;
+
+                dropDownOption.addEventListener('mousedown', (e) => {
+                    e.stopPropagation();
+                    select.value = option.value;
+                    selector.value = option.value;
+                    select.dispatchEvent(new Event('change'));
+                    selector.dispatchEvent(new Event('change'));
+                    dropDown.remove();
+                });
+
+                dropDown.appendChild(dropDownOption);
+            });
+
+            selector.appendChild(dropDown);
+
+            document.addEventListener('click', (e) => {
+                if (!selector.contains(e.target)) {
+                    dropDown.remove();
+                }
+            });
+        }
+    });
 }
 

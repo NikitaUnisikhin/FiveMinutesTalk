@@ -104,26 +104,39 @@ select {
 
     -webkit-appearance: none;
     -moz-appearance: none;
-    transition: all 375ms ease-in-out;
     background: transparent url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat 97% center;
     background-size: 9%;
-
-    min-height: 20px;
 }
 
-li {
+.custom-select {
     position: relative;
-    float: left;
-    width: 96%;
-    border-bottom:1px solid #E0E0E0;
-    background-color: #F5F5F5;
-    list-style-type: none;
-    padding: 10px 2%;
-    margin: 0px;
-    transition: all 275ms ease-in-out;
-    display: block;
-    cursor:pointer;
+}
 
+.custom-select .selector-options {
+    list-style: none;
+    padding: 5px 0;
+    background: white;
+    z-index: 1;
+    width: 100%;
+    position: absolute;
+    border: 1px solid var(--green);
+    border-radius: 10px;
+    margin-top: -40px;
+}
+
+.custom-select .selector-options li {
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Montserrat SemiBold", serif;
+    font-size: 13px;
+    padding: 0 15px;
+    transition: background 0.3s ease;
+}
+
+.custom-select .selector-options li:hover {
+    background: var(--light-green);
 }
 
 

@@ -1,6 +1,10 @@
 ﻿@using FiveMinutesTalk.Domain.Entities.QuestionsTypes
 @model Guid[]
 
+@{
+    ViewData["Title"] = "Прохождение опроса";
+}
+
 <script>
     function checkCheckbox(checkbox, optionNumber){
         if (checkbox.checked) {

@@ -1,6 +1,10 @@
 ﻿@using FiveMinutesTalk.Domain.Entities.QuestionsTypes
 @model QuestionModel
 
+@{
+    ViewData["Title"] = "Создание опроса";
+}
+
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <div id="create-poll-content">
@@ -14,7 +18,7 @@
                             <div class="dot">.</div>
                         </section>
                         <input class="name-question" name="questions[0].Text" name="Question" type="text" value="Новый вопрос" placeholder="Введите название вопроса" onFocus="this.select()">
-                        <label >
+                        <label class="custom-select">
                             <select id="1" asp-for="Type" name="questions[0].Type" class="form-select">
                                 @{
                                     var types = new Dictionary<string, string>()
