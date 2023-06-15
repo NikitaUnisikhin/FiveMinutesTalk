@@ -16,8 +16,8 @@
     }
 </script>
 <div class="text-center">
-    <h2 class="display-4">@ViewBag.QuizTitle</h2>
-    <form method="post" asp-controller="SolveQuiz" asp-action="SaveResult" class="questions1">
+    <h2 class="name-poll" style="position: relative">@ViewBag.QuizTitle</h2>
+    <form method="post" asp-controller="SolveQuiz" asp-action="SaveResult">
         @{
             var questionNumber = 0;
             foreach (var id in Model)
@@ -27,40 +27,55 @@
                 <input type="text" readonly name="answers[@questionNumber].QuestionType" value="@question.Type" hidden="hidden">
                 <input type="text" readonly name="answers[@questionNumber].QuizId" value="@ViewBag.QuidId" hidden="hidden">
                 var questionContainerId = $"question_{questionNumber}";
-                <div id=@questionContainerId class="question-div">
-                    <div class="text"><span style="color: var(--green)">@(questionNumber + 1).</span> @question.Text</div>
-                    @if (question.Type == QuestionTypeEnum.OpenQuestion)
-                    {
-                        var inputId = $"answer_{questionNumber}";
-                        <label>
-                            <input class="form-control" type="text" id=@inputId placeholder="Ответ" 
-                                   name="answers[@questionNumber].Answers">
-                        </label>
-                    }
-                    else if (question.Type == QuestionTypeEnum.MultipleAnswersQuestion)
-                    {
-                        <label>
-                            @{
-                                var optionNumber = 0;
-                                foreach (var option in question.AnswerOptions)
-                                {
-                                    var optionId = $"option_{questionNumber}_{optionNumber}";
-                                        <label id=@optionId class="checkbox-label">
-                                            <input type="checkbox" 
-                                                   onchange="checkCheckbox(this, @optionNumber)" 
-                                                   name = "answers[@questionNumber].Answers"
-                                                   value=-1>
-                                            <span>@option</span>
-                                        </label>
-                                    optionNumber++;
-                                }
+                <section class="question-solve">
+                    <section id=@questionContainerId class="hat-question">
+                        <div class="number-question">
+                            <div class="number">@(questionNumber + 1)</div>
+                            <div class="dot">.</div>
+                        </div>
+                        <div class="name-question">@question.Text</div>
+                    </section>
+                    <div class="answer">
+                        @switch (question.Type)
+                        {
+                            case QuestionTypeEnum.OpenQuestion:
+                            {
+                                var inputId = $"answer_{questionNumber}";
+                                <label>
+                                    <input class="text-question" type="text" id=@inputId placeholder="Ответ"
+                                           name="answers[@questionNumber].Answers">
+                                </label>
+                                break;
                             }
-                        </label>
-                    }
-                </div>
+                            case QuestionTypeEnum.MultipleAnswersQuestion:
+                            {
+                                <label>
+                                    @{
+                                        var optionNumber = 0;
+                                        foreach (var option in question.AnswerOptions)
+                                        {
+                                            var optionId = $"option_{questionNumber}_{optionNumber}";
+                                            <label id=@optionId class="checkbox-label">
+                                                <input type="checkbox"
+                                                       onchange="checkCheckbox(this, @optionNumber)"
+                                                       name="answers[@questionNumber].Answers"
+                                                       value=-1
+                                                       class="checkbox-text">
+                                                <span>@option</span>
+                                            </label>
+                                            optionNumber++;
+                                        }
+                                    } 
+                                </label>
+                                break;
+                            }
+                        }
+                    </div>
+                </section>
                 questionNumber++;
             }
-            <button class="send-answers">Отправить</button>
+            <button class="submit-button" id="send-answers">Отправить</button>
         }
+
     </form>
 </div>

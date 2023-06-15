@@ -211,7 +211,7 @@ function addNewCheckbox(e, id, col) {
     };
 
     let checkboxText = document.createElement("input");
-    checkboxText.setAttribute("placeholder", "Текст");
+    checkboxText.setAttribute("placeholder", "Ответ");
     checkboxText.setAttribute("type", "text");
     checkboxText.setAttribute("id", "CheckboxText" + id + `-${col}`);
     checkboxText.setAttribute("name", `questions[${id - 1}].AnswerOptions`);
@@ -290,3 +290,16 @@ function setupSelector(selector) {
     });
 }
 
+// Присваиваем всем календарям текущую дату и время
+window.addEventListener('load', () => {
+    let now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+
+    now.setMilliseconds(null)
+    now.setSeconds(null)
+
+    let calendars = document.querySelectorAll('input[type=datetime-local]');
+    
+    for (let calendar of calendars)
+        calendar.value = now.toISOString().slice(0, -1);
+});

@@ -14,7 +14,7 @@ html {
     font-family: "Montserrat", serif;
     position: relative;
     min-height: 100%;
-
+    scrollbar-gutter: stable;
 }
 
 body {
