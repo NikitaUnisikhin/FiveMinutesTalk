@@ -24,7 +24,7 @@
                 <input type="text" readonly name="answers[@questionNumber].QuizId" value="@ViewBag.QuidId" hidden="hidden">
                 var questionContainerId = $"question_{questionNumber}";
                 <div id=@questionContainerId class="question-div">
-                    <div class="text">@question.Text</div>
+                    <div class="text"><span style="color: var(--green)">@(questionNumber + 1).</span> @question.Text</div>
                     @if (question.Type == QuestionTypeEnum.OpenQuestion)
                     {
                         var inputId = $"answer_{questionNumber}";
@@ -46,7 +46,7 @@
                                                    onchange="checkCheckbox(this, @optionNumber)" 
                                                    name = "answers[@questionNumber].Answers"
                                                    value=-1>
-                                            <a>@option</a>
+                                            <span>@option</span>
                                         </label>
                                     optionNumber++;
                                 }
@@ -56,7 +56,7 @@
                 </div>
                 questionNumber++;
             }
-            <button class="send-answers">Отправить ответы</button>
+            <button class="send-answers">Отправить</button>
         }
     </form>
 </div>
