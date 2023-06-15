@@ -192,6 +192,7 @@
     width: 765px;
     height: 40px;
     border-bottom: 1px solid var(--green);
+    font-family: "Montserrat Regular", serif;
     font-size: 15px;
 }
 
@@ -217,6 +218,11 @@
     height: 40px;
 
     color: rgba(0, 0, 0, 0.5);
+}
+
+.checkbox-text {
+    font-size: 15px;
+    font-family: "Montserrat Regular", serif;
 }
 
 /*========Табы========*/

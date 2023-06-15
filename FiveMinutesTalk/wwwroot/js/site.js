@@ -215,7 +215,8 @@ function addNewCheckbox(e, id, col) {
     checkboxText.setAttribute("type", "text");
     checkboxText.setAttribute("id", "CheckboxText" + id + `-${col}`);
     checkboxText.setAttribute("name", `questions[${id - 1}].AnswerOptions`);
-    checkboxText.setAttribute("class", "checkbox-text");
+    checkboxText.setAttribute("class", `checkbox-text`);
+
 
     label.appendChild(checkbox);
     label.appendChild(checkboxText);
