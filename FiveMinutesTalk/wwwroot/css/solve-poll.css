@@ -1,10 +1,11 @@
 /*========Для прохождения опроса========*/
 
-.text-center {
+.solve-content {
     align-items: center;
     display: flex;
     flex-direction: column;
     margin-top: 2%;
+    justify-content: center;
 }
 
 .question-solve {
@@ -22,7 +23,7 @@
 #end-solve {
     display: flex;
     flex-direction: column;
-    gap: 100px;
+    gap: 80px;
     margin-top: 3%;
     align-items: center;
     justify-content: center;
@@ -34,3 +35,27 @@
     box-shadow: none;
     padding: 0 35px;
 }
+
+.timer {
+    position: fixed;
+    display: flex;
+    bottom: -35px;
+    right: 5%;
+    border-radius: 30px;
+    margin-bottom: 15px;
+    box-shadow: var(--shadow);
+    background-color: var(--green);
+    height: 90px;
+    width: 200px;
+    padding: 0 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+#time {
+    color: white;
+    font-size: 20px;
+}
+
+

@@ -28,6 +28,15 @@
 
     background: var(--green);
     border-radius: 15px;
+    transition: all 0.5s ease;
+}
+
+#save-poll:hover {
+    background-color: var(--hover-green);
+}
+
+#save-poll:active {
+    scale: 0.97;
 }
 
 /*========Структура вопросов========*/
@@ -179,6 +188,10 @@
     border-radius: 100px;
 }
 
+.add-question:hover {
+    filter: brightness(110%);
+}
+
 /*========Типы вопросов========*/
 
 .text-question {
@@ -200,7 +213,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0;
+    padding: 3px 10px;
     gap: 10px;
     height: 40px;
     width: 765px;
@@ -223,7 +236,35 @@
 .checkbox-text {
     font-size: 15px;
     font-family: "Montserrat Regular", serif;
+    padding: 5px 0;
+    border: none;
 }
+
+
+.input-container {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    gap: 0;
+    width: 765px;
+}
+
+.checkbox-span {
+    display: flex;
+    width: 0;
+    height: 1px;
+    background: var(--green);
+    position: relative;
+    top: 0;
+
+    transition: all ease-in-out .3s;
+}
+
+.checkbox-text:focus + .checkbox-span {
+    width: 100%;
+}
+
+
 
 /*========Табы========*/
 
@@ -288,13 +329,13 @@
 
 #popup {
     padding: 50px;
-    background: var(--white);
+    background: white;
     border-radius: 20px;
     width: 850px;
-    position: relative;
+    position: absolute;
     top: 20%;
     left: 20%;
-    transition: all 5s ease-in-out;
+    transition: all 1s ease-in-out;
     gap: 40px;
     display: flex;
     flex-direction: column;

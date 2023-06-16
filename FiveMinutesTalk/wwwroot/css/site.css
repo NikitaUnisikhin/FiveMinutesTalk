@@ -7,6 +7,9 @@
     --light-grey: #EBEBEB;
     --black: #000000;
     --white: #FFFFFF;
+    --hover-green: #7AE878;
+
+    --shadow: -1px -1px 10px rgba(0, 0, 0, 0.15), 5px 5px 10px rgba(0, 0, 0, 0.35);
 }
 
 html {
@@ -50,6 +53,14 @@ button, select, a {
     cursor: pointer;
 }
 
+button {
+    transition: all 0.3s ease;
+}
+
+button:active {
+    scale: 0.97;
+}
+
 a {
     text-decoration: none;
     color: var(--green);
@@ -77,13 +88,14 @@ input[type="checkbox"]:checked {
     background-size: 70% 70%;
 }
 
-input[type="datetime-local"]{
+input[type="datetime-local"] {
     background-color: var(--light-green);
     border-radius: 10px;
     padding: 10px;
     cursor: pointer;
 }
-::-webkit-calendar-picker-indicator{
+
+::-webkit-calendar-picker-indicator {
     background-color: #ffffff;
     padding: 5px;
     border-radius: 5px;

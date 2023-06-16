@@ -14,68 +14,91 @@
             checkbox.value = -1;
         }
     }
-</script>
-<div class="text-center">
-    <h2 class="name-poll" style="position: relative">@ViewBag.QuizTitle</h2>
-    <form method="post" asp-controller="SolveQuiz" asp-action="SaveResult">
-        @{
-            var questionNumber = 0;
-            foreach (var id in Model)
-            {
-                var question = (Question)ViewBag.DataMangager.Questions.GetItemById(id);
-                <input type="text" readonly name="answers[@questionNumber].QuestionId" value="@question.Id" hidden="hidden">
-                <input type="text" readonly name="answers[@questionNumber].QuestionType" value="@question.Type" hidden="hidden">
-                <input type="text" readonly name="answers[@questionNumber].QuizId" value="@ViewBag.QuidId" hidden="hidden">
-                var questionContainerId = $"question_{questionNumber}";
-                <section class="question-solve">
-                    <section id=@questionContainerId class="hat-question">
-                        <div class="number-question">
-                            <div class="number">@(questionNumber + 1)</div>
-                            <div class="dot">.</div>
-                        </div>
-                        <div class="name-question">@question.Text</div>
-                    </section>
-                    <div class="answer">
-                        @switch (question.Type)
-                        {
-                            case QuestionTypeEnum.OpenQuestion:
-                            {
-                                var inputId = $"answer_{questionNumber}";
-                                <label>
-                                    <input class="text-question" type="text" id=@inputId placeholder="Ответ"
-                                           name="answers[@questionNumber].Answers">
-                                </label>
-                                break;
-                            }
-                            case QuestionTypeEnum.MultipleAnswersQuestion:
-                            {
-                                <label>
-                                    @{
-                                        var optionNumber = 0;
-                                        foreach (var option in question.AnswerOptions)
-                                        {
-                                            var optionId = $"option_{questionNumber}_{optionNumber}";
-                                            <label id=@optionId class="checkbox-label">
-                                                <input type="checkbox"
-                                                       onchange="checkCheckbox(this, @optionNumber)"
-                                                       name="answers[@questionNumber].Answers"
-                                                       value=-1
-                                                       class="checkbox-text">
-                                                <span>@option</span>
-                                            </label>
-                                            optionNumber++;
-                                        }
-                                    } 
-                                </label>
-                                break;
-                            }
-                        }
-                    </div>
-                </section>
-                questionNumber++;
-            }
-            <button class="submit-button" id="send-answers">Отправить</button>
-        }
+    
+    //Таймер
+    let endTime = new Date("Jun 17, 2023 13:00:00").getTime();
+    
+    let x = setInterval(function() {
+        
+        let now = new Date().getTime();
+        let distance = endTime - now;
+        if (distance < 0) {
+                    clearInterval(x);
+                }
+    
+        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + days * 24;
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+        document.getElementById("time").textContent = hours + "h " + minutes + "m " + seconds + "s ";
+    }, 1000);
+    </script>
 
-    </form>
-</div>
+<body>
+<form method="post" asp-controller="SolveQuiz" asp-action="SaveResult" class="solve-content">
+    <h2 class="name-poll" style="position: relative">@ViewBag.QuizTitle</h2>
+    @{
+        var questionNumber = 0;
+        foreach (var id in Model)
+        {
+            var question = (Question)ViewBag.DataMangager.Questions.GetItemById(id);
+            <input type="text" readonly name="answers[@questionNumber].QuestionId" value="@question.Id" hidden="hidden">
+            <input type="text" readonly name="answers[@questionNumber].QuestionType" value="@question.Type" hidden="hidden">
+            <input type="text" readonly name="answers[@questionNumber].QuizId" value="@ViewBag.QuidId" hidden="hidden">
+            var questionContainerId = $"question_{questionNumber}";
+            <section class="question-solve">
+                <section id=@questionContainerId class="hat-question">
+                    <div class="number-question">
+                        <div class="number">@(questionNumber + 1)</div>
+                        <div class="dot">.</div>
+                    </div>
+                    <div class="name-question">@question.Text</div>
+                </section>
+                <div class="answer">
+                    @switch (question.Type)
+                    {
+                        case QuestionTypeEnum.OpenQuestion:
+                        {
+                            var inputId = $"answer_{questionNumber}";
+                            <label>
+                                <input class="text-question" type="text" id=@inputId placeholder="Ответ"
+                                       name="answers[@questionNumber].Answers">
+                            </label>
+                            break;
+                        }
+                        case QuestionTypeEnum.MultipleAnswersQuestion:
+                        {
+                            <label>
+                                @{
+                                    var optionNumber = 0;
+                                    foreach (var option in question.AnswerOptions)
+                                    {
+                                        var optionId = $"option_{questionNumber}_{optionNumber}";
+                                        <label id=@optionId class="checkbox-label">
+                                            <input type="checkbox"
+                                                   onchange="checkCheckbox(this, @optionNumber)"
+                                                   name="answers[@questionNumber].Answers"
+                                                   value=-1
+                                                   class="checkbox-text">
+                                            <span>@option</span>
+                                        </label>
+                                        optionNumber++;
+                                    }
+                                }
+                            </label>
+                            break;
+                        }
+                    }
+                </div>
+            </section>
+            questionNumber++;
+        }
+    }
+    <button class="submit-button" id="send-answers">Отправить</button>
+    <div class="timer">
+        <img src="images/timer.svg" alt="timer-icon" style="width: 24px;"/>
+        <p id="time" class="bold-text"></p>
+    </div>
+</form>
+</body>

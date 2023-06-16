@@ -209,21 +209,34 @@ function addNewCheckbox(e, id, col) {
     checkbox.onclick = () => {
         checkMark(checkbox.id, id - 1, col);
     };
+    
+    let inputContainer = document.createElement("div");
+    inputContainer.setAttribute("class", "input-container");
+    inputContainer.setAttribute("id", "inputContainer" + id + `-${col}`);
+    
+    let spanCheckbox = document.createElement("span");
+    spanCheckbox.setAttribute("class", "checkbox-span");
+    spanCheckbox.setAttribute("id", "SpanCheckbox" + id + `-${col}`);
 
     let checkboxText = document.createElement("input");
     checkboxText.setAttribute("placeholder", "Ответ");
+    checkboxText.setAttribute("value", "Текст");
     checkboxText.setAttribute("type", "text");
     checkboxText.setAttribute("id", "CheckboxText" + id + `-${col}`);
     checkboxText.setAttribute("name", `questions[${id - 1}].AnswerOptions`);
     checkboxText.setAttribute("class", `checkbox-text`);
+    checkboxText.setAttribute("onFocus", `this.select()`);
 
-
+    inputContainer.appendChild(checkboxText);
+    inputContainer.appendChild(spanCheckbox);
+    
     label.appendChild(checkbox);
-    label.appendChild(checkboxText);
+    label.appendChild(inputContainer);
 
     addCheck.before(label);
 }
 
+// Для табов
 function openPage(id) {
     for (let i = 0; i < pages.length; i++) {
         pages[i].style.display = "none";
@@ -304,3 +317,4 @@ window.addEventListener('load', () => {
     for (let calendar of calendars)
         calendar.value = now.toISOString().slice(0, -1);
 });
+

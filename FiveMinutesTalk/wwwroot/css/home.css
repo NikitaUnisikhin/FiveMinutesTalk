@@ -29,9 +29,14 @@
 
     background: var(--green);
 
-    box-shadow: -1px -1px 10px rgba(0, 0, 0, 0.15), 5px 5px 10px rgba(0, 0, 0, 0.35);
+    box-shadow: var(--shadow);
     border-radius: 100px;
     border-color: transparent;
+    transition: all 0.5s ease;
+}
+
+.submit-button:hover{
+    background-color: var(--hover-green);
 }
 
 #create-poll-button{
