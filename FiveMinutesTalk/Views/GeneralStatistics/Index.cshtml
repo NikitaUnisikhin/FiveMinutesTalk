@@ -5,6 +5,7 @@
 @model Guid
 
 <div>
+    @await Html.PartialAsync("StatisticsType")
     <h2>Статистика по опросу "@ViewBag.QuizTitle"</h2>
     @{
         var answersIds = ((EFQuestionAnswersRepository)ViewBag.DataManager.QuestionAnswers)
@@ -55,7 +56,7 @@
                             <div>
                                 <a>@question.AnswerOptions[int.Parse(answerWithCount.Key)]</a>
                                 <a>@percent</a>
-                            </div>                                                
+                            </div>
                         }
                     }
                 }

@@ -15,9 +15,9 @@ public class GeneralStatisticsController : Controller
     }
     
     // 4043b854-c29f-4dca-900c-0387de52d250
-    [HttpPost]
     public IActionResult Index(Guid token)
     {
+        ViewBag.QuizId = token;
         ViewBag.QuizTitle = dataManager.Quizzes.GetItemById(token).Title;
         ViewBag.DataManager = dataManager;
         return View(token);
