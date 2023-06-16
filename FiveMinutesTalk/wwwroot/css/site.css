@@ -45,7 +45,7 @@ button, input, select, a {
     background-color: transparent;
     border: none;
     align-items: center;
-    font-family: "Montserrat SemiBold", serif;
+    font-family: 'Montserrat SemiBold', sans-serif;
     font-size: 13px;
 }
 
