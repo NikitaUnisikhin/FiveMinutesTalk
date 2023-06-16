@@ -1,0 +1,116 @@
+@using FiveMinutesTalk.Domain.Entities.QuestionsTypes
+@model Guid[]
+
+<body>
+<form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
+    <div class="page" id="create-poll-content">
+        <input type="text" name="quizTitle" id="name-poll" required value="@ViewBag.Title" placeholder="Введите название опроса" onFocus="this.select()"/>
+        <section id="questions">
+            @{
+                for (int i = 0; i < Model.Length; i++)
+                {
+                    var id = Model[i];
+                    Question question = ViewBag.DataManager.Questions.GetItemById(id);
+                    <div id="Form1" class="question-block">
+                        <section id="Question1" class="question">
+                            <section class="hat-question">
+                                <section class="number-question">
+                                    <div class="number">1</div>
+                                    <div class="dot">.</div>
+                                </section>
+                                <input class="name-question" value="@question.Text" name="questions[0].Text" name="Question" type="text" placeholder="Введите название вопроса" onFocus="this.select()">
+                                <label>
+                                    <select id="1" name="questions[0].Type" class="form-select">
+                                        @{
+                                            var types = new Dictionary<string, string>()
+                                            {
+                                                ["MultipleAnswersQuestion"] = "Несколько из списка",
+                                                ["OpenQuestion"] = "Текст"
+                                            };
+                                            foreach (var type in Enum.GetValues(typeof(QuestionTypeEnum)))
+                                            {
+                                                if (question.Type.ToString() == type.ToString())
+                                                {
+                                                    <option value="@type.ToString()" selected="selected">@types[type.ToString()!]</option>
+                                                }
+                                            }
+                                        }
+                                    </select>
+                                </label>
+                            </section>
+                        <div id="Answer1" class="answer">
+                            @{
+                                if (question.Type == QuestionTypeEnum.OpenQuestion)
+                                {
+                                    <input id="Text1" class="text-question" type="text" placeholder="Ответ">
+                                }
+                                else if (question.Type == QuestionTypeEnum.MultipleAnswersQuestion)
+                                {
+                                    for (int j = 0; j < question.AnswerOptions.Length; j++)
+                                    {
+                                        var option = question.AnswerOptions[j];
+                                        <label id="Label1-0" class="checkbox-label">
+                                            @{
+                                                if (question.CorrectAnswers.Contains(option))
+                                                {
+                                                    <input type="checkbox" checked="checked" name="Checkbox1" id="Checkbox1-0">
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" name="Checkbox1" id="Checkbox1-0">
+                                                }
+                                            }
+                                            <input placeholder="Текст" value="@option" type="text" id="CheckboxText1-0" class="checkbox-text">
+                                        </label>
+                                    }
+                                }
+                            }
+                        </div>
+                        </section>
+                        <section class="bottom-question">
+                            <label class="obligatory">
+                                <input type="checkbox">
+                                <div style="font-size: 14px">Обязательный вопрос</div>
+                            </label>
+                            <section class="right-part">
+                                <button class="right-answer" formmethod="dialog">
+                                    <div style="font-family: 'Montserrat SemiBold',serif; color: #69E167">++</div>
+                                    <div style="font-family: Montserrat,serif">Правильный ответ</div>
+                                </button>
+                                <button class="close-button" formmethod="dialog">
+                                    <img src="/images/bin.svg" alt="bin"/>
+                                </button>
+                            </section>
+                        </section>
+                        <button id="AddQuestion1" formmethod="dialog" class="add-question"> <img src="/images/add-question.svg" alt="plus">Добавить вопрос</button>
+                    </div>
+                }
+            }
+        </section>
+    </div>
+
+    <section id="create-poll-hat">
+        <button type="submit">
+            <img src="/images/eye.svg" alt="eye-icon">
+        </button>
+        <button type="submit" id="save-poll">Сохранить</button>
+        <button type="submit">
+            <img src="/images/more.svg" alt="more-icon">
+        </button>
+        <button type="submit" id="profile-button">
+            <img src="/images/profile.svg" alt="profile-icon">
+        </button>
+    </section>
+</form>
+
+<div id="tabs">
+    <input type="radio" class="tab" id="tab-questions" name="tab-group" checked>
+    <label for="tab-questions" class="tab-label" onclick="openPage('create-poll-content')">Вопросы</label>
+
+    <input type="radio" class="tab" id="tab-answer" onclick="openPage('answers')" name="tab-group">
+    <label for="tab-answer" class="tab-label">Ответы</label>
+
+    <input type="radio" class="tab" id="tab-settings" onclick="openPage('settings')" name="tab-group">
+    <label for="tab-settings" class="tab-label">Настройки</label>
+</div>
+</body>

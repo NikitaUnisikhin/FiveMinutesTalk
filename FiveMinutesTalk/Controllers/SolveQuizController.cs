@@ -2,10 +2,12 @@ using FiveMinutesTalk.Domain;
 using FiveMinutesTalk.Domain.Entities;
 using FiveMinutesTalk.Domain.Entities.Repositories.EntityFramework;
 using FiveMinutesTalk.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiveMinutesTalk.Controllers;
 
+[Authorize]
 public class SolveQuizController : Controller
 {
     private readonly DataManager dataManager;

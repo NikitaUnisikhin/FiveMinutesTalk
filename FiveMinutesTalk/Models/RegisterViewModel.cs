@@ -12,5 +12,6 @@ public class RegisterViewModel
     public string Password { get; set; }
  
     [Display(Name = "Подтвердить пароль")]
+    [Compare("Password", ErrorMessage = "Пароли не совпадают")]
     public string PasswordConfirm { get; set; }
 }

@@ -1,3 +1,5 @@
+using FiveMinutesTalk.Domain;
+using FiveMinutesTalk.Domain.Entities.Repositories.EntityFramework;
 using FiveMinutesTalk.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -9,13 +11,27 @@ public class AccountController : Controller
 {
     private readonly UserManager<IdentityUser> userManager;
     private readonly SignInManager<IdentityUser> signInManager;
+    private readonly DataManager dataManager;
     
-    public AccountController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signinMgr)
+    public AccountController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signinMgr,
+        DataManager dataManager)
     {
         userManager = userMgr;
         signInManager = signinMgr;
+        this.dataManager = dataManager;
     }
 
+    [Authorize]
+    [HttpGet]
+    public IActionResult Quizzes(Guid token)
+    {
+        ViewBag.Title = dataManager.Quizzes.GetItemById(token).Title;
+        var questionIds = ((EFQuizQuestionsRepository)dataManager.QuizQuestions)
+            .GetQuestionsIdByQuizId(token);
+        ViewBag.DataManager = dataManager;
+        return View("Quiz", questionIds);
+    }
+    
     [HttpGet]
     public IActionResult Register()
     {
@@ -50,6 +66,7 @@ public class AccountController : Controller
         return View(model);
     }
     
+    [HttpGet]
     public IActionResult Login(string returnUrl = null)
     {
         ViewBag.returnUrl = returnUrl;

@@ -1,8 +1,10 @@
 using FiveMinutesTalk.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiveMinutesTalk.Controllers;
 
+[Authorize]
 public class GeneralStatisticsController : Controller
 {
     private readonly DataManager dataManager;

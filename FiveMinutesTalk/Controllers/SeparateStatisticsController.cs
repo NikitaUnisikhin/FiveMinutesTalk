@@ -1,9 +1,11 @@
 using FiveMinutesTalk.Domain;
 using FiveMinutesTalk.Domain.Entities.Repositories.EntityFramework;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiveMinutesTalk.Controllers;
 
+[Authorize]
 public class SeparateStatisticsController : Controller
 {
     private readonly DataManager dataManager;

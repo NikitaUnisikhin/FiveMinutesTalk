@@ -30,7 +30,7 @@
                         var inputId = $"answer_{questionNumber}";
                         <label>
                             Введите ваш ответ:
-                            <input class="form-control" type="text" id=@inputId placeholder="Ответ" 
+                            <input class="form-control" maxlength="3" type="text" id=@inputId placeholder="Ответ" 
                                    name="answers[@questionNumber].Answers">
                         </label>
                     }
