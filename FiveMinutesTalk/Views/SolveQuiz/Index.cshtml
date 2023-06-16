@@ -4,13 +4,13 @@
 @{
     ViewData["Title"] = "Прохождение опроса";
 }
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-<script>
-    function highlights(){
-        hljs.highlightAll();
-    }
-</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/mode/javascript/javascript.js"></script>
+
+
+
 <script>
     function checkCheckbox(checkbox, optionNumber){
         if (checkbox.checked) {
@@ -42,10 +42,15 @@
     </script>
 
 <body>
-<pre contentEditable="true" onkeyup="highlights()"><code>print('hello')
-    print('And what are you want?')
-</code></pre>
-<textarea oninput="highlights()"></textarea>
+<textarea id="code" ></textarea>
+<script>
+    CodeMirror.fromTextArea(document.getElementById('code'), {
+                                                                     lineNumbers: true,
+                                                                     lineWrapping: true,
+                                                                     matchBrackets: true,
+                                                                     styleActiveLine: true,
+                                                                 });
+</script>
 <form method="post" asp-controller="SolveQuiz" asp-action="SaveResult" class="solve-content">
     <h2 class="name-poll" style="position: relative">@ViewBag.QuizTitle</h2>
     @{
