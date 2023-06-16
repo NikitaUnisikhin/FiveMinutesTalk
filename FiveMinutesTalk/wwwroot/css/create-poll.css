@@ -116,7 +116,7 @@
 
 .number-question > div {
     color: var(--green);
-    font-family: "Montserrat SemiBold", serif;
+    font-family: 'Montserrat SemiBold', sans-serif;
 }
 
 .name-question {
@@ -205,7 +205,7 @@
     width: 765px;
     height: 40px;
     border-bottom: 1px solid var(--green);
-    font-family: "Montserrat Regular", serif;
+    font-family: 'Montserrat Regular', sans-serif;
     font-size: 15px;
 }
 
@@ -235,7 +235,7 @@
 
 .checkbox-text {
     font-size: 15px;
-    font-family: "Montserrat Regular", serif;
+    font-family: 'Montserrat Regular', sans-serif;
     padding: 5px 0;
     border: none;
 }
@@ -305,7 +305,7 @@
     justify-content: center;
     align-items: center;
     padding: 0;
-    font-family: "Montserrat SemiBold", serif;
+    font-family: 'Montserrat SemiBold', sans-serif;
     font-size: 13px;
     transition: all 0.3s ease-in-out;
     cursor: pointer;

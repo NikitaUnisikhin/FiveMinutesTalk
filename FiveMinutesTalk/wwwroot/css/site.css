@@ -14,7 +14,7 @@
 
 html {
     font-size: 16px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat Regular', sans-serif;
     position: relative;
     min-height: 100%;
     scrollbar-gutter: stable;
@@ -30,11 +30,11 @@ h1 {
 
 
 .light-text {
-    font-family: "Montserrat Light", sans-serif;
+    font-family: 'Montserrat Light', sans-serif;
 }
 
 .bold-text {
-    font-family: "Montserrat SemiBold", sans-serif;
+    font-family: 'Montserrat SemiBold', sans-serif;
 }
 
 input:focus {
