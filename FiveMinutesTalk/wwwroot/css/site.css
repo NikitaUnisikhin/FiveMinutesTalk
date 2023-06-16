@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+
 :root {
     --green: #69E167;
     --light-green: #C1F3C1;
@@ -10,6 +12,14 @@
     --shadow: -1px -1px 10px rgba(0, 0, 0, 0.15), 5px 5px 10px rgba(0, 0, 0, 0.35);
 }
 
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-weight: 600;
+}
+
 html {
     position: relative;
     min-height: 100%;
@@ -18,7 +28,7 @@ html {
 
 body {
     font-size: 16px;
-    font-family: 'Montserrat Regular', sans-serif;
+    font-weight: 400;
     margin-bottom: 60px;
 }
 
@@ -28,11 +38,11 @@ h1 {
 
 
 .light-text {
-    font-family: 'Montserrat Light', sans-serif;
+    font-weight: 300;
 }
 
 .bold-text {
-    font-family: 'Montserrat SemiBold', sans-serif;
+    font-weight: 600;
 }
 
 input:focus {
@@ -43,7 +53,7 @@ button, input, select, a {
     background-color: transparent;
     border: none;
     align-items: center;
-    font-family: 'Montserrat SemiBold', sans-serif;
+    font-weight: 600;
     font-size: 13px;
 }
 
@@ -139,7 +149,7 @@ select {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Montserrat SemiBold", serif;
+    font-weight: 600;
     font-size: 13px;
     padding: 0 15px;
     transition: background 0.3s ease;
