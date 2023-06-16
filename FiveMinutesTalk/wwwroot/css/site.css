@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
-
 :root {
     --green: #69E167;
     --light-green: #C1F3C1;
@@ -12,15 +10,15 @@
     --shadow: -1px -1px 10px rgba(0, 0, 0, 0.15), 5px 5px 10px rgba(0, 0, 0, 0.35);
 }
 
-body {
-    font-size: 16px;
-    font-family: 'Montserrat Regular', sans-serif;
+html {
     position: relative;
     min-height: 100%;
     scrollbar-gutter: stable;
 }
 
 body {
+    font-size: 16px;
+    font-family: 'Montserrat Regular', sans-serif;
     margin-bottom: 60px;
 }
 
