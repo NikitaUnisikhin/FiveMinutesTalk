@@ -4,7 +4,13 @@
 @{
     ViewData["Title"] = "Прохождение опроса";
 }
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+<script>
+    function highlights(){
+        hljs.highlightAll();
+    }
+</script>
 <script>
     function checkCheckbox(checkbox, optionNumber){
         if (checkbox.checked) {
@@ -36,6 +42,10 @@
     </script>
 
 <body>
+<pre contentEditable="true" onkeyup="highlights()"><code>print('hello')
+    print('And what are you want?')
+</code></pre>
+<textarea oninput="highlights()"></textarea>
 <form method="post" asp-controller="SolveQuiz" asp-action="SaveResult" class="solve-content">
     <h2 class="name-poll" style="position: relative">@ViewBag.QuizTitle</h2>
     @{
