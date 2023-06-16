@@ -12,7 +12,7 @@
     --shadow: -1px -1px 10px rgba(0, 0, 0, 0.15), 5px 5px 10px rgba(0, 0, 0, 0.35);
 }
 
-html {
+body {
     font-size: 16px;
     font-family: 'Montserrat Regular', sans-serif;
     position: relative;
