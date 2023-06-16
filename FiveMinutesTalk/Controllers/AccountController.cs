@@ -22,10 +22,10 @@ public class AccountController : Controller
     }
 
     [Authorize]
-    [HttpGet]
     public IActionResult Quizzes(Guid token)
     {
         ViewBag.Title = dataManager.Quizzes.GetItemById(token).Title;
+        ViewBag.QuizId = token;
         var questionIds = ((EFQuizQuestionsRepository)dataManager.QuizQuestions)
             .GetQuestionsIdByQuizId(token);
         ViewBag.DataManager = dataManager;

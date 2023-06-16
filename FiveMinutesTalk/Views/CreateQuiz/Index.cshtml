@@ -67,15 +67,5 @@
         </button>
     </section>
 </form>
-
-<div id="tabs">
-    <input type="radio" class="tab" id="tab-questions" name="tab-group" checked>
-    <label for="tab-questions" class="tab-label" onclick="openPage('create-poll-content')">Вопросы</label>
-
-    <input type="radio" class="tab" id="tab-answer" onclick="openPage('answers')" name="tab-group">
-    <label for="tab-answer" class="tab-label">Ответы</label>
-
-    <input type="radio" class="tab" id="tab-settings" onclick="openPage('settings')" name="tab-group">
-    <label for="tab-settings" class="tab-label">Настройки</label>
-</div>
+@await Html.PartialAsync("Tabs");
 </body>
