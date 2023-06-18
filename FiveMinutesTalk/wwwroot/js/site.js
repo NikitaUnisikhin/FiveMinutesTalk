@@ -117,21 +117,7 @@ function changeComponents(questionType) {
 
         /*} else if (selectedValue === "1") {
             newDiv.innerText = "Код";
-    
-        } else if (selectedValue === "2") {
-            // здесь создаем кнопку, которая добавляет новый label с radio кнопкой и вводом
-            let addRadio = document.createElement("input");
-            addRadio.setAttribute("value", "Добавить вариант ответа");
-            addRadio.setAttribute("type", "button");
-            addRadio.setAttribute("id", "AddRadio" + id);
-            let col = 0;
-            addRadio.addEventListener("click", function (e) {
-                addNewRadio(e, id, col++)
-            });
-            addRadio.setAttribute("class", "add-variant");
-            newDiv.appendChild(addRadio);
-            addRadio.click();*/
-
+        */
     } else if (selectedValue === "MultipleAnswersQuestion") {
         // здесь создаем кнопку, которая добавляет новый label с checkbox кнопкой и вводом
         let addCheckbox = document.createElement("input");
@@ -146,6 +132,18 @@ function changeComponents(questionType) {
         addCheckbox.setAttribute("class", "add-checkbox");
         newDiv.appendChild(addCheckbox);
         addCheckbox.click();
+    } else if (selectedValue === "Radio") {
+        let addRadio = document.createElement("input");
+        addRadio.setAttribute("value", "Добавить вариант ответа");
+        addRadio.setAttribute("type", "button");
+        addRadio.setAttribute("id", "AddRadio" + id);
+        let col = 0;
+        addRadio.addEventListener("click", function (e) {
+            addNewRadio(e, id, col++)
+        });
+        addRadio.setAttribute("class", "add-variant");
+        newDiv.appendChild(addRadio);
+        addRadio.click();
     }
     let addQuest = document.getElementById("Question" + questType.id);
     addQuest.appendChild(newDiv);
