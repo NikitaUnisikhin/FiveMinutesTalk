@@ -67,7 +67,7 @@
     text-align: center;
 
     top: 20%;
-    
+
     font-size: 36px;
     line-height: 44px;
     font-weight: 600;
@@ -189,17 +189,18 @@
     filter: brightness(110%);
 }
 
-.close-button{
+.close-button {
     border-radius: 100px;
     width: 45px;
     height: 40px;
 }
 
-.close-button:active{
+.close-button:active {
     box-shadow: inset 0 0 0 30px var(--light-grey);
     scale: 0.9;
 }
-.close-button:before{
+
+.close-button:before {
     box-shadow: inset 0 0 0 30px white;
 }
 
@@ -435,23 +436,22 @@
         bottom: 0;
         opacity: 0;
     }
-}   
+}
 
-.copy-text{
+.copy-text {
     border-radius: 100px;
     width: 40px;
     height: 40px;
 }
 
-.copy-text:active{
+.copy-text:active {
     box-shadow: inset 0 0 0 30px var(--light-green);
     scale: 0.9;
 }
-.copy-text:before{
+
+.copy-text:before {
     box-shadow: inset 0 0 0 30px white;
 }
-
-
 
 /*========Настройки========*/
 
