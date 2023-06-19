@@ -10,6 +10,8 @@
     @{
         var answersIds = ((EFQuestionAnswersRepository)ViewBag.DataManager.QuestionAnswers)
             .GetQuestionAnswerIdByQuizId(Model);
+        var quizAnswerCount = ((EFQuizAnswerRepository)ViewBag.DataManager.QuizAnswers)
+            .GetQuizAnswerIdByQuizId(Model).Length;
         var statisticsContainer = new Dictionary<Guid, StatisticsContainer>();
         foreach (var answerId in answersIds)
         {
@@ -38,7 +40,8 @@
                             <div>@answer</div>
                         }
                     }
-                    else if (questionStatistics.Value.QuestionType == QuestionTypeEnum.MultipleAnswersQuestion)
+                    else if (questionStatistics.Value.QuestionType is QuestionTypeEnum.MultipleAnswersQuestion 
+                        or QuestionTypeEnum.Radio)
                     {
                         var countQuestionAnswers = new Dictionary<string, int>();
                         var allCount = questionStatistics.Value.Answers.Count;
@@ -52,7 +55,7 @@
                         {
                             if (answerWithCount.Key == "-1")
                                 continue;
-                            var percent = " | " + Math.Round(answerWithCount.Value / (double)allCount * 100, 2) + " %";
+                            var percent = " | " + Math.Round(answerWithCount.Value / (double)quizAnswerCount * 100, 2) + " %";
                             <div>
                                 <a>@question.AnswerOptions[int.Parse(answerWithCount.Key)]</a>
                                 <a>@percent</a>

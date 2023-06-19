@@ -162,10 +162,14 @@ function addNewRadio(e, id, col) {
     radio.setAttribute("type", "radio");
     radio.setAttribute("name", "Radio" + id)
     radio.setAttribute("id", "Radio" + id + `-${col}`);
+    radio.onclick = () => {
+        checkMark(radio.id, id - 1, col);
+    };
 
     let radioText = document.createElement("input");
     radioText.setAttribute("placeholder", "Текст");
     radioText.setAttribute("type", "text");
+    radioText.setAttribute("name", `questions[${id - 1}].AnswerOptions`);
     radioText.setAttribute("id", "RadioText" + id + `-${col}`);
 
     label.appendChild(radio);
