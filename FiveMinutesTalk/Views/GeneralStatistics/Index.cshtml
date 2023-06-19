@@ -44,7 +44,6 @@
                         or QuestionTypeEnum.Radio)
                     {
                         var countQuestionAnswers = new Dictionary<string, int>();
-                        var allCount = questionStatistics.Value.Answers.Count;
                         @foreach (var answer in questionStatistics.Value.Answers)
                         {
                             if (!countQuestionAnswers.ContainsKey(answer))
