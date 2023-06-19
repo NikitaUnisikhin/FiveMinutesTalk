@@ -80,7 +80,7 @@
 
 #search ::placeholder {
     font-size: 14px;
-    font-family: 'Montserrat Light', sans-serif;
+    font-weight: 300;
 }
 
 #profile-button {
