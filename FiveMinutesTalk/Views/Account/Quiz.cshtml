@@ -7,36 +7,21 @@
         <input type="text" name="quizTitle" id="name-poll" required value="@ViewBag.Title" placeholder="Введите название опроса" onFocus="this.select()"/>
         <section id="questions">
             @{
+                var counter = 0;
                 for (int i = 0; i < Model.Length; i++)
                 {
+                    counter++;
                     var id = Model[i];
                     Question question = ViewBag.DataManager.Questions.GetItemById(id);
                     <div id="Form1" class="question-block">
                         <section id="Question1" class="question">
                             <section class="hat-question">
                                 <section class="number-question">
-                                    <div class="number">1</div>
+                                    <div class="number">@counter</div>
                                     <div class="dot">.</div>
                                 </section>
                                 <input class="name-question" value="@question.Text" name="questions[0].Text" name="Question" type="text" placeholder="Введите название вопроса" onFocus="this.select()">
-                                <label>
-                                    <select id="1" name="questions[0].Type" class="form-select">
-                                        @{
-                                            var types = new Dictionary<string, string>()
-                                            {
-                                                ["MultipleAnswersQuestion"] = "Несколько из списка",
-                                                ["OpenQuestion"] = "Текст"
-                                            };
-                                            foreach (var type in Enum.GetValues(typeof(QuestionTypeEnum)))
-                                            {
-                                                if (question.Type.ToString() == type.ToString())
-                                                {
-                                                    <option value="@type.ToString()" selected="selected">@types[type.ToString()!]</option>
-                                                }
-                                            }
-                                        }
-                                    </select>
-                                </label>
+                                @await Html.PartialAsync("QuestionTypeSelect", question.Type)
                             </section>
                         <div id="Answer1" class="answer">
                             @{
@@ -51,13 +36,33 @@
                                         var option = question.AnswerOptions[j];
                                         <label id="Label1-0" class="checkbox-label">
                                             @{
-                                                if (question.CorrectAnswers.Contains(option))
+                                                if (question.CorrectAnswers.Contains(j.ToString()))
                                                 {
                                                     <input type="checkbox" checked="checked" name="Checkbox1" id="Checkbox1-0">
                                                 }
                                                 else
                                                 {
                                                     <input type="checkbox" name="Checkbox1" id="Checkbox1-0">
+                                                }
+                                            }
+                                            <input placeholder="Текст" value="@option" type="text" id="CheckboxText1-0" class="checkbox-text">
+                                        </label>
+                                    }
+                                }
+                                else if (question.Type == QuestionTypeEnum.Radio)
+                                {
+                                    for (int j = 0; j < question.AnswerOptions.Length; j++)
+                                    {
+                                        var option = question.AnswerOptions[j];
+                                        <label id="Label1-0" class="checkbox-label">
+                                            @{
+                                                if (question.CorrectAnswers.Contains(j.ToString()))
+                                                {
+                                                    <input type="radio" checked="checked" name="Checkbox1" id="Checkbox1-0">
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" name="Checkbox1" id="Checkbox1-0">
                                                 }
                                             }
                                             <input placeholder="Текст" value="@option" type="text" id="CheckboxText1-0" class="checkbox-text">

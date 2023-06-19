@@ -18,7 +18,14 @@ public class GeneralStatisticsController : Controller
     public IActionResult Index(Guid token)
     {
         ViewBag.QuizId = token;
-        ViewBag.QuizTitle = dataManager.Quizzes.GetItemById(token).Title;
+        try
+        {
+            ViewBag.QuizTitle = dataManager.Quizzes.GetItemById(token).Title;
+        }
+        catch (Exception e)
+        {
+            return Redirect("~/CreateQuiz/Index");
+        }
         ViewBag.DataManager = dataManager;
         return View(token);
     }

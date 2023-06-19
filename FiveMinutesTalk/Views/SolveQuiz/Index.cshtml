@@ -89,6 +89,28 @@
                             </label>
                             break;
                         }
+                        case QuestionTypeEnum.Radio:
+                        {
+                            <label>
+                                Выберите правильный ответ:
+                                @{
+                                    var optionNumb = 0;
+                                    foreach (var option in question.AnswerOptions)
+                                    {
+                                        var optionId = $"option_{questionNumber}_{optionNumb}";
+                                        <div id=@optionId>
+                                            <input type="radio"
+                                                   onchange="checkCheckbox(this, @optionNumb)"
+                                                   name="answers[@questionNumber].Answers"
+                                                   value=-1>
+                                            <a>@option</a>
+                                        </div>
+                                        optionNumb++;
+                                    }
+                                }
+                            </label>
+                            break;
+                        }
                     }
                     else if (question.Type == QuestionTypeEnum.Radio)
                     {
@@ -111,7 +133,7 @@
                             }
                         </label>
                     }
-                </div>
+                    </div>
             </section>
             questionNumber++;
         }

@@ -24,7 +24,14 @@ public class AccountController : Controller
     [Authorize]
     public IActionResult Quizzes(Guid token)
     {
-        ViewBag.Title = dataManager.Quizzes.GetItemById(token).Title;
+        try
+        {
+            ViewBag.Title = dataManager.Quizzes.GetItemById(token).Title;
+        }
+        catch (Exception e)
+        {
+            return Redirect("~/CreateQuiz/Index");
+        }
         ViewBag.QuizId = token;
         var questionIds = ((EFQuizQuestionsRepository)dataManager.QuizQuestions)
             .GetQuestionsIdByQuizId(token);
