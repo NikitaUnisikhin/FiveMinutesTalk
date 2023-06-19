@@ -241,7 +241,7 @@ function addNewCheckbox(e, id, col) {
 // Для табов
 function openPage(id) {
     for (let i = 0; i < pages.length; i++) {
-        pages[i].style.display = "none";
+        // pages[i].style.display = "none";
     }
 
     document.getElementById(id).style.display = "flex";
