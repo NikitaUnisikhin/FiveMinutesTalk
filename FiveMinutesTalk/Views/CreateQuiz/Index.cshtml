@@ -1,9 +1,13 @@
 ﻿@model QuestionModel
 
+@{
+    ViewData["Title"] = "Создание опроса";
+}
+
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <div class="page" id="create-poll-content">
-        <input type="text" name="quizTitle" id="name-poll" required value="Новый опрос" placeholder="Введите название опроса" onFocus="this.select()"/>
+        <input type="text" name="quizTitle" class="name-poll" required value="Новый опрос" placeholder="Введите название опроса" onFocus="this.select()"/>
         <section id="questions">
             <div id="Form1" class="question-block">
                 <section id="Question1" class="question">

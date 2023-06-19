@@ -4,7 +4,7 @@
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <div class="page" id="create-poll-content">
-        <input type="text" name="quizTitle" id="name-poll" required value="@ViewBag.Title" placeholder="Введите название опроса" onFocus="this.select()"/>
+        <input type="text" name="quizTitle" class="name-poll" required value="@ViewBag.Title" placeholder="Введите название опроса" onFocus="this.select()"/>
         <section id="questions">
             @{
                 var counter = 0;

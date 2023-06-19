@@ -226,12 +226,13 @@
     flex-direction: row;
     align-items: center;
     padding: 3px 10px;
+    margin: 3px 0;
     gap: 10px;
     height: 40px;
     width: 765px;
 }
 
-.add-checkbox {
+.add-checkbox, .add-radio {
     box-sizing: border-box;
     position: relative;
     display: flex;
@@ -245,13 +246,12 @@
     color: rgba(0, 0, 0, 0.5);
 }
 
-.checkbox-text {
+.checkbox-text, .radio-text {
     font-size: 15px;
     font-weight: 400;
     padding: 5px 0;
     border: none;
 }
-
 
 .input-container {
     display: flex;
@@ -261,7 +261,7 @@
     width: 765px;
 }
 
-.checkbox-span {
+.checkbox-span, .radio-span {
     display: flex;
     width: 0;
     height: 1px;
@@ -272,7 +272,7 @@
     transition: all ease-in-out .3s;
 }
 
-.checkbox-text:focus + .checkbox-span {
+.checkbox-text:focus + .checkbox-span, .radio-text:focus + .radio-span{
     width: 100%;
 }
 

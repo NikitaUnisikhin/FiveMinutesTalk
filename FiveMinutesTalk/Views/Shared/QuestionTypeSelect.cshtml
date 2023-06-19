@@ -1,14 +1,14 @@
 @using FiveMinutesTalk.Domain.Entities.QuestionsTypes
 @model QuestionTypeEnum
 
-<label>
+<label class="custom-select">
     <select id="1" name="questions[0].Type" class="form-select">
         @{
             var types = new Dictionary<string, string>()
             {
                 ["MultipleAnswersQuestion"] = "Несколько из списка",
                 ["OpenQuestion"] = "Текст",
-                ["Radio"] = "Один правильный ответ"
+                ["Radio"] = "Один из списка"
             };
             foreach (var type in Enum.GetValues(typeof(QuestionTypeEnum)))
             {
