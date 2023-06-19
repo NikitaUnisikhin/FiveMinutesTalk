@@ -5,96 +5,96 @@
 @model Guid
 
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
-    <section class="statistics">
-        @await Html.PartialAsync("StatisticsType")
-        <h2>Статистика по опросу "@ViewBag.QuizTitle"</h2>
-        @{
-            var questionNumber = 1;
-            var answersIds = ((EFQuestionAnswersRepository)ViewBag.DataManager.QuestionAnswers)
-                .GetQuestionAnswerIdByQuizId(Model);
-            var statisticsContainer = new Dictionary<Guid, StatisticsContainer>();
-            foreach (var answerId in answersIds)
+<section class="statistics">
+    @await Html.PartialAsync("StatisticsType")
+    <h2>Статистика по опросу "@ViewBag.QuizTitle"</h2>
+    @{
+        var questionNumber = 1;
+        var answersIds = ((EFQuestionAnswersRepository)ViewBag.DataManager.QuestionAnswers)
+            .GetQuestionAnswerIdByQuizId(Model);
+        var statisticsContainer = new Dictionary<Guid, StatisticsContainer>();
+        foreach (var answerId in answersIds)
+        {
+            QuestionAnswer answer = ViewBag.DataManager.QuestionAnswers.GetItemById(answerId);
+            statisticsContainer.TryAdd(answer.QuestionId, new StatisticsContainer()
             {
-                QuestionAnswer answer = ViewBag.DataManager.QuestionAnswers.GetItemById(answerId);
-                statisticsContainer.TryAdd(answer.QuestionId, new StatisticsContainer()
-                {
-                    QuestionType = answer.QuestionType
-                });
-                statisticsContainer[answer.QuestionId].Answers = statisticsContainer[answer.QuestionId]
-                    .Answers.Concat(answer.Answers).ToList();
-            }
-
-            foreach (var questionStatistics in statisticsContainer)
-            {
-                <div class="question">
-                    @{
-                        Question question = ViewBag.DataManager.Questions.GetItemById(questionStatistics.Key);
-                        <section class="hat-question">
-                            <div class="number-question">
-                                <div class="number">@questionNumber</div>
-                                <div class="dot">.</div>
-                            </div>
-                            <div class="name-question">@question.Text</div>
-                            <section class="answers-count">
-                                <div>@questionStatistics.Value.Answers.Count</div>
-                                <div>ответов</div>
-                            </section>
-                        </section>
-                        switch (questionStatistics.Value.QuestionType)
-                        {
-                            case QuestionTypeEnum.OpenQuestion:
-                            {
-                                <section class="answers">
-                                    @foreach (var answer in questionStatistics.Value.Answers)
-                                    {
-                                        <div class="text-question">@answer</div>
-                                    }
-                                </section>
-                                break;
-                            }
-                            case QuestionTypeEnum.MultipleAnswersQuestion:
-                            {
-                                var countQuestionAnswers = new Dictionary<string, int>();
-                                var allCount = questionStatistics.Value.Answers.Count;
-                                foreach (var answer in questionStatistics.Value.Answers)
-                                {
-                                    countQuestionAnswers.TryAdd(answer, 0);
-                                    countQuestionAnswers[answer]++;
-                                }
-                                foreach (var answerWithCount in countQuestionAnswers)
-                                {
-                                    if (answerWithCount.Key == "-1")
-                                    {
-                                        continue;
-                                    }
-                                    var percent = " | " + Math.Round(answerWithCount.Value / (double)allCount * 100, 2) + " %";
-                                    <div>
-                                        <a>@question.AnswerOptions[int.Parse(answerWithCount.Key)]</a>
-                                        <a>@percent</a>
-                                    </div>
-                                }
-                                break;
-                            }
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
-                    }
-                </div>
-                questionNumber += 1;
-            }
-
-            <section id="create-poll-hat">
-                <button type="submit">
-                    <img src="/images/eye.svg" alt="eye-icon">
-                </button>
-                <button type="submit" id="save-poll">Сохранить</button>
-                <button type="submit">
-                    <img src="/images/more.svg" alt="more-icon">
-                </button>
-                <button type="submit" id="profile-button">
-                    <img src="/images/profile.svg" alt="profile-icon">
-                </button>
-            </section>
+                QuestionType = answer.QuestionType
+            });
+            statisticsContainer[answer.QuestionId].Answers = statisticsContainer[answer.QuestionId]
+                .Answers.Concat(answer.Answers).ToList();
         }
-    </section>
+
+        foreach (var questionStatistics in statisticsContainer)
+        {
+            <div class="question">
+                @{
+                    Question question = ViewBag.DataManager.Questions.GetItemById(questionStatistics.Key);
+                    <section class="hat-question">
+                        <div class="number-question">
+                            <div class="number">@questionNumber</div>
+                            <div class="dot">.</div>
+                        </div>
+                        <div class="name-question">@question.Text</div>
+                        <section class="answers-count">
+                            <div>@questionStatistics.Value.Answers.Count</div>
+                            <div>ответов</div>
+                        </section>
+                    </section>
+                    switch (questionStatistics.Value.QuestionType)
+                    {
+                        case QuestionTypeEnum.OpenQuestion:
+                        {
+                            <section class="answers">
+                                @foreach (var answer in questionStatistics.Value.Answers)
+                                {
+                                    <div class="text-question" >@answer</div>
+                                }
+                            </section>
+                            break;
+                        }
+                        case QuestionTypeEnum.MultipleAnswersQuestion:
+                        {
+                            var countQuestionAnswers = new Dictionary<string, int>();
+                            var allCount = questionStatistics.Value.Answers.Count;
+                            foreach (var answer in questionStatistics.Value.Answers)
+                            {
+                                countQuestionAnswers.TryAdd(answer, 0);
+                                countQuestionAnswers[answer]++;
+                            }
+                            foreach (var answerWithCount in countQuestionAnswers)
+                            {
+                                if (answerWithCount.Key == "-1")
+                                {
+                                    continue;
+                                }
+                                var percent = " | " + Math.Round(answerWithCount.Value / (double)allCount * 100, 2) + " %";
+                                <div>
+                                    <a>@question.AnswerOptions[int.Parse(answerWithCount.Key)]</a>
+                                    <a>@percent</a>
+                                </div>
+                            }
+                            break;
+                        }
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
+            </div>
+            questionNumber += 1;
+        }
+        
+        <section id="create-poll-hat">
+            <button type="submit">
+                <img src="/images/eye.svg" alt="eye-icon">
+            </button>
+            <button type="submit" id="save-poll">Сохранить</button>
+            <button type="submit">
+                <img src="/images/more.svg" alt="more-icon">
+            </button>
+            <button type="submit" id="profile-button">
+                <img src="/images/profile.svg" alt="profile-icon">
+            </button>
+        </section>
+    }
+</section>
 </form>

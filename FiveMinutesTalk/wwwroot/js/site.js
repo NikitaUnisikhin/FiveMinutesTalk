@@ -112,9 +112,18 @@ function changeComponents(questionType) {
         text.setAttribute("id", "Text" + id);
         newDiv.appendChild(text);
 
-        /*} else if (selectedValue === "1") {
-            newDiv.innerText = "Код";
-        */
+    } else if (selectedValue === "Code") {
+        let textarea = document.createElement("textarea");
+        textarea.setAttribute("id", "Textarea" + id);
+        newDiv.appendChild(textarea);
+        CodeMirror.fromTextArea(textarea, {
+            lineNumbers: true,
+            lineWrapping: true,
+            matchBrackets: true,
+            indentUnit: 5,
+            lint: true
+        });
+
     } else if (selectedValue === "MultipleAnswersQuestion") {
         // здесь создаем кнопку, которая добавляет новый label с checkbox кнопкой и вводом
         let addCheckbox = document.createElement("input");

@@ -58,4 +58,22 @@
     font-size: 20px;
 }
 
+.CodeMirror {
+    border: 1px solid #eee;
+    max-height: 100px;
+    width: 100%;
+}
+
+.CodeMirror-scroll {
+    max-height: 100px;
+}
+
+.CodeMirror-sizer {
+    margin-left: 30px !important;
+}
+
+.CodeMirror-gutters {
+    width: 29px;
+}
+
 

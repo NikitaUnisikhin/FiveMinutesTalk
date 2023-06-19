@@ -5,6 +5,11 @@
     ViewData["Title"] = "Прохождение опроса";
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/mode/javascript/javascript.js"></script>
+
+
 <script>
     function checkCheckbox(checkbox, optionNumber){
         if (checkbox.checked) {
@@ -35,6 +40,7 @@
     </script>
 
 <body>
+
 <form method="post" asp-controller="SolveQuiz" asp-action="SaveResult" class="solve-content">
     <h2 class="name-poll" style="position: relative">@ViewBag.QuizTitle</h2>
     @{
@@ -110,7 +116,27 @@
                             </label>
                             break;
                         }
+                        case QuestionTypeEnum.Code:
+                        {
+                            <label>
+                                @{
+                                    <textarea id="code_@questionNumber"></textarea>
+                                    <script>
+                                 CodeMirror.fromTextArea(document.getElementById("code_@questionNumber"), {
+                                     lineNumbers: true,
+                                     lineWrapping: true,
+                                     matchBrackets: true,
+                                     indentUnit: 5,
+                                     lint: true
+                                 });
+                            </script>
+
+                                }
+                            </label>
+                            break;
+                        }
                     }
+
                 </section>
             </section>
             questionNumber++;
