@@ -4,6 +4,7 @@
 @model Guid[]
 
 <div>
+    @await Html.PartialAsync("StatisticsType")
     <h2>Статистика по опросу "@ViewBag.QuizTitle"</h2>
     @{
         var answerNumber = 0;
@@ -35,6 +36,21 @@
                             else
                             {
                                 <label><input type="checkbox">@option</label>
+                            }
+                        }
+                    }
+                    else if (question.Type == QuestionTypeEnum.Radio)
+                    {
+                        for (int i = 0; i < question.AnswerOptions.Length; i++)
+                        {
+                            var option = question.AnswerOptions[i];
+                            if (answer.Answers.Contains(i.ToString()))
+                            {
+                                <label><input type="radio" checked>@option</label>
+                            }
+                            else
+                            {
+                                <label><input type="radio">@option</label>
                             }
                         }
                     }

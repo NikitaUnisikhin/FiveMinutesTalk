@@ -1,15 +1,10 @@
-﻿@using FiveMinutesTalk.Domain.Entities.QuestionsTypes
-@model QuestionModel
-
-@{
-    ViewData["Title"] = "Создание опроса";
-}
+﻿@model QuestionModel
 
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
-    <div id="create-poll-content">
-        <input type="text" name="quizTitle" class="name-poll" required value="Новый опрос" placeholder="Название опроса" onFocus="this.select()"/>
-        <section class="page" id="questions">
+    <div class="page" id="create-poll-content">
+        <input type="text" name="quizTitle" id="name-poll" required value="Новый опрос" placeholder="Введите название опроса" onFocus="this.select()"/>
+        <section id="questions">
             <div id="Form1" class="question-block">
                 <section id="Question1" class="question">
                     <section class="hat-question">
@@ -17,22 +12,8 @@
                             <div class="number">1</div>
                             <div class="dot">.</div>
                         </section>
-                        <input class="name-question" name="questions[0].Text" name="Question" type="text" value="Новый вопрос" placeholder="Название вопроса" onFocus="this.select()">
-                        <label class="custom-select">
-                            <select id="1" asp-for="Type" name="questions[0].Type" class="form-select">
-                                @{
-                                    var types = new Dictionary<string, string>()
-                                    {
-                                        ["MultipleAnswersQuestion"] = "Несколько из списка",
-                                        ["OpenQuestion"] = "Текст"
-                                    };
-                                    foreach (var type in Enum.GetValues(typeof(QuestionTypeEnum)))
-                                    {
-                                        <option value="@type.ToString()">@types[type.ToString()!]</option>
-                                    }
-                                }
-                            </select>
-                        </label>
+                        <input class="name-question" name="questions[0].Text" name="Question" type="text" value="Новый вопрос" placeholder="Введите название вопроса" onFocus="this.select()">
+                        @await Html.PartialAsync("QuestionTypeSelect")
                     </section>
                     <div id="Answer1" class="answer">
                         <input id="Text1" class="text-question" type="text" placeholder="Ответ">
@@ -56,21 +37,6 @@
                 <button id="AddQuestion1" formmethod="dialog" class="add-question"> <img src="/images/add-question.svg" alt="plus">Добавить вопрос</button>
             </div>
         </section>
-
-        <section class="page" id="settings">
-            <div class="options">
-                <section class="option">
-                    <div class="bold-text">Начало опроса:</div>
-                    <input type="datetime-local"/>
-                </section>
-
-                <section class="option">
-                    <div class="bold-text">Конец опроса: </div>
-                    <input type="datetime-local"/>
-                </section>
-            </div>
-            <img src="images/setting.svg" alt="settings-image"/>
-        </section>
     </div>
 
     <section id="create-poll-hat">
@@ -86,15 +52,5 @@
         </button>
     </section>
 </form>
-
-<div id="tabs">
-    <input type="radio" class="tab" id="tab-questions" name="tab-group" checked>
-    <label for="tab-questions" class="tab-label" onclick="openPage('questions')">Вопросы</label>
-
-    <input type="radio" class="tab" id="tab-answer" onclick="openPage('answers')" name="tab-group">
-    <label for="tab-answer" class="tab-label">Ответы</label>
-
-    <input type="radio" class="tab" id="tab-settings" onclick="openPage('settings')" name="tab-group">
-    <label for="tab-settings" class="tab-label">Настройки</label>
-</div>
+@await Html.PartialAsync("Tabs");
 </body>

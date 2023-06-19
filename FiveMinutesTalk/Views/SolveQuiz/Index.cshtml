@@ -71,24 +71,45 @@
                         {
                             <label>
                                 @{
-                                    var optionNumber = 0;
+                                    var optionNumb = 0;
                                     foreach (var option in question.AnswerOptions)
                                     {
-                                        var optionId = $"option_{questionNumber}_{optionNumber}";
+                                        var optionId = $"option_{questionNumber}_{optionNumb}";
                                         <label id=@optionId class="checkbox-label">
                                             <input type="checkbox"
-                                                   onchange="checkCheckbox(this, @optionNumber)"
+                                                   onchange="checkCheckbox(this, @optionNumb)"
                                                    name="answers[@questionNumber].Answers"
                                                    value=-1
                                                    class="checkbox-text">
                                             <span>@option</span>
                                         </label>
-                                        optionNumber++;
+                                        optionNumb++;
                                     }
                                 }
                             </label>
                             break;
                         }
+                    }
+                    else if (question.Type == QuestionTypeEnum.Radio)
+                    {
+                        <label>
+                            Выберите правильный ответ:
+                            @{
+                                var optionNumber = 0;
+                                foreach (var option in question.AnswerOptions)
+                                {
+                                    var optionId = $"option_{questionNumber}_{optionNumber}";
+                                        <div id=@optionId>
+                                            <input type="radio" 
+                                                   onchange="checkCheckbox(this, @optionNumber)" 
+                                                   name = "answers[@questionNumber].Answers"
+                                                   value=-1>
+                                        <a>@option</a>
+                                    </div>
+                                    optionNumber++;
+                                }
+                            }
+                        </label>
                     }
                 </div>
             </section>

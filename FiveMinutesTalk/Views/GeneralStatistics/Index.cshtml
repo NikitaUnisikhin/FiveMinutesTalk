@@ -5,6 +5,7 @@
 @model Guid
 
 <section class="statistics">
+    @await Html.PartialAsync("StatisticsType")
     <h2>Статистика по опросу "@ViewBag.QuizTitle"</h2>
     @{
         var questionNumber = 1;

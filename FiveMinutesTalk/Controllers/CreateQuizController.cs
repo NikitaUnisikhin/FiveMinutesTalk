@@ -2,10 +2,12 @@ using FiveMinutesTalk.Domain;
 using FiveMinutesTalk.Domain.Entities;
 using FiveMinutesTalk.Domain.Entities.QuestionsTypes;
 using FiveMinutesTalk.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FiveMinutesTalk.Controllers;
 
+[Authorize]
 public class CreateQuizController : Controller
 {
     private readonly DataManager dataManager;
@@ -43,7 +45,7 @@ public class CreateQuizController : Controller
                 Type = question.Type
             };
 
-            if (newQuestion.Type == QuestionTypeEnum.MultipleAnswersQuestion)
+            if (newQuestion.Type is QuestionTypeEnum.MultipleAnswersQuestion or QuestionTypeEnum.Radio)
             {
                 newQuestion.AnswerOptions = question.AnswerOptions;
                 newQuestion.CorrectAnswers = question.CorrectAnswers;
