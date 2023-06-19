@@ -1,0 +1,18 @@
+@using FiveMinutesTalk.Domain.Entities.QuestionsTypes
+
+<label>
+    <select id="1" name="questions[0].Type" class="form-select">
+        @{
+            var types = new Dictionary<string, string>()
+            {
+                ["MultipleAnswersQuestion"] = "Несколько из списка",
+                ["OpenQuestion"] = "Текст",
+                ["Radio"] = "Один правильный ответ"
+            };
+            foreach (var type in Enum.GetValues(typeof(QuestionTypeEnum)))
+            {
+                <option value="@type.ToString()">@types[type.ToString()!]</option>
+            }
+        }
+    </select>
+</label>

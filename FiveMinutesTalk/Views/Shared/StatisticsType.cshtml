@@ -1,0 +1,8 @@
+<div>
+    <form asp-controller="GeneralStatistics" asp-action="Index" asp-route-token="@ViewBag.QuizId">
+        <button>Общая статистика</button>
+    </form>
+    <form asp-controller="SeparateStatistics" asp-action="Index" asp-route-token="@ViewBag.QuizId">
+        <button>Отдельные ответы</button>
+    </form>
+</div>
