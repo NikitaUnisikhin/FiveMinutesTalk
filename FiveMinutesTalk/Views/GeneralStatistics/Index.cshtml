@@ -4,9 +4,10 @@
 @using FiveMinutesTalk.Domain.Entities.QuestionsTypes
 @model Guid
 
-<div>
+<section class="statistics">
     <h2>Статистика по опросу "@ViewBag.QuizTitle"</h2>
     @{
+        var questionNumber = 1;
         var answersIds = ((EFQuestionAnswersRepository)ViewBag.DataManager.QuestionAnswers)
             .GetQuestionAnswerIdByQuizId(Model);
         var statisticsContainer = new Dictionary<Guid, StatisticsContainer>();
@@ -23,18 +24,30 @@
 
         foreach (var questionStatistics in statisticsContainer)
         {
-            <div>
+            <div class="question">
                 @{
                     Question question = ViewBag.DataManager.Questions.GetItemById(questionStatistics.Key);
-                    <h3>@question.Text</h3>
+                    <section class="hat-question">
+                        <div class="number-question">
+                            <div class="number">@questionNumber</div>
+                            <div class="dot">.</div>
+                        </div>
+                        <div class="name-question">@question.Text</div>
+                        <section class="answers-count">
+                            <div>@questionStatistics.Value.Answers.Count</div>
+                            <div>ответов</div>
+                        </section>
+                    </section>
                     switch (questionStatistics.Value.QuestionType)
                     {
                         case QuestionTypeEnum.OpenQuestion:
                         {
-                            foreach (var answer in questionStatistics.Value.Answers)
-                            {
-                                <div>@answer</div>
-                            }
+                            <section class="answers">
+                                @foreach (var answer in questionStatistics.Value.Answers)
+                                {
+                                    <div class="text-question" >@answer</div>
+                                }
+                            </section>
                             break;
                         }
                         case QuestionTypeEnum.MultipleAnswersQuestion:
@@ -65,6 +78,7 @@
                     }
                 }
             </div>
+            questionNumber += 1;
         }
     }
-</div>
+</section>
