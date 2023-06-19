@@ -109,6 +109,7 @@ function changeComponents(questionType) {
     // Тут же создаём новый
     let newDiv = document.createElement("div");
     newDiv.setAttribute("id", "Answer" + id);
+    newDiv.setAttribute("class", "answer");
     if (selectedValue === "OpenQuestion") {
         let text = document.createElement("input");
         text.setAttribute("placeholder", "Ответ");
@@ -116,22 +117,31 @@ function changeComponents(questionType) {
         text.setAttribute("id", "Text" + id);
         newDiv.appendChild(text);
 
-        /*} else if (selectedValue === "1") {
-            newDiv.innerText = "Код";
-    
-        } else if (selectedValue === "2") {
-            // здесь создаем кнопку, которая добавляет новый label с radio кнопкой и вводом
-            let addRadio = document.createElement("input");
-            addRadio.setAttribute("value", "Добавить вариант ответа");
-            addRadio.setAttribute("type", "button");
-            addRadio.setAttribute("id", "AddRadio" + id);
-            let col = 0;
-            addRadio.addEventListener("click", function (e) {
-                addNewRadio(e, id, col++)
-            });
-            addRadio.setAttribute("class", "add-variant");
-            newDiv.appendChild(addRadio);
-            addRadio.click();*/
+    } else if (selectedValue === "Code") {
+        let textarea = document.createElement("textarea");
+        textarea.setAttribute("class", "textarea");
+        textarea.setAttribute("id", "Textarea" + id);
+        newDiv.appendChild(textarea);
+        let codeMirror = CodeMirror.fromTextArea(textarea, {
+            lineNumbers: true,
+            lineWrapping: true,
+            matchBrackets: true,
+            indentUnit: 4,
+        });
+        /*
+            } else if (selectedValue === "2") {
+                // здесь создаем кнопку, которая добавляет новый label с radio кнопкой и вводом
+                let addRadio = document.createElement("input");
+                addRadio.setAttribute("value", "Добавить вариант ответа");
+                addRadio.setAttribute("type", "button");
+                addRadio.setAttribute("id", "AddRadio" + id);
+                let col = 0;
+                addRadio.addEventListener("click", function (e) {
+                    addNewRadio(e, id, col++)
+                });
+                addRadio.setAttribute("class", "add-variant");
+                newDiv.appendChild(addRadio);
+                addRadio.click();*/
 
     } else if (selectedValue === "MultipleAnswersQuestion") {
         // здесь создаем кнопку, которая добавляет новый label с checkbox кнопкой и вводом
@@ -235,6 +245,8 @@ function addNewCheckbox(e, id, col) {
 
     addCheck.before(label);
 }
+
+
 
 // Для табов
 function openPage(id) {

@@ -5,6 +5,10 @@
     ViewData["Title"] = "Создание опроса";
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/mode/javascript/javascript.js"></script>
+
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <div id="create-poll-content">
@@ -24,7 +28,8 @@
                                     var types = new Dictionary<string, string>()
                                     {
                                         ["MultipleAnswersQuestion"] = "Несколько из списка",
-                                        ["OpenQuestion"] = "Текст"
+                                        ["OpenQuestion"] = "Текст",
+                                        ["Code"] = "Код"
                                     };
                                     foreach (var type in Enum.GetValues(typeof(QuestionTypeEnum)))
                                     {

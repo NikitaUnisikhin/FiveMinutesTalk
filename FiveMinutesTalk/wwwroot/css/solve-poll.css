@@ -68,4 +68,12 @@
     max-height:100px;
 }
 
+.CodeMirror-sizer{
+    margin-left: 30px !important;
+}
+
+.CodeMirror-gutters{
+    width: 29px;
+}
+
 
