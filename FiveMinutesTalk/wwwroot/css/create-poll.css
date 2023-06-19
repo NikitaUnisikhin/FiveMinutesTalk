@@ -453,6 +453,28 @@
     box-shadow: inset 0 0 0 30px white;
 }
 
+/*========Ответы========*/
+
+.answers-count{
+    display: flex;
+    gap: 5px;
+}
+
+.statistics{
+    align-items: center;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5%;
+    gap: 100px;
+}
+
+.answers{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
 /*========Настройки========*/
 
 #settings {
