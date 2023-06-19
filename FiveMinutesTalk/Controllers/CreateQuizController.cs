@@ -60,7 +60,7 @@ public class CreateQuizController : Controller
                 QuizId = quizId
             });
         }
-
-        return View("PopUp");
+        
+        return View("PopUp", quizId);
     }
 }

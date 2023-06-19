@@ -1,4 +1,4 @@
-@model QuestionModel
+@model Guid
 
 <section id="overlay">
     <section id="popup">
@@ -14,6 +14,8 @@
             </button>
             <span id="snackbar">Скопировано</span>
         </section>
+        <form asp-controller="Account" asp-action="Quizzes" asp-route-token="@Model">
         <button class="close light-text" onclick="closePopUp()" >&times;</button>
+        </form>
     </section>
 </section>

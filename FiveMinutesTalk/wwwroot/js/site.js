@@ -72,7 +72,6 @@ function newField(ev) {
 
     questions.splice(getNumber(addQue.parentElement), 0, newCopied);
     changeNumberQuestions();
-    setupSelector(newCopied.querySelector('.custom-select'));
     parent.after(newCopied);
 }
 
