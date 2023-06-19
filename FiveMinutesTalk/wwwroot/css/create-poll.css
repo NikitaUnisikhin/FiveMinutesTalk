@@ -40,8 +40,9 @@
 }
 
 /*========Структура вопросов========*/
-.page {
-    display: none;
+
+.page{
+    display: flex;
 }
 
 #create-poll-content {

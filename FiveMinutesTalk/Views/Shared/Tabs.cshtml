@@ -1,16 +1,16 @@
 <div id="tabs">
     <form asp-controller="Account" asp-action="Quizzes" asp-route-token="@ViewBag.QuizId">
-        <input type="submit" class="tab" id="tab-questions" name="tab-group" checked>
-        <label for="tab-questions" class="tab-label" onclick="openPage('create-poll-content')">Вопросы</label>
+        <input type="submit" class="tab" id="tab-questions" name="tab-group">
+        <label for="tab-questions" class="tab-label">Вопросы</label>
     </form>
     
     <form asp-controller="GeneralStatistics" asp-action="Index" asp-route-token="@ViewBag.QuizId">
-        <input type="submit" class="tab" id="tab-answer" onclick="openPage('answers')" name="tab-group">
+        <input type="submit" class="tab" id="tab-answer" name="tab-group">
         <label for="tab-answer" class="tab-label">Ответы</label>
     </form>
     
     <form>
-        <input type="submit" class="tab" id="tab-settings" onclick="openPage('settings')" name="tab-group">
+        <input type="submit" class="tab" id="tab-settings" name="tab-group">
         <label for="tab-settings" class="tab-label">Настройки</label>
     </form>
 </div>

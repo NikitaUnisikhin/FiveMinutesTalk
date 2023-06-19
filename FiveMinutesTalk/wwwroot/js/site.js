@@ -20,10 +20,6 @@ const copied = baseForm.cloneNode(true);
 // Я предлагаю сделать глобальный id для вопросов, чтобы после удаления у нас не было совпадений id вопросов
 let questionId = 1;
 
-let pages = document.getElementsByClassName("page");
-openPage("questions");
-
-
 // Проверка на совпадение паролей
 function validatePassword() {
     let password = document.getElementById("reg-password");
@@ -72,6 +68,7 @@ function newField(ev) {
 
     questions.splice(getNumber(addQue.parentElement), 0, newCopied);
     changeNumberQuestions();
+    setupSelector(newCopied.querySelector('.custom-select'));
     parent.after(newCopied);
 }
 
@@ -249,15 +246,6 @@ function checkMark(checkboxId, questionIndex, answerIndex) {
         countCorrectAnswers[questionIndex]--;
         checkbox.name = '';
     }
-}
-
-// Для табов
-function openPage(id) {
-    for (let i = 0; i < pages.length; i++) {
-        // pages[i].style.display = "none";
-    }
-
-    document.getElementById(id).style.display = "flex";
 }
 
 function openPopUp() {
