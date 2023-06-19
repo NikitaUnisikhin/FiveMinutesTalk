@@ -16,10 +16,9 @@
     }
     
     //Таймер
-    let endTime = new Date("Jun 17, 2023 13:00:00").getTime();
+    let endTime = new Date("Jun 20, 2023 13:00:00").getTime();
     
     let x = setInterval(function() {
-        
         let now = new Date().getTime();
         let distance = endTime - now;
         if (distance < 0) {
@@ -55,7 +54,7 @@
                     </div>
                     <div class="name-question">@question.Text</div>
                 </section>
-                <div class="answer">
+                <section class="answer">
                     @switch (question.Type)
                     {
                         case QuestionTypeEnum.OpenQuestion:
@@ -92,19 +91,19 @@
                         case QuestionTypeEnum.Radio:
                         {
                             <label>
-                                Выберите правильный ответ:
                                 @{
                                     var optionNumb = 0;
                                     foreach (var option in question.AnswerOptions)
                                     {
                                         var optionId = $"option_{questionNumber}_{optionNumb}";
-                                        <div id=@optionId>
+                                        <label id=@optionId class="radio-label">
                                             <input type="radio"
                                                    onchange="checkCheckbox(this, @optionNumb)"
                                                    name="answers[@questionNumber].Answers"
-                                                   value=-1>
-                                            <a>@option</a>
-                                        </div>
+                                                   value=-1
+                                                   class="radio-text">
+                                            <span>@option</span>
+                                        </label>
                                         optionNumb++;
                                     }
                                 }
@@ -112,28 +111,7 @@
                             break;
                         }
                     }
-                    else if (question.Type == QuestionTypeEnum.Radio)
-                    {
-                        <label>
-                            Выберите правильный ответ:
-                            @{
-                                var optionNumber = 0;
-                                foreach (var option in question.AnswerOptions)
-                                {
-                                    var optionId = $"option_{questionNumber}_{optionNumber}";
-                                        <div id=@optionId>
-                                            <input type="radio" 
-                                                   onchange="checkCheckbox(this, @optionNumber)" 
-                                                   name = "answers[@questionNumber].Answers"
-                                                   value=-1>
-                                        <a>@option</a>
-                                    </div>
-                                    optionNumber++;
-                                }
-                            }
-                        </label>
-                    }
-                    </div>
+                </section>
             </section>
             questionNumber++;
         }
