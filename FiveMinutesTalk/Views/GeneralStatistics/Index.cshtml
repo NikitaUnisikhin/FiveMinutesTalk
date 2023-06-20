@@ -52,7 +52,7 @@
                             </section>
                             break;
                         }
-                        case QuestionTypeEnum.MultipleAnswersQuestion:
+                        case QuestionTypeEnum.MultipleAnswersQuestion or QuestionTypeEnum.Radio:
                         {
                             var countQuestionAnswers = new Dictionary<string, int>();
                             var allCount = questionStatistics.Value.Answers.Count;
@@ -73,6 +73,10 @@
                                     <a>@percent</a>
                                 </div>
                             }
+                            break;
+                        }
+                        case QuestionTypeEnum.Code:
+                        {
                             break;
                         }
                         default:

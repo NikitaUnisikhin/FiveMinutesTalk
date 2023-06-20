@@ -12,10 +12,10 @@
             <button type="submit" onclick="copyText()" class="copy-text">
                 <img src="/images/copy.svg" alt="copy-icon">
             </button>
-            <span id="snackbar">Скопировано</span>
         </section>
         <form asp-controller="Account" asp-action="Quizzes" asp-route-token="@Model">
-        <button class="close light-text" onclick="closePopUp()" >&times;</button>
+            <button class="close light-text" onclick="closePopUp()" >&times;</button>
         </form>
     </section>
+    <span id="snackbar">Скопировано</span>
 </section>

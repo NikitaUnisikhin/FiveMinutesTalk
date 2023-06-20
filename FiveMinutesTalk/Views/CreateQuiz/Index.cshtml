@@ -8,8 +8,8 @@
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <div class="page" id="create-poll-content">
-        <input type="text" name="quizTitle" class="name-poll" required value="Новый опрос" placeholder="Введите название опроса" onFocus="this.select()"/>
         <section id="questions">
+            <input type="text" name="quizTitle" class="name-poll" required value="Новый опрос" placeholder="Введите название опроса" onFocus="this.select()"/>
             <div id="Form1" class="question-block">
                 <section id="Question1" class="question">
                     <section class="hat-question">
@@ -20,7 +20,7 @@
                         <input class="name-question" name="questions[0].Text" name="Question" type="text" value="Новый вопрос" placeholder="Введите название вопроса" onFocus="this.select()">
                         @await Html.PartialAsync("QuestionTypeSelect")
                     </section>
-                    <div id="Answer1" class="answer">
+                    <div id="Answer1">
                         <input id="Text1" class="text-question" type="text" placeholder="Ответ">
                     </div>
                 </section>
@@ -44,6 +44,20 @@
         </section>
     </div>
 
+    <section class="page" id="settings">
+        <div class="options">
+            <section class="option">
+                <div class="bold-text">Начало опроса:</div>
+                <input type="datetime-local"/>
+            </section>
+
+            <section class="option">
+                <div class="bold-text">Конец опроса: </div>
+                <input type="datetime-local"/>
+            </section>
+        </div>
+    </section>
+
     <section id="create-poll-hat">
         <button type="submit">
             <img src="/images/eye.svg" alt="eye-icon">
@@ -57,5 +71,4 @@
         </button>
     </section>
 </form>
-@await Html.PartialAsync("Tabs")
 </body>
