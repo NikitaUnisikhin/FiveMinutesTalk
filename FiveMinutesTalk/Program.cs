@@ -1,3 +1,5 @@
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using FiveMinutesTalk.Domain;
 using FiveMinutesTalk.Domain.Entities;
 using FiveMinutesTalk.Domain.Entities.QuestionsTypes;
@@ -32,6 +34,11 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireDigit = false;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+builder.Services.AddWebEncoders(options =>
+{
+    options.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All);
+});
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

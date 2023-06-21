@@ -4,92 +4,87 @@
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <div class="page" id="create-poll-content">
-        <input type="text" name="quizTitle" class="name-poll" required value="@ViewBag.Title" placeholder="Введите название опроса" onFocus="this.select()"/>
         <section id="questions">
-            <div id="Form1" class="question-block">
-                <section id="Question1" class="question">
-                    <section class="hat-question">
-                        <section class="number-question">
-                            <div class="number">1</div>
-                            <div class="dot">.</div>
-                        </section>
-                        <input class="name-question" name="questions[0].Text" name="Question" type="text" value="Новый вопрос" placeholder="Введите название вопроса" onFocus="this.select()">
-                        @await Html.PartialAsync("QuestionTypeSelect")
-                    </section>
-                    <div id="Answer1" class="answer">
-                        <input id="Text1" class="text-question" type="text" placeholder="Ответ">
-                    </div>
-                </section>
-                <section class="bottom-question">
-                    <label class="obligatory">
-                        <input type="checkbox">
-                        <div style="font-size: 14px">Обязательный вопрос</div>
-                    </label>
-                    <section class="right-part">
-                        <button class="right-answer" formmethod="dialog">
-                            <div style="font-weight: 600; color: var(--green);">++</div>
-                            <div style="font-weight: 400">Правильный ответ</div>
-                        </button>
-                        <button class="close-button round-button" formmethod="dialog">
-                            <img src="/images/bin.svg" alt="bin"/>
-                        </button>
-                    </section>
-                </section>
-                <button id="AddQuestion1" formmethod="dialog" class="add-question"> <img src="/images/add-question.svg" alt="plus">Добавить вопрос</button>
-            </div>
+            <input type="text" name="quizTitle" class="name-poll" required value="@ViewBag.Title" placeholder="Введите название опроса" onFocus="this.select()"/>
             @{
                 var counter = 0;
                 foreach (var guid in Model)
                 {
-                    Question question = ViewBag.DataManager.Questions.GetItemById(guid);
                     counter++;
-                    var addQuestion = $"AddQuestion{counter - 1}";
-                    var oldForm = $"Form{counter - 1}";
-                    var newForm = $"Form{counter}";
-                    var answerId = $"Answer{counter}";
-                    <script type="module">
-                        import { newField, changeComponents } from '/js/site.js';
-                        if (@counter !== 1){
-                            var button = document.querySelector('#@addQuestion');
-                            button.parent = document.querySelector('#@oldForm');
-                            var ev = {
-                                currentTarget: button 
-                            }
-                            newField(ev);
-                        }
-                        var newQuestion = document.querySelector('#@newForm');
-                        var select = document.getElementsByClassName("form-select")[@(counter - 1)];
-                        select.value = "@question.Type.ToString()";
-                        ev = {
-                            currentTarget: select,
-                            id: @counter
-                        }
-                        changeComponents(ev);
-                        
-                        var questionTitle = document.getElementById("@newForm").getElementsByClassName("name-question")[0];
-                        questionTitle.value = '@question.Text';
-                        
-                        var answer = document.getElementById("@answerId");    
-                                                
-                            
-                    </script>
+                    var id = guid;
+                    Question question = ViewBag.DataManager.Questions.GetItemById(id);
+                    <div id="Form1" class="question-block">
+                        <section id="Question1" class="question">
+                            <section class="hat-question">
+                                <section class="number-question">
+                                    <div class="number">@counter</div>
+                                    <div class="dot">.</div>
+                                </section>
+                                <input class="name-question" value="@question.Text" name="questions[0].Text" name="Question" type="text" placeholder="Введите название вопроса" onFocus="this.select()">
+                                @await Html.PartialAsync("QuestionTypeSelect", question.Type)
+                            </section>
+                            <div id="Answer1">
+
+                                @switch (question.Type)
+                                {
+                                    case QuestionTypeEnum.OpenQuestion:
+                                        <input id="Text1" class="text-question" value="@question.CorrectAnswers.FirstOrDefault()" type="text" placeholder="Ответ">
+                                        break;
+
+                                    case QuestionTypeEnum.MultipleAnswersQuestion:
+                                    {
+                                        for (int j = 0; j < question.AnswerOptions.Length; j++)
+                                        {
+                                            var option = question.AnswerOptions[j];
+                                            <label id="Label1-0" class="checkbox-label">
+
+                                                @if (question.CorrectAnswers.Contains(j.ToString()))
+                                                {
+                                                    @:<input type="checkbox" checked="checked" name="Checkbox1" id="Checkbox1-0">
+                                                }
+                                                else
+                                                {
+                                                    @:<input type="checkbox" name="Checkbox1" id="Checkbox1-0">
+                                                }
+
+                                                <input placeholder="Текст" value="@option" type="text" id="CheckboxText1-0" class="checkbox-text">
+                                            </label>
+                                        }
+                                        break;
+                                    }
+                                    case QuestionTypeEnum.Radio:
+                                    {
+                                        for (int j = 0; j < question.AnswerOptions.Length; j++)
+                                        {
+                                            var option = question.AnswerOptions[j];
+                                            <label id="Label1-0" class="radio-label">
+
+                                                @if (question.CorrectAnswers.Contains(j.ToString()))
+                                                {
+                                                    @:<input type="radio" checked="checked" name="Checkbox1" id="Checkbox1-0">
+                                                }
+                                                else
+                                                {
+                                                    @:<input type="radio" name="Checkbox1" id="Checkbox1-0">
+                                                }
+
+                                                <input placeholder="Текст" value="@option" type="text" id="CheckboxText1-0" class="radio-text">
+                                            </label>
+                                        }
+                                        break;
+                                    }
+                                }
+                            </div>
+                        </section>
+                        @await Html.PartialAsync("BottomQuestion")
+                        <button id="AddQuestion1" formmethod="dialog" class="add-question"> <img src="/images/add-question.svg" alt="plus">Добавить вопрос</button>
+                    </div>
                 }
             }
         </section>
     </div>
-
-    <section id="create-poll-hat">
-        <button type="submit">
-            <img src="/images/eye.svg" alt="eye-icon">
-        </button>
-        <button type="submit" id="save-poll">Сохранить</button>
-        <button type="submit">
-            <img src="/images/more.svg" alt="more-icon">
-        </button>
-        <button type="submit" id="profile-button">
-            <img src="/images/profile.svg" alt="profile-icon">
-        </button>
-    </section>
+    @await Html.PartialAsync("Settings")
+    @await Html.PartialAsync("Header")
 </form>
 @await Html.PartialAsync("Tabs")
 </body>
