@@ -3,59 +3,114 @@
 @using FiveMinutesTalk.Domain.Entities.QuestionsTypes
 @model Guid[]
 
-<div>
-    @await Html.PartialAsync("StatisticsType")
-    <h2>Статистика по опросу "@ViewBag.QuizTitle"</h2>
-    @{
-        var answerNumber = 0;
-        foreach (var quizAnswerId in Model)
-        {
-            answerNumber++;
-            var questionAnswerIds = ((EFQuizQuestionAnswerRepository)ViewBag.DataManager.QuizQuestionAnswers)
-                .GetQuestionAnswerIdsByQuizAnswerId(quizAnswerId);
-            <div>
-                <h3>Ответ номер @answerNumber</h3>
-                @foreach (var id in questionAnswerIds)
-                {
-                    QuestionAnswer answer = ViewBag.DataManager.QuestionAnswers.GetItemById(id);
-                    Question question = ViewBag.DataManager.Questions.GetItemById(answer.QuestionId);
-                    <h3>@question.Text</h3>
-                    if (question.Type == QuestionTypeEnum.OpenQuestion)
-                    {
-                        <a>@answer.Answers[0]</a>
-                    }
-                    else if (question.Type == QuestionTypeEnum.MultipleAnswersQuestion)
-                    {
-                        for (int i = 0; i < question.AnswerOptions.Length; i++)
+@{
+    ViewData["Title"] = "Статистика";
+}
+
+<body>
+<form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
+    <section class="statistics">
+        <h1 style="font-size: 32px">Статистика по «@ViewBag.QuizTitle»</h1>
+        <section class="empty-answers">
+            <p>Пока нет ответов</p>
+            <img src="/images/empty-answers.svg" alt="empty-answers image"/>
+        </section>
+        @await Html.PartialAsync("StatisticsType")
+        @{
+            var answerNumber = 0;
+            foreach (var quizAnswerId in Model)
+            {
+                answerNumber++;
+                var questionAnswerIds = ((EFQuizQuestionAnswerRepository)ViewBag.DataManager.QuizQuestionAnswers)
+                    .GetQuestionAnswerIdsByQuizAnswerId(quizAnswerId);
+                var questionNumber = 0;
+                <div class="separate-statistic">
+                    <h3>#Ответ @answerNumber</h3>
+                        @foreach (var id in questionAnswerIds)
                         {
-                            var option = question.AnswerOptions[i];
-                            if (answer.Answers.Contains(i.ToString()))
-                            {
-                                <label><input type="checkbox" checked>@option</label>
-                            }
-                            else
-                            {
-                                <label><input type="checkbox">@option</label>
-                            }
+                            QuestionAnswer answer = ViewBag.DataManager.QuestionAnswers.GetItemById(id);
+                            Question question = ViewBag.DataManager.Questions.GetItemById(answer.QuestionId);
+                            var questionContainerId = $"question_{answerNumber}";
+
+                            <section class="question">
+                                <section id=@questionContainerId class="hat-question">
+                                    <div class="number-question">
+                                        <div class="number">@(questionNumber + 1)</div>
+                                        <div class="dot">.</div>
+                                    </div>
+                                    <div class="name-question">@question.Text</div>
+                                </section>
+                                <section>
+                                    @switch (question.Type)
+                                    {
+                                        case QuestionTypeEnum.OpenQuestion:
+                                        {
+                                            <div class="text-question">@answer.Answers[0]</div>
+                                            break;
+                                        }
+                                        case QuestionTypeEnum.MultipleAnswersQuestion:
+                                        {
+                                            for (int i = 0; i < question.AnswerOptions.Length; i++)
+                                            {
+                                                var option = question.AnswerOptions[i];
+                                                <label class="checkbox-label">
+                                                    @if (answer.Answers.Contains(i.ToString()))
+                                                    {
+                                                        <input type="checkbox" class="checkbox-text" checked disabled>
+                                                        @option
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="checkbox" class="checkbox-text" disabled>
+                                                        @option
+                                                    }
+                                                </label>
+                                            }
+                                            break;
+                                        }
+                                        case QuestionTypeEnum.Radio:
+                                        {
+                                            for (int i = 0; i < question.AnswerOptions.Length; i++)
+                                            {
+                                                var option = question.AnswerOptions[i];
+                                                <label class="radio-label">
+                                                    @if (answer.Answers.Contains(i.ToString()))
+                                                    {
+                                                        <input type="radio" class="radio-text" checked>
+                                                        @option
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="radio" class="radio-text" disabled>
+                                                        @option
+                                                    }
+                                                </label>
+                                            }
+                                            break;
+                                        }
+                                        case
+                                            QuestionTypeEnum.Code:
+                                        {
+                                            break;
+                                        }
+                                    }
+                                </section>
+                            </section>
+                            questionNumber += 1;
                         }
-                    }
-                    else if (question.Type == QuestionTypeEnum.Radio)
-                    {
-                        for (int i = 0; i < question.AnswerOptions.Length; i++)
-                        {
-                            var option = question.AnswerOptions[i];
-                            if (answer.Answers.Contains(i.ToString()))
-                            {
-                                <label><input type="radio" checked>@option</label>
-                            }
-                            else
-                            {
-                                <label><input type="radio">@option</label>
-                            }
-                        }
-                    }
-                }
-            </div>
+                    </div>
+            }
+
         }
-    }
-</div>
+        @await Html.PartialAsync("Header")
+    </section>
+</form>
+</body>
+@await Html.PartialAsync("Tabs")
+
+<script>
+    let statistic = document.querySelector(".statistics");
+    console.log(statistic.childElementCount)
+    if (statistic.childElementCount > 4)
+    statistic.querySelector(".empty-answers").setAttribute("style", "display: none");
+</script>

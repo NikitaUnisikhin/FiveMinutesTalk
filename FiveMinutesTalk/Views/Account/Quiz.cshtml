@@ -57,7 +57,7 @@
                                         for (int j = 0; j < question.AnswerOptions.Length; j++)
                                         {
                                             var option = question.AnswerOptions[j];
-                                            <label id="Label1-0" class="checkbox-label">
+                                            <label id="Label1-0" class="radio-label">
 
                                                 @if (question.CorrectAnswers.Contains(j.ToString()))
                                                 {
@@ -68,7 +68,7 @@
                                                     @:<input type="radio" name="Checkbox1" id="Checkbox1-0">
                                                 }
 
-                                                <input placeholder="Текст" value="@option" type="text" id="CheckboxText1-0" class="checkbox-text">
+                                                <input placeholder="Текст" value="@option" type="text" id="CheckboxText1-0" class="radio-text">
                                             </label>
                                         }
                                         break;
@@ -99,32 +99,8 @@
         </section>
     </div>
 
-    <section id="settings">
-        <div class="options">
-            <section class="option">
-                <div class="bold-text">Начало опроса:</div>
-                <input type="datetime-local"/>
-            </section>
-
-            <section class="option">
-                <div class="bold-text">Конец опроса: </div>
-                <input type="datetime-local"/>
-            </section>
-        </div>
-    </section>
-
-    <section id="create-poll-hat">
-        <button type="submit">
-            <img src="/images/eye.svg" alt="eye-icon">
-        </button>
-        <button type="submit" id="save-poll">Сохранить</button>
-        <button type="submit">
-            <img src="/images/more.svg" alt="more-icon">
-        </button>
-        <button type="submit" id="profile-button">
-            <img src="/images/profile.svg" alt="profile-icon">
-        </button>
-    </section>
+    @await Html.PartialAsync("Settings")
+    @await Html.PartialAsync("Header")
 </form>
 @await Html.PartialAsync("Tabs")
 </body>

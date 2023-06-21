@@ -44,31 +44,7 @@
         </section>
     </div>
 
-    <section id="settings">
-        <div class="options">
-            <section class="option">
-                <div class="bold-text">Начало опроса:</div>
-                <input type="datetime-local"/>
-            </section>
-
-            <section class="option">
-                <div class="bold-text">Конец опроса: </div>
-                <input type="datetime-local"/>
-            </section>
-        </div>
-    </section>
-
-    <section id="create-poll-hat">
-        <button type="submit">
-            <img src="/images/eye.svg" alt="eye-icon">
-        </button>
-        <button type="submit" id="save-poll">Сохранить</button>
-        <button type="submit">
-            <img src="/images/more.svg" alt="more-icon">
-        </button>
-        <button type="submit" id="profile-button">
-            <img src="/images/profile.svg" alt="profile-icon">
-        </button>
-    </section>
+    @await Html.PartialAsync("Settings")
+    @await Html.PartialAsync("Header")
 </form>
 </body>

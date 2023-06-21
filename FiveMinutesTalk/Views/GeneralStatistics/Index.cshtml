@@ -11,10 +11,10 @@
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <section class="statistics">
-        <h1 style="font-size: 32px">Статистика за «@ViewBag.QuizTitle»</h1>
+        <h1 style="font-size: 32px">Статистика по «@ViewBag.QuizTitle»</h1>
         <section class="empty-answers">
             <p>Пока нет ответов</p>
-            <img src="images/empty-answers.svg" alt="empty-answers image"/>
+            <img src="/images/empty-answers.svg" alt="empty-answers image"/>
         </section>
         @await Html.PartialAsync("StatisticsType")
         @{
@@ -102,18 +102,7 @@
                 questionNumber += 1;
             }
 
-            <section id="create-poll-hat">
-                <button type="submit">
-                    <img src="/images/eye.svg" alt="eye-icon">
-                </button>
-                <button type="submit" id="save-poll">Сохранить</button>
-                <button type="submit">
-                    <img src="/images/more.svg" alt="more-icon">
-                </button>
-                <button type="submit" id="profile-button">
-                    <img src="/images/profile.svg" alt="profile-icon">
-                </button>
-            </section>
+            @await Html.PartialAsync("Header")
         }
     </section>
 </form>
