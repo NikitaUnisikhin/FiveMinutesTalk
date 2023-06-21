@@ -1,8 +1,7 @@
 @using FiveMinutesTalk.Domain.Entities.QuestionsTypes
-@using Microsoft.CodeAnalysis.Formatting
 @model Guid[]
 
-<script src="./js/bind.js"></script>
+<script src="/js/site.js"></script>
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <div class="page" id="create-poll-content">
@@ -47,14 +46,14 @@
                     counter++;
                     var form = $"Form{counter}";
                     <script>
-                        let button = document.querySelector('#AddQuestion1');
+                        var button = document.querySelector('#AddQuestion1');
                         button.parent = document.querySelector('#Form1');
-                        let ev = {
+                        var ev = {
                             currentTarget: button 
                         }
                         newField(ev);
-                        let newQuestion = document.querySelector('#@form');
-                        let select = document.getElementsByClassName("form-select")[@(counter - 1)];
+                        var newQuestion = document.querySelector('#@form');
+                        var select = document.getElementsByClassName("form-select")[@(counter - 1)];
                         select.value = "@question.Type.ToString()";
                         ev = {
                             currentTarget: select,
@@ -82,4 +81,3 @@
 </form>
 @await Html.PartialAsync("Tabs")
 </body>
-<script src="/js/site.js"></script>
