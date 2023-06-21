@@ -1,5 +1,4 @@
 @using FiveMinutesTalk.Domain.Entities.QuestionsTypes
-@model QuestionTypeEnum
 
 <label class="custom-select">
     <select id="1" name="questions[0].Type" class="form-select">
@@ -13,14 +12,7 @@
             };
             foreach (var type in Enum.GetValues(typeof(QuestionTypeEnum)))
             {
-                if ((int)type == (int)Model)
-                {
-                    <option value="@type.ToString()" selected="selected">@types[type.ToString()!]</option>
-                }
-                else
-                {
-                    <option value="@type.ToString()">@types[type.ToString()!]</option>
-                }
+                <option value="@type.ToString()">@types[type.ToString()!]</option>
             }
         }
     </select>

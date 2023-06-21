@@ -1,25 +1,3 @@
-﻿// Подключение кнопки добавления к функции
-document.querySelector('#AddQuestion1').addEventListener('click', function (ev) {
-    newField(ev)
-});
-
-// Подключение изначального select к функции
-document.querySelector('select').addEventListener('change', function (questionType) {
-    changeComponents(questionType)
-});
-
-// Подключение кнопки закрытия к функции
-document.querySelector(".close-button").addEventListener('click', removeParent);
-
-let baseForm = document.getElementById("Form1");
-let questions = [baseForm];
-
-// Копируем изначальную форму
-const copied = baseForm.cloneNode(true);
-
-// Я предлагаю сделать глобальный id для вопросов, чтобы после удаления у нас не было совпадений id вопросов
-let questionId = 1;
-
 // Проверка на совпадение паролей
 function validatePassword() {
     let password = document.getElementById("reg-password");
@@ -32,13 +10,16 @@ function validatePassword() {
     }
 }
 
-
-const getNumber = (element) => {
+/*const getNumber = (element) => {
     return Number(element.querySelector(".hat-question").querySelector(".number-question").querySelector(".number").textContent);
-}
+}*/
 
 // У нас уже есть заранее склонированная форма, поэтому просто изменяем id в зависимости от questionId
-function newField(ev) {
+export function newField(ev) {
+    let baseForm = document.getElementById("Form1");
+    const copied = baseForm.cloneNode(true);
+    let questionId = document.getElementsByClassName("question-block").length;
+
     let addQue = ev.currentTarget;
     let parent = addQue.parentNode;
     questionId++;
@@ -66,33 +47,38 @@ function newField(ev) {
         newField(ev)
     });
 
-    questions.splice(getNumber(addQue.parentElement), 0, newCopied);
-    changeNumberQuestions();
+    let questions = Array.from(document.getElementsByClassName("question-block"));
+    let number = Number(addQue.parentElement.querySelector(".hat-question")
+        .querySelector(".number-question")
+        .querySelector(".number").textContent);
+    questions.splice(number, 0, newCopied);
+    changeNumberQuestions(questions);
     setupSelector(newCopied.querySelector('.custom-select'));
     parent.after(newCopied);
 }
 
 // Обновляет номера вопросов
-function changeNumberQuestions() {
+function changeNumberQuestions(questions) {
     for (let i = 0; i < questions.length; i++) {
         questions[i].querySelector(".hat-question").querySelector(".number-question").querySelector(".number").textContent = `${i + 1}`;
     }
 }
 
 // Удаляет родителя...
-function removeParent() {
+export function removeParent() {
     let revDiv = this.parentElement.parentElement.parentElement;
-    let numberQuestion = getNumber(revDiv);
+    let numberQuestion = Number(revDiv.parentElement.querySelector(".hat-question")
+        .querySelector(".number-question")
+        .querySelector(".number").textContent);
     if (numberQuestion === 1)
         return;
 
-    questions.splice(numberQuestion - 1, 1);
-    changeNumberQuestions();
+    changeNumberQuestions(Array.from(document.getElementsByClassName("question-block")));
     revDiv.remove();
 }
 
 // Функция в зависимости от выбранного типа будет менять варианты ответа под вопросом
-function changeComponents(questionType) {
+export function changeComponents(questionType) {
     // Получаем элемент на котором произошло событие
     let questType = questionType.currentTarget;
     let selectedValue = questType.value;
@@ -329,4 +315,3 @@ window.addEventListener('load', () => {
     for (let calendar of calendars)
         calendar.value = now.toISOString().slice(0, -1);
 });
-
