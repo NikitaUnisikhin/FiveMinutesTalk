@@ -292,21 +292,16 @@
     transform: translate(0, -50%);
 }
 
-.tab-label {
+.tab {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    font-weight: 600;
-    font-size: 13px;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-
     width: 160px;
-    height: 80px;
+    height: 75px;
+    padding: 0;
     border-radius: 15px;
+    align-items: center;
+    justify-content: center;
     background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='15' ry='15' stroke='%2369E167FF' stroke-width='3' stroke-dasharray='12' stroke-dashoffset='3' stroke-linecap='butt'/%3e%3c/svg%3e");
+
 }
 
 /*========Поп-ап========*/
@@ -452,7 +447,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-top: 3%;
+    margin-top: 5%;
     gap: 80px;
 }
 
@@ -520,19 +515,19 @@
     font-weight: 600;
 }
 
-.diagram-text{
+.diagram-text {
     flex-shrink: 0;
     padding: 5px;
 }
 
-.switch-statistic{
+.switch-statistic {
     display: flex;
     position: fixed;
     right: 5%;
     bottom: 5%;
 }
 
-.empty-answers{
+.empty-answers {
     display: flex;
     flex-direction: column;
     gap: 30px;

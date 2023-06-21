@@ -1,16 +1,9 @@
 <div id="tabs">
     <form asp-controller="Account" asp-action="Quizzes" asp-route-token="@ViewBag.QuizId">
-        <input type="submit" class="tab" id="tab-questions" name="tab-group" value="">
-        <label for="tab-questions" class="tab-label">Вопросы</label>
+        <button type="submit" class="tab" id="tab-questions" name="tab-group" value="">Вопросы</button>
     </form>
     
     <form asp-controller="GeneralStatistics" asp-action="Index" asp-route-token="@ViewBag.QuizId">
-        <input type="submit" class="tab" id="tab-answer" name="tab-group" value="">
-        <label for="tab-answer" class="tab-label">Ответы</label>
+       <button type="submit" class="tab" id="tab-answers" name="tab-group" value="">Ответы</button>
     </form>
-    
-    <!--<for
-        <input type="submit" class="tab" id="tab-settings" name="tab-group">
-        <label for="tab-settings" class="tab-label">Настройки</label>
-    </for>-->
 </div>
