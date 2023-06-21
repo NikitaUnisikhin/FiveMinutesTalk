@@ -4,11 +4,19 @@
 @using FiveMinutesTalk.Domain.Entities.QuestionsTypes
 @model Guid
 
+@{
+    ViewData["Title"] = "Статистика";
+}
+
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <section class="statistics">
-        <h1 style="font-size: 36px">Статистика по опросу «@ViewBag.QuizTitle»</h1>
-        <!--@await Html.PartialAsync("StatisticsType")-->
+        <h1 style="font-size: 32px">Статистика за «@ViewBag.QuizTitle»</h1>
+        <section class="empty-answers">
+            <p>Пока нет ответов</p>
+            <img src="images/empty-answers.svg" alt="empty-answers image"/>
+        </section>
+        @await Html.PartialAsync("StatisticsType")
         @{
             var questionNumber = 1;
             var answersIds = ((EFQuestionAnswersRepository)ViewBag.DataManager.QuestionAnswers)
@@ -27,6 +35,7 @@
 
             foreach (var questionStatistics in statisticsContainer)
             {
+                <script>removeImage()</script>
                 <div class="question">
                     @{
                         Question question = ViewBag.DataManager.Questions.GetItemById(questionStatistics.Key);
@@ -160,4 +169,9 @@
         }
         return five;
     }
+    
+    let statistic = document.querySelector(".statistics");
+    if (statistic.childElementCount > 4)
+        statistic.querySelector(".empty-answers").setAttribute("style", "display: none");
+    
 </script>

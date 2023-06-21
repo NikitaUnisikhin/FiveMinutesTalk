@@ -304,7 +304,7 @@
     cursor: pointer;
 
     width: 160px;
-    height: 65px;
+    height: 80px;
     border-radius: 15px;
     background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='15' ry='15' stroke='%2369E167FF' stroke-width='3' stroke-dasharray='12' stroke-dashoffset='3' stroke-linecap='butt'/%3e%3c/svg%3e");
 }
@@ -527,7 +527,16 @@
 
 .switch-statistic{
     display: flex;
-    
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+}
+
+.empty-answers{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
 }
 
 /*========Настройки========*/
