@@ -4,101 +4,160 @@
 @using FiveMinutesTalk.Domain.Entities.QuestionsTypes
 @model Guid
 
+<body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
-<section class="statistics">
-    @await Html.PartialAsync("StatisticsType")
-    <h2>Статистика по опросу "@ViewBag.QuizTitle"</h2>
-    @{
-        var questionNumber = 1;
-        var answersIds = ((EFQuestionAnswersRepository)ViewBag.DataManager.QuestionAnswers)
-            .GetQuestionAnswerIdByQuizId(Model);
-        var statisticsContainer = new Dictionary<Guid, StatisticsContainer>();
-        foreach (var answerId in answersIds)
-        {
-            QuestionAnswer answer = ViewBag.DataManager.QuestionAnswers.GetItemById(answerId);
-            statisticsContainer.TryAdd(answer.QuestionId, new StatisticsContainer()
+    <section class="statistics">
+        <h1 style="font-size: 36px">Статистика по опросу «@ViewBag.QuizTitle»</h1>
+        <!--@await Html.PartialAsync("StatisticsType")-->
+        @{
+            var questionNumber = 1;
+            var answersIds = ((EFQuestionAnswersRepository)ViewBag.DataManager.QuestionAnswers)
+                .GetQuestionAnswerIdByQuizId(Model);
+            var statisticsContainer = new Dictionary<Guid, StatisticsContainer>();
+            foreach (var answerId in answersIds)
             {
-                QuestionType = answer.QuestionType
-            });
-            statisticsContainer[answer.QuestionId].Answers = statisticsContainer[answer.QuestionId]
-                .Answers.Concat(answer.Answers).ToList();
-        }
+                QuestionAnswer answer = ViewBag.DataManager.QuestionAnswers.GetItemById(answerId);
+                statisticsContainer.TryAdd(answer.QuestionId, new StatisticsContainer()
+                {
+                    QuestionType = answer.QuestionType
+                });
+                statisticsContainer[answer.QuestionId].Answers = statisticsContainer[answer.QuestionId]
+                    .Answers.Concat(answer.Answers).ToList();
+            }
 
-        foreach (var questionStatistics in statisticsContainer)
-        {
-            <div class="question">
-                @{
-                    Question question = ViewBag.DataManager.Questions.GetItemById(questionStatistics.Key);
-                    <section class="hat-question">
-                        <div class="number-question">
-                            <div class="number">@questionNumber</div>
-                            <div class="dot">.</div>
-                        </div>
-                        <div class="name-question">@question.Text</div>
-                        <section class="answers-count">
-                            <div>@questionStatistics.Value.Answers.Count</div>
-                            <div>ответов</div>
-                        </section>
-                    </section>
-                    switch (questionStatistics.Value.QuestionType)
-                    {
-                        case QuestionTypeEnum.OpenQuestion:
-                        {
-                            <section class="answers">
-                                @foreach (var answer in questionStatistics.Value.Answers)
-                                {
-                                    <div class="text-question" >@answer</div>
-                                }
+            foreach (var questionStatistics in statisticsContainer)
+            {
+                <div class="question">
+                    @{
+                        Question question = ViewBag.DataManager.Questions.GetItemById(questionStatistics.Key);
+                        <section class="hat-question">
+                            <div class="number-question">
+                                <div class="number">@questionNumber</div>
+                                <div class="dot">.</div>
+                            </div>
+                            <div class="name-question">@question.Text</div>
+                            <section class="answers-count">
+                                <div class="count">@questionStatistics.Value.Answers.Count</div>
+                                <div class="counter-text">ответов</div>
                             </section>
-                            break;
-                        }
-                        case QuestionTypeEnum.MultipleAnswersQuestion or QuestionTypeEnum.Radio:
+                        </section>
+                        switch (questionStatistics.Value.QuestionType)
                         {
-                            var countQuestionAnswers = new Dictionary<string, int>();
-                            var allCount = questionStatistics.Value.Answers.Count;
-                            foreach (var answer in questionStatistics.Value.Answers)
+                            case QuestionTypeEnum.OpenQuestion:
                             {
-                                countQuestionAnswers.TryAdd(answer, 0);
-                                countQuestionAnswers[answer]++;
+                                <section class="answers">
+                                    @foreach (var answer in questionStatistics.Value.Answers)
+                                    {
+                                        <div class="text-question">@answer</div>
+                                    }
+                                </section>
+                                break;
                             }
-                            foreach (var answerWithCount in countQuestionAnswers)
+                            case QuestionTypeEnum.MultipleAnswersQuestion or QuestionTypeEnum.Radio:
                             {
-                                if (answerWithCount.Key == "-1")
+                                var countQuestionAnswers = new Dictionary<string, int>();
+                                var allCount = questionStatistics.Value.Answers.Count;
+                                foreach (var answer in questionStatistics.Value.Answers)
                                 {
-                                    continue;
+                                    countQuestionAnswers.TryAdd(answer, 0);
+                                    countQuestionAnswers[answer]++;
                                 }
-                                var percent = " | " + Math.Round(answerWithCount.Value / (double)allCount * 100, 2) + " %";
-                                <div>
-                                    <a>@question.AnswerOptions[int.Parse(answerWithCount.Key)]</a>
-                                    <a>@percent</a>
+                                <div class="statistic-container">
+                                    <div class="chart">
+                                        @foreach (var answerWithCount in countQuestionAnswers)
+                                        {
+                                            if (answerWithCount.Key == "-1")
+                                            {
+                                                continue;
+                                            }
+                                            var percent = Math.Round(answerWithCount.Value / (double)allCount * 100, 2) + "%";
+                                            <div class="statistic-part">
+                                                <label class="diagram-text">@question.AnswerOptions[int.Parse(answerWithCount.Key)]</label>
+                                                <div class="bar">
+                                                    <label class="value-diagram">@percent</label>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
+                                break;
                             }
-                            break;
+                            case QuestionTypeEnum.Code:
+                            {
+                                break;
+                            }
+                            default:
+                                throw new ArgumentOutOfRangeException();
                         }
-                        case QuestionTypeEnum.Code:
-                        {
-                            break;
-                        }
-                        default:
-                            throw new ArgumentOutOfRangeException();
                     }
-                }
-            </div>
-            questionNumber += 1;
+                </div>
+                questionNumber += 1;
+            }
+
+            <section id="create-poll-hat">
+                <button type="submit">
+                    <img src="/images/eye.svg" alt="eye-icon">
+                </button>
+                <button type="submit" id="save-poll">Сохранить</button>
+                <button type="submit">
+                    <img src="/images/more.svg" alt="more-icon">
+                </button>
+                <button type="submit" id="profile-button">
+                    <img src="/images/profile.svg" alt="profile-icon">
+                </button>
+            </section>
         }
-        
-        <section id="create-poll-hat">
-            <button type="submit">
-                <img src="/images/eye.svg" alt="eye-icon">
-            </button>
-            <button type="submit" id="save-poll">Сохранить</button>
-            <button type="submit">
-                <img src="/images/more.svg" alt="more-icon">
-            </button>
-            <button type="submit" id="profile-button">
-                <img src="/images/profile.svg" alt="profile-icon">
-            </button>
-        </section>
-    }
-</section>
+    </section>
 </form>
+@await Html.PartialAsync("Tabs")
+</body>
+<script>
+    //Для диаграмм
+    const blocks = document.querySelectorAll(".diagram-text");
+    let maxWidth = 0;
+    const coeffWidth = 6;
+    
+    blocks.forEach((block) => {
+        const width = block.offsetWidth;
+        if (width > maxWidth) {
+            maxWidth = width;
+        }
+    });
+    
+    
+    document.documentElement.style.setProperty("--width", maxWidth);
+    
+    document.querySelectorAll(".statistic-part").forEach(changeWidth);
+    
+    function changeWidth(diagram) {
+        let value = Number(diagram.querySelector(".value-diagram").textContent.slice(0, -1));
+        let text = diagram.querySelector(".diagram-text");
+        text.style.width = maxWidth + "px";
+        diagram.setAttribute("style", `width: ${value * coeffWidth + text.offsetWidth}px`);
+    }
+        
+    //Для склонения ответов
+    document.querySelectorAll(".answers-count").forEach(changeText);
+    
+    function changeText(counter) {
+        let count = Number(counter.querySelector(".count").textContent);
+        let text = counter.querySelector(".counter-text");
+        text.textContent = getNoun(count, 'ответ', 'ответа', 'ответов');
+    }
+    
+    function getNoun(number, one, two, five) {
+        let n = Math.abs(number);
+        n %= 100;
+        if (n >= 5 && n <= 20) {
+            return five;
+        }
+        n %= 10;
+        if (n === 1) {
+            return one;
+        }
+        if (n >= 2 && n <= 4) {
+            return two;
+        }
+        return five;
+    }
+</script>

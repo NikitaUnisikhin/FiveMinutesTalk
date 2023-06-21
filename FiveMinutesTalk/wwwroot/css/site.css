@@ -3,11 +3,9 @@
 :root {
     --green: #69E167;
     --light-green: #C1F3C1;
+    --hover-green: #7AE878;
     --grey: #808080;
     --light-grey: #EBEBEB;
-    --black: #000000;
-    --white: #FFFFFF;
-    --hover-green: #7AE878;
 
     --shadow: -1px -1px 10px rgba(0, 0, 0, 0.15), 5px 5px 10px rgba(0, 0, 0, 0.35);
 }
@@ -16,8 +14,12 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
+}
+
+h1 {
+    font-size: 36px;
 }
 
 html {
@@ -108,7 +110,7 @@ input[type="radio"] {
     appearance: none;
     padding: 0;
     margin: 0;
-    transition: box-shadow 150ms cubic-bezier(.95,.15,.5,1.25);
+    transition: box-shadow 150ms cubic-bezier(.95, .15, .5, 1.25);
     pointer-events: none;
     cursor: pointer;
 }

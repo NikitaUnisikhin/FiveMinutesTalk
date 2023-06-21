@@ -5,10 +5,6 @@
     ViewData["Title"] = "Прохождение опроса";
 }
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/codemirror.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/mode/javascript/javascript.js"></script>
-
 
 <script>
     function checkCheckbox(checkbox, optionNumber){
@@ -40,9 +36,9 @@
     </script>
 
 <body>
-
-<form method="post" asp-controller="SolveQuiz" asp-action="SaveResult" class="solve-content">
-    <h2 class="name-poll" style="position: relative">@ViewBag.QuizTitle</h2>
+<form method="post" asp-controller="SolveQuiz" asp-action="SaveResult">
+    <section class="solve-content">
+    <h1 class="name-poll">@ViewBag.QuizTitle</h1>
     @{
         var questionNumber = 0;
         foreach (var id in Model)
@@ -147,5 +143,6 @@
         <img src="images/timer.svg" alt="timer-icon" style="width: 24px;"/>
         <p id="time" class="bold-text"></p>
     </div>
+    </section>
 </form>
 </body>
