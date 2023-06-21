@@ -1,7 +1,7 @@
 @using FiveMinutesTalk.Domain.Entities.QuestionsTypes
 @model Guid[]
 
-<script src="/js/site.js"></script>
+<script type="module" src="/js/site.js"></script>
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <div class="page" id="create-poll-content">
@@ -52,14 +52,6 @@
                             currentTarget: button 
                         }
                         newField(ev);
-                        var newQuestion = document.querySelector('#@form');
-                        var select = document.getElementsByClassName("form-select")[@(counter - 1)];
-                        select.value = "@question.Type.ToString()";
-                        ev = {
-                            currentTarget: select,
-                            id: @counter
-                        }
-                        changeComponents(ev);
                     </script>
                 }
             }

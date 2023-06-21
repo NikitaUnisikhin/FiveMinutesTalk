@@ -15,7 +15,7 @@ function validatePassword() {
 }*/
 
 // У нас уже есть заранее склонированная форма, поэтому просто изменяем id в зависимости от questionId
-function newField(ev) {
+export function newField(ev) {
     let baseForm = document.getElementById("Form1");
     const copied = baseForm.cloneNode(true);
     let questionId = document.getElementsByClassName("question-block").length;
@@ -65,7 +65,7 @@ function changeNumberQuestions(questions) {
 }
 
 // Удаляет родителя...
-function removeParent() {
+export function removeParent() {
     let revDiv = this.parentElement.parentElement.parentElement;
     let numberQuestion = Number(revDiv.parentElement.querySelector(".hat-question")
         .querySelector(".number-question")
@@ -78,7 +78,7 @@ function removeParent() {
 }
 
 // Функция в зависимости от выбранного типа будет менять варианты ответа под вопросом
-function changeComponents(questionType) {
+export function changeComponents(questionType) {
     // Получаем элемент на котором произошло событие
     let questType = questionType.currentTarget;
     let selectedValue = questType.value;
