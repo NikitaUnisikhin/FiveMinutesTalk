@@ -46,6 +46,7 @@
                     var addQuestion = $"AddQuestion{counter - 1}";
                     var oldForm = $"Form{counter - 1}";
                     var newForm = $"Form{counter}";
+                    var answerId = $"Answer{counter}";
                     <script type="module">
                         import { newField, changeComponents } from '/js/site.js';
                         if (@counter !== 1){
@@ -64,6 +65,13 @@
                             id: @counter
                         }
                         changeComponents(ev);
+                        
+                        var questionTitle = document.getElementById("@newForm").getElementsByClassName("name-question")[0];
+                        questionTitle.value = '@question.Text';
+                        
+                        var answer = document.getElementById("@answerId");    
+                                                
+                            
                     </script>
                 }
             }
