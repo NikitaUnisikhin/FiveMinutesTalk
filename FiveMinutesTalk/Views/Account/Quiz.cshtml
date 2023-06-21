@@ -1,7 +1,6 @@
 @using FiveMinutesTalk.Domain.Entities.QuestionsTypes
 @model Guid[]
 
-<script type="module" src="/js/site.js"></script>
 <body>
 <form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <div class="page" id="create-poll-content">
@@ -44,14 +43,27 @@
                 {
                     Question question = ViewBag.DataManager.Questions.GetItemById(guid);
                     counter++;
-                    var form = $"Form{counter}";
-                    <script>
-                        var button = document.querySelector('#AddQuestion1');
-                        button.parent = document.querySelector('#Form1');
-                        var ev = {
-                            currentTarget: button 
+                    var addQuestion = $"AddQuestion{counter - 1}";
+                    var oldForm = $"Form{counter - 1}";
+                    var newForm = $"Form{counter}";
+                    <script type="module">
+                        import { newField, changeComponents } from '/js/site.js';
+                        if (@counter !== 1){
+                            var button = document.querySelector('#@addQuestion');
+                            button.parent = document.querySelector('#@oldForm');
+                            var ev = {
+                                currentTarget: button 
+                            }
+                            newField(ev);
                         }
-                        newField(ev);
+                        var newQuestion = document.querySelector('#@newForm');
+                        var select = document.getElementsByClassName("form-select")[@(counter - 1)];
+                        select.value = "@question.Type.ToString()";
+                        ev = {
+                            currentTarget: select,
+                            id: @counter
+                        }
+                        changeComponents(ev);
                     </script>
                 }
             }
