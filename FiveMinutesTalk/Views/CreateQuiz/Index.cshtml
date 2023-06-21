@@ -24,21 +24,7 @@
                         <input id="Text1" class="text-question" type="text" placeholder="Ответ">
                     </div>
                 </section>
-                <section class="bottom-question">
-                    <label class="obligatory">
-                        <input type="checkbox">
-                        <div style="font-size: 14px">Обязательный вопрос</div>
-                    </label>
-                    <section class="right-part">
-                        <button class="right-answer" formmethod="dialog">
-                            <div style="font-weight: 600; color: var(--green);">++</div>
-                            <div style="font-weight: 400">Правильный ответ</div>
-                        </button>
-                        <button class="close-button round-button" formmethod="dialog">
-                            <img src="/images/bin.svg" alt="bin"/>
-                        </button>
-                    </section>
-                </section>
+                @await Html.PartialAsync("BottomQuestion")
                 <button id="AddQuestion1" formmethod="dialog" class="add-question"> <img src="/images/add-question.svg" alt="plus">Добавить вопрос</button>
             </div>
         </section>
