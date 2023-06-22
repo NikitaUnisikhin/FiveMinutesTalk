@@ -1,30 +1,29 @@
-﻿// Подключение кнопки добавления к функции
+﻿// Подключение кнопок добавления к функции
 let adds = document.querySelectorAll('.add-question');
 for (let add of adds)
     add.addEventListener('click', function (ev) {
     newField(ev)
 });
 
+// Подключение всех кнопок удаления
 let deletes = document.querySelectorAll('.close-button');
 for (let del of deletes)
     del.addEventListener('click', removeParent);
 
-
-// Подключение изначального select к функции
-document.querySelector('select').addEventListener('change', function (questionType) {
+// Подключение изначальныч selectов к функции
+let selects = document.querySelectorAll('select');
+for (let sel in selects)    
+    sel.addEventListener('change', function (questionType) {
     changeComponents(questionType)
 });
-
-// Подключение кнопки закрытия к функции
-document.querySelector(".close-button").addEventListener('click', removeParent);
 
 let baseForm = document.getElementById("Form-1");
 
 // Копируем изначальную форму
 const copied = baseForm.cloneNode(true);
 
-// Я предлагаю сделать глобальный id для вопросов, чтобы после удаления у нас не было совпадений id вопросов
-let questionId = document.querySelectorAll(".question-block").length;
+// Я предлагаю сделать глобальный id для вопросов, чтобы после удаления у нас не было совпадений id вопросов(СКОРО УДАЛЮ)
+let questionId = document.querySelectorAll(".question-block").length - 1;
 
 // Проверка на совпадение паролей
 function validatePassword() {
@@ -45,12 +44,11 @@ function newField(ev) {
     questionId++;
     let newCopied = copied.cloneNode(true);
     newCopied.id = "Form-" + questionId;
-
-    let arrayIndex = questionId - 1;
+    
     let formControl = newCopied.getElementsByClassName('name-question')[0];
-    formControl.name = `questions[${arrayIndex}].Text`;
+    formControl.name = `questions[${questionId}].Text`;
     let formSelect = newCopied.getElementsByClassName('form-select')[0];
-    formSelect.name = `questions[${arrayIndex}].Type`;
+    formSelect.name = `questions[${questionId}].Type`;
 
     let select = newCopied.querySelector("select");
     select.id = String(questionId);
@@ -210,7 +208,7 @@ function addNewRadio(e, id, col) {
     radio.setAttribute("name", "Radio-" + id)
     radio.setAttribute("id", "Radio-" + id + `-${col}`);
     radio.onclick = () => {
-        checkMark(radio.id, id - 1, col);
+        checkMark(radio.id, id, col);
     };
 
     let inputContainer = document.createElement("div");
