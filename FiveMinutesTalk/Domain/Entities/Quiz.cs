@@ -9,4 +9,6 @@ public class Quiz : EntityBase
     public string Title { get; set; } = "Опрос";
 
     public DateTime EndDate { get; set; }
+    
+    public Guid OwnerId { get; set; }
 }

@@ -86,7 +86,7 @@ namespace FiveMinutesTalk.Migrations
                             AnswerOptions = new[] { "Саша", "Никита", "Сша" },
                             CorrectAnswers = new[] { "Саша", "Никита" },
                             Text = "Назови имена создателей сайта?",
-                            Type = 1
+                            Type = 2
                         });
                 });
 
@@ -98,6 +98,9 @@ namespace FiveMinutesTalk.Migrations
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -112,6 +115,7 @@ namespace FiveMinutesTalk.Migrations
                         {
                             Id = new Guid("4043b854-c29f-4dca-900c-0387de52d250"),
                             EndDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OwnerId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Title = "Как хорошо ты знаешь создателей?"
                         });
                 });
@@ -311,13 +315,13 @@ namespace FiveMinutesTalk.Migrations
                         {
                             Id = "BCF8F1A1-A9BA-480F-A16C-88DBDCFAA9AC",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "48b26dee-3802-45e1-ba86-68178b6aba65",
+                            ConcurrencyStamp = "7ffbd348-097e-4a20-afe6-9cc431eb8abf",
                             Email = "my@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MY@EMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEER/z4zE1T9k3xLgWew2bHjTbE82gQzAk1q0M0nwPCm/CmmmtatlY6M6PxJcuBCc9A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKhhulBleKUCHkkaYCDS8Wn4Muj2D+kHob00TUc63XpDHtQBGPk2CFgDweEjQsBKgQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -327,13 +331,13 @@ namespace FiveMinutesTalk.Migrations
                         {
                             Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ce2621cd-1547-411d-bed5-afbcd3348609",
+                            ConcurrencyStamp = "efc8c9ff-2d03-49bf-9c92-5b91bf815e88",
                             Email = "my@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MY@EMAIL.COM",
                             NormalizedUserName = "NIKITA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMP6GWlFjQszj0VwegsIs7r1Vg4MuJjrQGfJTqS4sa9sV+Gj65/Y97FcnwtWUvSlSQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBU535YriH0R8js03CcZcdZGt9f6w24ccnulHpb/jyUEqSHCxY3C7Esf9Gs1rzQrwQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

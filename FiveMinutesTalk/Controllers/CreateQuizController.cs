@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using FiveMinutesTalk.Domain;
 using FiveMinutesTalk.Domain.Entities;
 using FiveMinutesTalk.Domain.Entities.QuestionsTypes;
@@ -32,7 +33,8 @@ public class CreateQuizController : Controller
         dataManager.Quizzes.SaveItem(new Quiz()
         {
             Id = quizId,
-            Title = quizTitle
+            Title = quizTitle,
+            OwnerId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty)
         });
 
         foreach (var question in questions)
