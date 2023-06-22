@@ -17,7 +17,7 @@ for (let sel in selects)
     changeComponents(questionType)
 });
 
-let baseForm = document.getElementById("Form-1");
+let baseForm = document.getElementById("Form-0");
 
 // Копируем изначальную форму
 const copied = baseForm.cloneNode(true);
@@ -55,11 +55,11 @@ function newField(ev) {
     select.addEventListener('change', function (questionType) {
         changeComponents(questionType)
     });
-    newCopied.querySelector("#Question-1").id = "Question-" + questionId;
-    newCopied.querySelector("#Answer-1").id = "Answer-" + questionId;
+    newCopied.querySelector("#Question-0").id = "Question-" + questionId;
+    newCopied.querySelector("#Answer-0").id = "Answer-" + questionId;
     newCopied.querySelector(".close-button").addEventListener('click', removeParent);
 
-    let addQuestion = newCopied.querySelector("#AddQuestion-1");
+    let addQuestion = newCopied.querySelector("#AddQuestion-0");
     addQuestion.id = "AddQuestion-" + questionId;
     addQuestion.addEventListener('click', function (ev) {
         newField(ev)

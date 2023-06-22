@@ -9,8 +9,8 @@
     <div class="page" id="create-poll-content">
         <section id="questions">
             <input type="text" name="quizTitle" class="name-poll" required value="Новый опрос" placeholder="Введите название опроса" onFocus="this.select()"/>
-            <div id="Form-1" class="question-block">
-                <section id="Question-1" class="question">
+            <div id="Form-0" class="question-block">
+                <section id="Question-0" class="question">
                     <section class="hat-question">
                         <section class="number-question">
                             <div class="number">1</div>
@@ -19,12 +19,12 @@
                         <input class="name-question" name="questions[0].Text" type="text" value="Новый вопрос" placeholder="Введите название вопроса" onFocus="this.select()">
                         @await Html.PartialAsync("QuestionTypeSelect")
                     </section>
-                    <div id="Answer-1">
-                        <input id="Text-1" class="text-question" type="text" placeholder="Ответ">
+                    <div id="Answer-0">
+                        <input id="Text-0" class="text-question" type="text" placeholder="Ответ">
                     </div>
                 </section>
                 @await Html.PartialAsync("BottomQuestion")
-                <button id="AddQuestion-1" formmethod="dialog" class="add-question"> <img src="/images/add-question.svg" alt="plus">Добавить вопрос</button>
+                <button id="AddQuestion-0" formmethod="dialog" class="add-question"> <img src="/images/add-question.svg" alt="plus">Добавить вопрос</button>
             </div>
         </section>
     </div>
