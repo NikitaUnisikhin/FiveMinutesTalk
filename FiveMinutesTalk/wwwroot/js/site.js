@@ -1,7 +1,10 @@
 ﻿// Подключение кнопки добавления к функции
-document.querySelector('#AddQuestion1').addEventListener('click', function (ev) {
+let adds = document.querySelectorAll('.add-question');
+for (let add of adds)
+    add.addEventListener('click', function (ev) {
     newField(ev)
 });
+
 
 // Подключение изначального select к функции
 document.querySelector('select').addEventListener('change', function (questionType) {
@@ -11,7 +14,7 @@ document.querySelector('select').addEventListener('change', function (questionTy
 // Подключение кнопки закрытия к функции
 document.querySelector(".close-button").addEventListener('click', removeParent);
 
-let baseForm = document.getElementById("Form1");
+let baseForm = document.getElementById("Form-1");
 let questions = [baseForm];
 
 // Копируем изначальную форму
@@ -43,7 +46,7 @@ function newField(ev) {
     let parent = addQue.parentNode;
     questionId++;
     let newCopied = copied.cloneNode(true);
-    newCopied.id = "Form" + questionId;
+    newCopied.id = "Form-" + questionId;
 
     let arrayIndex = questionId - 1;
     let formControl = newCopied.getElementsByClassName('name-question')[0];
@@ -56,12 +59,12 @@ function newField(ev) {
     select.addEventListener('change', function (questionType) {
         changeComponents(questionType)
     });
-    newCopied.querySelector("#Question1").id = "Question" + questionId;
-    newCopied.querySelector("#Answer1").id = "Answer" + questionId;
+    newCopied.querySelector("#Question-1").id = "Question-" + questionId;
+    newCopied.querySelector("#Answer-1").id = "Answer-" + questionId;
     newCopied.querySelector(".bottom-question").querySelector(".right-part").querySelector(".close-button").addEventListener('click', removeParent);
 
-    let addQuestion = newCopied.querySelector("#AddQuestion1");
-    addQuestion.id = "AddQuestion" + questionId;
+    let addQuestion = newCopied.querySelector("#AddQuestion-1");
+    addQuestion.id = "AddQuestion-" + questionId;
     addQuestion.addEventListener('click', function (ev) {
         newField(ev)
     });
@@ -99,22 +102,22 @@ function changeComponents(questionType) {
     let id = questType.id;
 
     // Здесь, зная id, мы получаем контейнер с вопросом и удаляем его
-    let cont = document.getElementById("Answer" + id);
+    let cont = document.getElementById("Answer-" + id);
     cont.remove();
 
     // Тут же создаём новый
     let newDiv = document.createElement("div");
-    newDiv.setAttribute("id", "Answer" + id);
+    newDiv.setAttribute("id", "Answer-" + id);
     if (selectedValue === "OpenQuestion") {
         let text = document.createElement("input");
         text.setAttribute("placeholder", "Ответ");
         text.setAttribute("class", "text-question");
-        text.setAttribute("id", "Text" + id);
+        text.setAttribute("id", "Text-" + id);
         newDiv.appendChild(text);
 
     } else if (selectedValue === "Code") {
         let textarea = document.createElement("textarea");
-        textarea.setAttribute("id", "Textarea" + id);
+        textarea.setAttribute("id", "Textarea-" + id);
         newDiv.appendChild(textarea);
         CodeMirror.fromTextArea(textarea, {
             lineNumbers: true,
@@ -129,7 +132,7 @@ function changeComponents(questionType) {
         let addCheckbox = document.createElement("input");
         addCheckbox.setAttribute("value", "Добавить вариант ответа");
         addCheckbox.setAttribute("type", "button");
-        addCheckbox.setAttribute("id", "AddСheckbox" + id);
+        addCheckbox.setAttribute("id", "AddСheckbox-" + id);
         let col = 0;
         addCheckbox.addEventListener("click", function (e) {
             addNewCheckbox(e, id, col++)
@@ -142,7 +145,7 @@ function changeComponents(questionType) {
         let addRadio = document.createElement("input");
         addRadio.setAttribute("value", "Добавить вариант ответа");
         addRadio.setAttribute("type", "button");
-        addRadio.setAttribute("id", "AddRadio" + id);
+        addRadio.setAttribute("id", "AddRadio-" + id);
         let col = 0;
         addRadio.addEventListener("click", function (e) {
             addNewRadio(e, id, col++)
@@ -151,7 +154,7 @@ function changeComponents(questionType) {
         newDiv.appendChild(addRadio);
         addRadio.click();
     }
-    let addQuest = document.getElementById("Question" + questType.id);
+    let addQuest = document.getElementById("Question-" + questType.id);
     addQuest.appendChild(newDiv);
 }
 
@@ -160,30 +163,30 @@ function addNewCheckbox(e, id, col) {
     let addCheck = e.currentTarget;
 
     let label = document.createElement("label");
-    label.setAttribute("id", "Label" + id + `-${col}`);
+    label.setAttribute("id", "Label-" + id + `-${col}`);
     label.setAttribute("class", "checkbox-label");
 
     let checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("name", "Checkbox" + id)
-    checkbox.setAttribute("id", "Checkbox" + id + `-${col}`);
+    checkbox.setAttribute("id", "Checkbox-" + id + `-${col}`);
     checkbox.onclick = () => {
         checkMark(checkbox.id, id - 1, col);
     };
 
     let inputContainer = document.createElement("div");
     inputContainer.setAttribute("class", "input-container");
-    inputContainer.setAttribute("id", "inputContainer" + id + `-${col}`);
+    inputContainer.setAttribute("id", "inputContainer-" + id + `-${col}`);
 
     let spanCheckbox = document.createElement("span");
     spanCheckbox.setAttribute("class", "checkbox-span");
-    spanCheckbox.setAttribute("id", "SpanCheckbox" + id + `-${col}`);
+    spanCheckbox.setAttribute("id", "SpanCheckbox-" + id + `-${col}`);
 
     let checkboxText = document.createElement("input");
     checkboxText.setAttribute("placeholder", "Ответ");
     checkboxText.setAttribute("value", "Текст");
     checkboxText.setAttribute("type", "text");
-    checkboxText.setAttribute("id", "CheckboxText" + id + `-${col}`);
+    checkboxText.setAttribute("id", "CheckboxText-" + id + `-${col}`);
     checkboxText.setAttribute("name", `questions[${id - 1}].AnswerOptions`);
     checkboxText.setAttribute("class", `checkbox-text`);
     checkboxText.setAttribute("onFocus", `this.select()`);
@@ -203,31 +206,31 @@ function addNewRadio(e, id, col) {
     let addRad = e.currentTarget;
 
     let label = document.createElement("label");
-    label.setAttribute("id", "Label" + id + `-${col}`);
+    label.setAttribute("id", "Label-" + id + `-${col}`);
     label.setAttribute("class", "radio-label");
 
     let radio = document.createElement("input");
     radio.setAttribute("type", "radio");
     radio.setAttribute("name", "Radio" + id)
-    radio.setAttribute("id", "Radio" + id + `-${col}`);
+    radio.setAttribute("id", "Radio-" + id + `-${col}`);
     radio.onclick = () => {
         checkMark(radio.id, id - 1, col);
     };
 
     let inputContainer = document.createElement("div");
     inputContainer.setAttribute("class", "input-container");
-    inputContainer.setAttribute("id", "inputContainerRadio" + id + `-${col}`);
+    inputContainer.setAttribute("id", "inputContainerRadio-" + id + `-${col}`);
 
     let spanRadio = document.createElement("span");
     spanRadio.setAttribute("class", "radio-span");
-    spanRadio.setAttribute("id", "SpanRadio" + id + `-${col}`);
+    spanRadio.setAttribute("id", "SpanRadio-" + id + `-${col}`);
 
     let radioText = document.createElement("input");
     radioText.setAttribute("value", "Текст");
     radioText.setAttribute("placeholder", "Ответ");
     radioText.setAttribute("type", "text");
     radioText.setAttribute("name", `questions[${id - 1}].AnswerOptions`);
-    radioText.setAttribute("id", "RadioText" + id + `-${col}`);
+    radioText.setAttribute("id", "RadioText-" + id + `-${col}`);
     radioText.setAttribute("class", `radio-text`);
     radioText.setAttribute("onFocus", `this.select()`);
 

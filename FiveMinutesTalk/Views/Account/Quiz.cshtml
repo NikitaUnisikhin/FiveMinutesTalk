@@ -8,27 +8,27 @@
             <input type="text" name="quizTitle" class="name-poll" required value="@ViewBag.Title" placeholder="Введите название опроса" onFocus="this.select()"/>
             @{
                 var counter = 0;
+                var id = 1;
                 foreach (var guid in Model)
                 {
                     counter++;
-                    var id = guid;
-                    Question question = ViewBag.DataManager.Questions.GetItemById(id);
-                    <div id="Form1" class="question-block">
-                        <section id="Question1" class="question">
+                    Question question = ViewBag.DataManager.Questions.GetItemById(guid);
+                    <div id="Form-@id" class="question-block">
+                        <section id="Question-@id" class="question">
                             <section class="hat-question">
                                 <section class="number-question">
                                     <div class="number">@counter</div>
                                     <div class="dot">.</div>
                                 </section>
-                                <input class="name-question" value="@question.Text" name="questions[0].Text" name="Question" type="text" placeholder="Введите название вопроса" onFocus="this.select()">
+                                <input class="name-question" value="@question.Text" name="questions[0].Text" type="text" placeholder="Введите название вопроса" onFocus="this.select()">
                                 @await Html.PartialAsync("QuestionTypeSelect", question.Type)
                             </section>
-                            <div id="Answer1">
+                            <div id="Answer-@id">
 
                                 @switch (question.Type)
                                 {
                                     case QuestionTypeEnum.OpenQuestion:
-                                        <input id="Text1" class="text-question" value="@question.CorrectAnswers.FirstOrDefault()" type="text" placeholder="Ответ">
+                                        <input id="Text-@id" class="text-question" value="@question.CorrectAnswers.FirstOrDefault()" type="text" placeholder="Ответ">
                                         break;
 
                                     case QuestionTypeEnum.MultipleAnswersQuestion:
@@ -36,18 +36,18 @@
                                         for (int j = 0; j < question.AnswerOptions.Length; j++)
                                         {
                                             var option = question.AnswerOptions[j];
-                                            <label id="Label1-0" class="checkbox-label">
+                                            <label id="Label0-@id" class="checkbox-label">
 
                                                 @if (question.CorrectAnswers.Contains(j.ToString()))
                                                 {
-                                                    @:<input type="checkbox" checked="checked" name="Checkbox1" id="Checkbox1-0">
+                                                    <input type="checkbox" checked="checked" name="Checkbox1" id="Checkbox-@id-@j">
                                                 }
                                                 else
                                                 {
-                                                    @:<input type="checkbox" name="Checkbox1" id="Checkbox1-0">
+                                                    <input type="checkbox" name="Checkbox1" id="Checkbox-@id-@j">
                                                 }
 
-                                                <input placeholder="Текст" value="@option" type="text" id="CheckboxText1-0" class="checkbox-text">
+                                                <input placeholder="Текст" value="@option" type="text" id="CheckboxText-@id-@j" class="checkbox-text">
                                             </label>
                                         }
                                         break;
@@ -57,18 +57,18 @@
                                         for (int j = 0; j < question.AnswerOptions.Length; j++)
                                         {
                                             var option = question.AnswerOptions[j];
-                                            <label id="Label1-0" class="radio-label">
+                                            <label id="Label-@id-@j" class="radio-label">
 
                                                 @if (question.CorrectAnswers.Contains(j.ToString()))
                                                 {
-                                                    <input type="radio" checked="checked" name="Checkbox1" id="Checkbox1-0">
+                                                    <input type="radio" checked="checked" name="Checkbox1" id="Radio-@id-@j">
                                                 }
                                                 else
                                                 {
-                                                    <input type="radio" name="Checkbox1" id="Checkbox1-0">
+                                                    <input type="radio" name="Checkbox1" id="Radio-@id-@j">
                                                 }
 
-                                                <input placeholder="Текст" value="@option" type="text" id="CheckboxText1-0" class="radio-text">
+                                                <input placeholder="Текст" value="@option" type="text" id="RadioText-@id-@j" class="radio-text">
                                             </label>
                                         }
                                         break;
@@ -78,8 +78,9 @@
                             </div>
                         </section>
                         @await Html.PartialAsync("BottomQuestion")
-                        <button id="AddQuestion1" formmethod="dialog" class="add-question"> <img src="/images/add-question.svg" alt="plus">Добавить вопрос</button>
+                        <button id="AddQuestion-@id" formmethod="dialog" class="add-question"> <img src="/images/add-question.svg" alt="plus">Добавить вопрос</button>
                     </div>
+                    id += 1;
                 }
             }
         </section>
@@ -90,3 +91,7 @@
 </form>
 @await Html.PartialAsync("Tabs")
 </body>
+
+<script>
+import {newField} from 'site.js'
+</script>
