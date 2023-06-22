@@ -16,11 +16,11 @@
                             <div class="number">1</div>
                             <div class="dot">.</div>
                         </section>
-                        <input class="name-question" name="questions[0].Text" name="Question" type="text" value="Новый вопрос" placeholder="Введите название вопроса" onFocus="this.select()">
+                        <input class="name-question" name="questions[0].Text" type="text" value="Новый вопрос" placeholder="Введите название вопроса" onFocus="this.select()">
                         @await Html.PartialAsync("QuestionTypeSelect")
                     </section>
                     <div id="Answer1">
-                        <input id="Text1" class="text-question" type="text" placeholder="Ответ">
+                        <input id="Text1" class="text-question" name="questions[0].CorrectAnswers" type="text" placeholder="Ответ">
                     </div>
                 </section>
                 @await Html.PartialAsync("BottomQuestion")

@@ -115,14 +115,14 @@
                         {
                             <label>
                                 @{
-                                    <textarea id="code_@questionNumber"></textarea>
+                                    <textarea id="code_@questionNumber" name="answers[@questionNumber].Answers"></textarea>
                                     <script>
-                                 CodeMirror.fromTextArea(document.getElementById("code_@questionNumber"), {
-                                     lineNumbers: true,
-                                     lineWrapping: true,
-                                     matchBrackets: true,
-                                     indentUnit: 5,
-                                     lint: true
+                                    CodeMirror.fromTextArea(document.getElementById("code_@questionNumber"), {
+                                        lineNumbers: true,
+                                        lineWrapping: true,
+                                        matchBrackets: true,
+                                        indentUnit: 5,
+                                        lint: true
                                  });
                             </script>
 

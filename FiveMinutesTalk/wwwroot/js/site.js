@@ -108,6 +108,7 @@ function changeComponents(questionType) {
         let text = document.createElement("input");
         text.setAttribute("placeholder", "Ответ");
         text.setAttribute("class", "text-question");
+        text.setAttribute("name", `questions[${id - 1}].CorrectAnswers`)
         text.setAttribute("id", "Text" + id);
         newDiv.appendChild(text);
 
@@ -120,9 +121,9 @@ function changeComponents(questionType) {
             lineWrapping: true,
             matchBrackets: true,
             indentUnit: 5,
-            lint: true
+            lint: true,
         });
-
+        
     } else if (selectedValue === "MultipleAnswersQuestion") {
         // здесь создаем кнопку, которая добавляет новый label с checkbox кнопкой и вводом
         let addCheckbox = document.createElement("input");
