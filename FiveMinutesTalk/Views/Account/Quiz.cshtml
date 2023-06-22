@@ -11,12 +11,13 @@
                 var id = 0;
                 foreach (var guid in Model)
                 {
+                    var num = id + 1;
                     Question question = ViewBag.DataManager.Questions.GetItemById(guid);
                     <div id="Form-@id" class="question-block">
                         <section id="Question-@id" class="question">
                             <section class="hat-question">
                                 <section class="number-question">
-                                    <div class="number">@id + 1</div>
+                                    <div class="number">@num</div>
                                     <div class="dot">.</div>
                                 </section>
                                 <input class="name-question" value="@question.Text" name="questions[0].Text" type="text" placeholder="Введите название вопроса" onFocus="this.select()">
@@ -57,6 +58,13 @@
                                                 <input placeholder="Текст" value="@option" type="text" id="CheckboxText-@id-@j" class="checkbox-text">
                                             </label>
                                         }
+                                        <input value="Добавить вариант ответа" type="button" id="AddСheckbox-@id" class="add-checkbox">
+                                        <script>        
+                                            let col = @question.AnswerOptions.Length;
+                                            document.getElementById("AddСheckbox-@id").addEventListener("click", function (e) {
+                                                            addNewCheckbox(e, @id, col++)
+                                                        });
+                                        </script>
                                         break;
                                     }
                                     case QuestionTypeEnum.Radio:
@@ -78,6 +86,13 @@
                                                 <input placeholder="Текст" value="@option" type="text" id="RadioText-@id-@j" class="radio-text">
                                             </label>
                                         }
+                                        <input value="Добавить вариант ответа" type="button" id="AddRadio-@id" class="add-radio">
+                                        <script>        
+                                            let col = @question.AnswerOptions.Length;
+                                            document.getElementById("AddRadio-@id").addEventListener("click", function (e) {
+                                                            addNewRadio(e, @id, col++)
+                                                        });
+                                        </script>
                                         break;
                                     }
                                 }
