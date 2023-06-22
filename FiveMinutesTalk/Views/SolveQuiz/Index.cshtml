@@ -11,7 +11,7 @@
             checkbox.value = optionNumber;
         }
         else {
-            checkbox.value = -1;
+            checkbox.removeAttribute('value');
         }
     }
     
@@ -81,7 +81,6 @@
                                             <input type="checkbox"
                                                    onchange="checkCheckbox(this, @optionNumb)"
                                                    name="answers[@questionNumber].Answers"
-                                                   value=-1
                                                    class="checkbox-text">
                                             <span>@option</span>
                                         </label>
@@ -103,7 +102,6 @@
                                             <input type="radio"
                                                    onchange="checkCheckbox(this, @optionNumb)"
                                                    name="answers[@questionNumber].Answers"
-                                                   value=-1
                                                    class="radio-text">
                                             <span>@option</span>
                                         </label>
