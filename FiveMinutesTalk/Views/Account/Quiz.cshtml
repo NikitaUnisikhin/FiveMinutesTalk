@@ -48,11 +48,11 @@
 
                                                 @if (question.CorrectAnswers.Contains(j.ToString()))
                                                 {
-                                                    <input type="checkbox" checked="checked" name="Checkbox1" id="Checkbox-@id-@j">
+                                                    <input type="checkbox" checked="checked" name="Checkbox-@id" id="Checkbox-@id-@j">
                                                 }
                                                 else
                                                 {
-                                                    <input type="checkbox" name="Checkbox1" id="Checkbox-@id-@j">
+                                                    <input type="checkbox" name="Checkbox-@id" id="Checkbox-@id-@j">
                                                 }
 
                                                 <input placeholder="Текст" value="@option" type="text" id="CheckboxText-@id-@j" class="checkbox-text">
@@ -69,11 +69,11 @@
 
                                                 @if (question.CorrectAnswers.Contains(j.ToString()))
                                                 {
-                                                    <input type="radio" checked="checked" name="Checkbox1" id="Radio-@id-@j">
+                                                    <input type="radio" checked="checked" name="Radio-@id" id="Radio-@id-@j">
                                                 }
                                                 else
                                                 {
-                                                    <input type="radio" name="Checkbox1" id="Radio-@id-@j">
+                                                    <input type="radio" name="Radio-@id" id="Radio-@id-@j">
                                                 }
 
                                                 <input placeholder="Текст" value="@option" type="text" id="RadioText-@id-@j" class="radio-text">
