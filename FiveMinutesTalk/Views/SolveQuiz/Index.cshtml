@@ -23,6 +23,7 @@
         let now = new Date().getTime();
         let distance = endTime - now;
         if (distance < 0) {
+            document.getElementById('send-answers').click();
             clearInterval(x);
         }
     
