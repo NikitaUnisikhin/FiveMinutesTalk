@@ -321,7 +321,7 @@
     flex-direction: column;
 }
 
-#popup .content {
+.popup-content {
     display: flex;
     flex-direction: row;
     padding: 0;

@@ -48,4 +48,11 @@
       <Folder Include="Migrations\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Migrations\20230612083220__initial.Designer.cs" />
+      <Compile Remove="Migrations\20230612083220__initial.cs" />
+      <Compile Remove="Migrations\20230613091215__test.cs" />
+      <Compile Remove="Migrations\20230613091215__test.Designer.cs" />
+    </ItemGroup>
+
 </Project>

@@ -1,4 +1,3 @@
-@using FiveMinutesTalk.Domain
 @model FiveMinutesTalk.Domain.Entities.Quiz[]
 
 @{
@@ -6,11 +5,6 @@
 }
 
 <body>
-<div style="position: relative; left: 40px; top: 50px;">
-    <h2>Опросы</h2>
-    <hr class="solid" style="width: 90%; margin-left: 0">
-</div>
-
 <div id="home-hat">
     <form>
         <div id="search">
@@ -24,19 +18,50 @@
     </button>
 </div>
 
-<div style="position: relative; text-align: center; top: 100px;">
-    <h2>Ваши опросы</h2>
-    @foreach (var quiz in Model)
-    {
-        <form asp-controller="Account" asp-action="Quizzes" asp-route-token="@quiz.Id">
-            <button>@quiz.Title</button>
-        </form>
-    }
-    
-    <h4>Здесь пока ничего нет</h4>
+<section id="home-content">
+    <div style="position: relative; left: 40px; top: 50px;">
+        <h2>Опросы</h2>
+        <hr class="solid" style="width: 90%; margin-left: 0">
+    </div>
+    <section id="polls">
+        @foreach (var quiz in Model)
+        {
+            <form asp-controller="Account" asp-action="Quizzes" asp-route-token="@quiz.Id">
+                <section class="poll">
+                    <section class="poll-block">
+                        <div class="block">
+                            <button class="more-button">
+                                <img src="images/more-horizontal.svg" alt="more-horiz"/>
+                            </button>
+                            <section class="content">
+                                <section class="content-head">
+                                    <div class="content-text">
+                                        <div class="create">
+                                            <p>Создано:</p>
+                                            <p>00.00.00</p>
+                                        </div>
+                                        <p>@quiz.Title</p>
+                                    </div>
+                                    <p>Статус: завершён</p>
+                                </section>
+                                <button class="button-return-poll">
+                                    <div>Посмотреть результаты</div>
+                                </button>
+                            </section>
+                        </div>
+                    </section>
+                </section>
+
+            </form>
+        }
+    </section>
+
+
+
+    <!--<h4>Здесь пока ничего нет</h4>
     <p class="light-text">Если хотите создать опрос, нажмите на кнопку справа внизу</p>
-    <img src="/images/empty-polls.svg" alt="no polls here" style="padding-top: 20px">
-</div>
+    <img src="/images/empty-polls.svg" alt="no polls here" style="padding-top: 20px">-->
+</section>
 
 <form action="CreateQuiz">
     <button class="submit-button" id="create-poll-button"> <img src="~/images/plus-create-poll.svg" alt="plus">Создать</button>

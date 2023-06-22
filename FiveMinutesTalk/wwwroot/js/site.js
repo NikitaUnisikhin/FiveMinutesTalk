@@ -5,7 +5,6 @@ for (let add of adds)
     newField(ev)
 });
 
-
 // Подключение изначального select к функции
 document.querySelector('select').addEventListener('change', function (questionType) {
     changeComponents(questionType)
@@ -27,6 +26,11 @@ let questionId = 1;
 function validatePassword() {
     let password = document.getElementById("reg-password");
     let confirm_password = document.getElementById("reg-password-confirm");
+    
+    if (password.value.length < 5)
+        password.setCustomValidity("Minimum length 5");
+    else
+        password.setCustomValidity("");
 
     if (password.value !== confirm_password.value) {
         confirm_password.setCustomValidity("Passwords Don't Match");
@@ -34,7 +38,6 @@ function validatePassword() {
         confirm_password.setCustomValidity('');
     }
 }
-
 
 const getNumber = (element) => {
     return Number(element.querySelector(".hat-question").querySelector(".number-question").querySelector(".number").textContent);
