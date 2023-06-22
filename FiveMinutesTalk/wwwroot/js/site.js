@@ -164,7 +164,7 @@ function addNewCheckbox(e, id, col) {
 
     let checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
-    checkbox.setAttribute("name", "Checkbox" + id)
+    checkbox.setAttribute("name", "Checkbox-" + id)
     checkbox.setAttribute("id", "Checkbox-" + id + `-${col}`);
     checkbox.onclick = () => {
         checkMark(checkbox.id, id - 1, col);
@@ -207,7 +207,7 @@ function addNewRadio(e, id, col) {
 
     let radio = document.createElement("input");
     radio.setAttribute("type", "radio");
-    radio.setAttribute("name", "Radio" + id)
+    radio.setAttribute("name", "Radio-" + id)
     radio.setAttribute("id", "Radio-" + id + `-${col}`);
     radio.onclick = () => {
         checkMark(radio.id, id - 1, col);
