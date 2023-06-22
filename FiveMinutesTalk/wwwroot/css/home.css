@@ -88,7 +88,18 @@
     background-color: transparent;
 }
 
-#home-content{
+#empty-polls {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 40%;
+    right: 50%;
+    transform: translate(50%, 0);
+}
+
+#home-content {
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -168,11 +179,13 @@
     display: inline-flex;
     width: 100%;
 }
+
 .button-return-poll > div {
     color: white;
     font-size: 14px;
     word-wrap: break-word
 }
+
 .content-head > p {
     height: 14px;
     color: black;

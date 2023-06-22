@@ -12,7 +12,7 @@
             <input type="search" placeholder="Поиск"/>
         </div>
     </form>
-    
+
     <button type="submit" id="profile-button">
         <img src="/images/profile.svg" alt="profile-icon">
     </button>
@@ -55,15 +55,21 @@
             </form>
         }
     </section>
-
-
-
-    <!--<h4>Здесь пока ничего нет</h4>
-    <p class="light-text">Если хотите создать опрос, нажмите на кнопку справа внизу</p>
-    <img src="/images/empty-polls.svg" alt="no polls here" style="padding-top: 20px">-->
 </section>
+
+<div id="empty-polls">
+    <h4>Здесь пока ничего нет</h4>
+    <p class="light-text">Если хотите создать опрос, нажмите на кнопку справа внизу</p>
+    <img src="/images/empty-polls.svg" alt="no polls here" style="padding-top: 20px">
+</div>
 
 <form action="CreateQuiz">
     <button class="submit-button" id="create-poll-button"> <img src="~/images/plus-create-poll.svg" alt="plus">Создать</button>
 </form>
 </body>
+
+<script>
+let polls = document.querySelector("#polls");
+    if (polls.childElementCount > 0)
+        document.querySelector("#empty-polls").setAttribute("style", "display: none");
+</script>
