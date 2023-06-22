@@ -20,7 +20,7 @@
                                     <div class="number">@num</div>
                                     <div class="dot">.</div>
                                 </section>
-                                <input class="name-question" value="@question.Text" name="questions[0].Text" type="text" placeholder="Введите название вопроса" onFocus="this.select()">
+                                <input class="name-question" value="@question.Text" name="questions[@id].Text" type="text" placeholder="Введите название вопроса" onFocus="this.select()">
                                 @await Html.PartialAsync("QuestionTypeSelect", question.Type)
                                 <script type="module">
                                     let select = document.getElementById("Question-@id").querySelector(".form-select");
