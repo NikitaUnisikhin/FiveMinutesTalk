@@ -7,7 +7,6 @@
         <section id="questions">
             <input type="text" name="quizTitle" class="name-poll" required value="@ViewBag.Title" placeholder="Введите название опроса" onFocus="this.select()"/>
             @{
-
                 var id = 0;
                 foreach (var guid in Model)
                 {
@@ -54,8 +53,10 @@
                                                 {
                                                     <input type="checkbox" name="Checkbox-@id" id="Checkbox-@id-@j">
                                                 }
-
-                                                <input placeholder="Текст" value="@option" type="text" id="CheckboxText-@id-@j" class="checkbox-text">
+                                                <div class="input-container" id="inputContainer-@id-@j">
+                                                    <input placeholder="Ответ" value="@option" type="text" id="CheckboxText-@id-@j" name="questions[@id].AnswerOptions" class="checkbox-text" onfocus="this.select()">
+                                                    <span class="checkbox-span" id="SpanCheckbox-@id-@j"></span>
+                                                </div>
                                             </label>
                                         }
                                         <input value="Добавить вариант ответа" type="button" id="AddСheckbox-@id" class="add-checkbox">
@@ -82,8 +83,10 @@
                                                 {
                                                     <input type="radio" name="Radio-@id" id="Radio-@id-@j">
                                                 }
-
-                                                <input placeholder="Текст" value="@option" type="text" id="RadioText-@id-@j" class="radio-text">
+                                                <div class="input-container" id="inputContainerRadio-@id-@j">
+                                                    <input value="@option" placeholder="Ответ" type="text" name="questions[@id].AnswerOptions" id="RadioText-@id-@j" class="radio-text" onfocus="this.select()">
+                                                    <span class="radio-span" id="SpanRadio-@id-@j"></span>
+                                                </div>
                                             </label>
                                         }
                                         <input value="Добавить вариант ответа" type="button" id="AddRadio-@id" class="add-radio">
