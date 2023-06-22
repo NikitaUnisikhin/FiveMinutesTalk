@@ -25,7 +25,7 @@ public class CreateQuizController : Controller
     }
 
     [HttpPost]
-    public IActionResult SaveChanges(QuestionModel[] questions, string quizTitle)
+    public IActionResult SaveChanges(QuestionModel[] questions, string quizTitle, DateTime start, DateTime end)
     {
         var quizId = Guid.NewGuid();
         ViewBag.QuizId = quizId;
@@ -34,7 +34,10 @@ public class CreateQuizController : Controller
         {
             Id = quizId,
             Title = quizTitle,
-            OwnerId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty)
+            OwnerId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty),
+            CreationDate = DateTime.Now,
+            Start = start,
+            End = end
         });
 
         foreach (var question in questions)

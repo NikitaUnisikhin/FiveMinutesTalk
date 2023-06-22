@@ -5,26 +5,27 @@
     ViewData["Title"] = "Прохождение опроса";
 }
 
-
 <script>
     function checkCheckbox(checkbox, optionNumber){
         if (checkbox.checked) {
             checkbox.value = optionNumber;
         }
         else {
-            checkbox.value = -1;
+            checkbox.removeAttribute('value');
         }
     }
     
     //Таймер
-    let endTime = new Date("Jun 20, 2023 13:00:00").getTime();
+    let endTime = new Date(@ViewBag.End.Year, @ViewBag.End.Month - 1, @ViewBag.End.Day,
+        @ViewBag.End.Hour, @ViewBag.End.Minute, @ViewBag.End.Second).getTime();
     
     let x = setInterval(function() {
         let now = new Date().getTime();
         let distance = endTime - now;
         if (distance < 0) {
-                    clearInterval(x);
-                }
+            document.getElementById('send-answers').click();
+            clearInterval(x);
+        }
     
         let days = Math.floor(distance / (1000 * 60 * 60 * 24));
         let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + days * 24;
@@ -80,7 +81,6 @@
                                             <input type="checkbox"
                                                    onchange="checkCheckbox(this, @optionNumb)"
                                                    name="answers[@questionNumber].Answers"
-                                                   value=-1
                                                    class="checkbox-text">
                                             <span>@option</span>
                                         </label>
@@ -102,7 +102,6 @@
                                             <input type="radio"
                                                    onchange="checkCheckbox(this, @optionNumb)"
                                                    name="answers[@questionNumber].Answers"
-                                                   value=-1
                                                    class="radio-text">
                                             <span>@option</span>
                                         </label>
