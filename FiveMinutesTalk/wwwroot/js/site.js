@@ -1,4 +1,4 @@
-﻿// Подключение кнопок добавления к функции
+﻿// Подключение кнопок добавления к функции.
 let adds = document.querySelectorAll('.add-question');
 for (let add of adds)
     add.addEventListener('click', function (ev) {
