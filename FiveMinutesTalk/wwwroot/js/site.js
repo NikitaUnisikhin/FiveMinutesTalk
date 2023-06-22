@@ -5,6 +5,10 @@ for (let add of adds)
     newField(ev)
 });
 
+let deletes = document.querySelectorAll('.close-button');
+for (let del of deletes)
+    del.addEventListener('click', removeParent);
+
 
 // Подключение изначального select к функции
 document.querySelector('select').addEventListener('change', function (questionType) {
@@ -15,13 +19,12 @@ document.querySelector('select').addEventListener('change', function (questionTy
 document.querySelector(".close-button").addEventListener('click', removeParent);
 
 let baseForm = document.getElementById("Form-1");
-let questions = [baseForm];
 
 // Копируем изначальную форму
 const copied = baseForm.cloneNode(true);
 
 // Я предлагаю сделать глобальный id для вопросов, чтобы после удаления у нас не было совпадений id вопросов
-let questionId = 1;
+let questionId = document.querySelectorAll(".question-block").length;
 
 // Проверка на совпадение паролей
 function validatePassword() {
@@ -33,11 +36,6 @@ function validatePassword() {
     } else {
         confirm_password.setCustomValidity('');
     }
-}
-
-
-const getNumber = (element) => {
-    return Number(element.querySelector(".hat-question").querySelector(".number-question").querySelector(".number").textContent);
 }
 
 // У нас уже есть заранее склонированная форма, поэтому просто изменяем id в зависимости от questionId
@@ -61,37 +59,35 @@ function newField(ev) {
     });
     newCopied.querySelector("#Question-1").id = "Question-" + questionId;
     newCopied.querySelector("#Answer-1").id = "Answer-" + questionId;
-    newCopied.querySelector(".bottom-question").querySelector(".right-part").querySelector(".close-button").addEventListener('click', removeParent);
+    newCopied.querySelector(".close-button").addEventListener('click', removeParent);
 
     let addQuestion = newCopied.querySelector("#AddQuestion-1");
     addQuestion.id = "AddQuestion-" + questionId;
     addQuestion.addEventListener('click', function (ev) {
         newField(ev)
     });
-
-    questions.splice(getNumber(addQue.parentElement), 0, newCopied);
-    changeNumberQuestions();
     setupSelector(newCopied.querySelector('.custom-select'));
     parent.after(newCopied);
+    changeNumberQuestions();
 }
 
 // Обновляет номера вопросов
 function changeNumberQuestions() {
-    for (let i = 0; i < questions.length; i++) {
-        questions[i].querySelector(".hat-question").querySelector(".number-question").querySelector(".number").textContent = `${i + 1}`;
+    let questionsNumbers = document.querySelectorAll(".number");
+    for (let i = 0; i < questionsNumbers.length; i++) {
+        questionsNumbers[i].textContent = `${i + 1}`;
     }
 }
 
-// Удаляет родителя...
+// Удаляет вопрос, ребенком которого является нажатая кнопка удаления
 function removeParent() {
     let revDiv = this.parentElement.parentElement.parentElement;
-    let numberQuestion = getNumber(revDiv);
+    let numberQuestion = document.querySelectorAll(".number").length;
     if (numberQuestion === 1)
         return;
-
-    questions.splice(numberQuestion - 1, 1);
-    changeNumberQuestions();
+    
     revDiv.remove();
+    changeNumberQuestions();
 }
 
 // Функция в зависимости от выбранного типа будет менять варианты ответа под вопросом

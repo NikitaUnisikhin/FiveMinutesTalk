@@ -22,6 +22,14 @@
                                 </section>
                                 <input class="name-question" value="@question.Text" name="questions[0].Text" type="text" placeholder="Введите название вопроса" onFocus="this.select()">
                                 @await Html.PartialAsync("QuestionTypeSelect", question.Type)
+                                <script type="module">
+                                    let select = document.getElementById("Question-@id").querySelector(".form-select");
+                                    select.id = @id;
+                                    select.name = "questions[" + (@id - 1) + "].Type";
+                                    select.addEventListener('change', function (questionType) {
+                                              changeComponents(questionType)
+                                          });
+                                </script>
                             </section>
                             <div id="Answer-@id">
 
@@ -91,7 +99,3 @@
 </form>
 @await Html.PartialAsync("Tabs")
 </body>
-
-<script>
-import {newField} from 'site.js'
-</script>
