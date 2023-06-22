@@ -10,12 +10,8 @@ let deletes = document.querySelectorAll('.close-button');
 for (let del of deletes)
     del.addEventListener('click', removeParent);
 
-// Подключение изначальныч selectов к функции
-let selects = document.querySelectorAll('select');
-for (let sel in selects)    
-    sel.addEventListener('change', function (questionType) {
-    changeComponents(questionType)
-});
+// Подключение select к функции
+document.querySelector('select').addEventListener('change', function (questionType) {changeComponents(questionType)});
 
 let baseForm = document.getElementById("Form-0");
 
@@ -165,7 +161,7 @@ function addNewCheckbox(e, id, col) {
     checkbox.setAttribute("name", "Checkbox-" + id)
     checkbox.setAttribute("id", "Checkbox-" + id + `-${col}`);
     checkbox.onclick = () => {
-        checkMark(checkbox.id, id - 1, col);
+        checkMark(checkbox.id, id, col);
     };
 
     let inputContainer = document.createElement("div");
@@ -181,7 +177,7 @@ function addNewCheckbox(e, id, col) {
     checkboxText.setAttribute("value", "Текст");
     checkboxText.setAttribute("type", "text");
     checkboxText.setAttribute("id", "CheckboxText-" + id + `-${col}`);
-    checkboxText.setAttribute("name", `questions[${id - 1}].AnswerOptions`);
+    checkboxText.setAttribute("name", `questions[${id}].AnswerOptions`);
     checkboxText.setAttribute("class", `checkbox-text`);
     checkboxText.setAttribute("onFocus", `this.select()`);
 
@@ -223,7 +219,7 @@ function addNewRadio(e, id, col) {
     radioText.setAttribute("value", "Текст");
     radioText.setAttribute("placeholder", "Ответ");
     radioText.setAttribute("type", "text");
-    radioText.setAttribute("name", `questions[${id - 1}].AnswerOptions`);
+    radioText.setAttribute("name", `questions[${id}].AnswerOptions`);
     radioText.setAttribute("id", "RadioText-" + id + `-${col}`);
     radioText.setAttribute("class", `radio-text`);
     radioText.setAttribute("onFocus", `this.select()`);

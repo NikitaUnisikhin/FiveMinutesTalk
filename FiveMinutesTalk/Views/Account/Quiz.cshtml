@@ -7,17 +7,16 @@
         <section id="questions">
             <input type="text" name="quizTitle" class="name-poll" required value="@ViewBag.Title" placeholder="Введите название опроса" onFocus="this.select()"/>
             @{
-                var counter = 0;
+
                 var id = 0;
                 foreach (var guid in Model)
                 {
-                    counter++;
                     Question question = ViewBag.DataManager.Questions.GetItemById(guid);
                     <div id="Form-@id" class="question-block">
                         <section id="Question-@id" class="question">
                             <section class="hat-question">
                                 <section class="number-question">
-                                    <div class="number">@counter</div>
+                                    <div class="number">@id + 1</div>
                                     <div class="dot">.</div>
                                 </section>
                                 <input class="name-question" value="@question.Text" name="questions[0].Text" type="text" placeholder="Введите название вопроса" onFocus="this.select()">
