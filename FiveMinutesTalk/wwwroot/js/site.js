@@ -65,11 +65,10 @@ function newField(ev) {
     addQuestion.addEventListener('click', function (ev) {
         newField(ev)
     });
-
-    questions.splice(getNumber(addQue.parentElement), 0, newCopied);
-    changeNumberQuestions();
+    
     setupSelector(newCopied.querySelector('.custom-select'));
     parent.after(newCopied);
+    changeNumberQuestions();
 }
 
 // Обновляет номера вопросов
@@ -110,20 +109,27 @@ function changeComponents(questionType) {
         text.setAttribute("placeholder", "Ответ");
         text.setAttribute("class", "text-question");
         text.setAttribute("id", "Text-" + id);
+        text.setAttribute("name", `questions[${id - 1}].CorrectAnswers`)
         newDiv.appendChild(text);
 
     } else if (selectedValue === "Code") {
         let textarea = document.createElement("textarea");
         textarea.setAttribute("id", "Textarea-" + id);
+        textarea.setAttribute("name", `questions[${id - 1}].CorrectAnswers`);
         newDiv.appendChild(textarea);
-        CodeMirror.fromTextArea(textarea, {
+        
+        var editor = CodeMirror.fromTextArea(textarea, {
             lineNumbers: true,
             lineWrapping: true,
             matchBrackets: true,
             indentUnit: 5,
-            lint: true
+            lint: true,
         });
-
+        
+        editor.on('change', function () {
+            textarea.value = editor.getValue();
+        });
+        
     } else if (selectedValue === "MultipleAnswersQuestion") {
         // здесь создаем кнопку, которая добавляет новый label с checkbox кнопкой и вводом
         let addCheckbox = document.createElement("input");

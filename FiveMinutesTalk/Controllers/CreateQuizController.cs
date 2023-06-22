@@ -50,11 +50,8 @@ public class CreateQuizController : Controller
                 Type = question.Type
             };
 
-            if (newQuestion.Type is QuestionTypeEnum.MultipleAnswersQuestion or QuestionTypeEnum.Radio)
-            {
-                newQuestion.AnswerOptions = question.AnswerOptions;
-                newQuestion.CorrectAnswers = question.CorrectAnswers;
-            }
+            newQuestion.AnswerOptions = question.AnswerOptions;
+            newQuestion.CorrectAnswers = question.CorrectAnswers;
             
             dataManager.Questions.SaveItem(newQuestion);
             

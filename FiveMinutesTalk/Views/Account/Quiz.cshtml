@@ -11,6 +11,7 @@
                 foreach (var guid in Model)
                 {
                     var num = id + 1;
+                    var textAreaId = $"Textarea{id}";
                     Question question = ViewBag.DataManager.Questions.GetItemById(guid);
                     <div id="Form-@id" class="question-block">
                         <section id="Question-@id" class="question">
@@ -98,6 +99,31 @@
                                         </script>
                                         break;
                                     }
+                                    case QuestionTypeEnum.Code:
+                                    {
+                                        <label>
+                                            @{
+                                                <textarea id="@textAreaId" style="display: none"></textarea>
+                                                <script>
+                                                    var textarea = document.getElementById("@textAreaId");
+                                                    var editor = CodeMirror.fromTextArea(textarea, {
+                                                        lineNumbers: true,
+                                                        lineWrapping: true,
+                                                        matchBrackets: true,
+                                                        indentUnit: 5,
+                                                        lint: true,
+                                                    });
+                                                    
+                                                    editor.on('change', function () {
+                                                        textarea.value = editor.getValue();
+                                                    });
+                                                    
+                                                    editor.getDoc().setValue("@question.CorrectAnswers.FirstOrDefault()");
+                                            </script>
+                                            }
+                                        </label>
+                                        break;
+                                    }
                                 }
 
                             </div>
@@ -111,8 +137,9 @@
         </section>
     </div>
 
+
     @await Html.PartialAsync("Settings")
     @await Html.PartialAsync("Header")
-</form>
+</form >
 @await Html.PartialAsync("Tabs")
-</body>
+</body >
