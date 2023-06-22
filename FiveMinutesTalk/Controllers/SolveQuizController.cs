@@ -23,6 +23,11 @@ public class SolveQuizController : Controller
     {
         ViewBag.DataMangager = dataManager;
         var quiz = dataManager.Quizzes.GetItemById(token);
+
+        if (quiz.Start > DateTime.Now || DateTime.Now > quiz.End)
+            return Empty;
+        
+        ViewBag.End = quiz.End;
         ViewBag.QuizTitle = quiz.Title;
         ViewBag.QuidId = quiz.Id;
         var questionsIds = ((EFQuizQuestionsRepository)dataManager.QuizQuestions)

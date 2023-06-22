@@ -32,7 +32,6 @@ function validatePassword() {
     }
 }
 
-
 const getNumber = (element) => {
     return Number(element.querySelector(".hat-question").querySelector(".number-question").querySelector(".number").textContent);
 }
