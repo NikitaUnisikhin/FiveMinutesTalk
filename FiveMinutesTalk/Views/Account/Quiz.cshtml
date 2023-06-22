@@ -7,21 +7,28 @@
         <section id="questions">
             <input type="text" name="quizTitle" class="name-poll" required value="@ViewBag.Title" placeholder="Введите название опроса" onFocus="this.select()"/>
             @{
-                var counter = 0;
-                var id = 1;
+                var id = 0;
                 foreach (var guid in Model)
                 {
-                    counter++;
+                    var num = id + 1;
                     Question question = ViewBag.DataManager.Questions.GetItemById(guid);
                     <div id="Form-@id" class="question-block">
                         <section id="Question-@id" class="question">
                             <section class="hat-question">
                                 <section class="number-question">
-                                    <div class="number">@counter</div>
+                                    <div class="number">@num</div>
                                     <div class="dot">.</div>
                                 </section>
                                 <input class="name-question" value="@question.Text" name="questions[0].Text" type="text" placeholder="Введите название вопроса" onFocus="this.select()">
                                 @await Html.PartialAsync("QuestionTypeSelect", question.Type)
+                                <script type="module">
+                                    let select = document.getElementById("Question-@id").querySelector(".form-select");
+                                    select.id = @id;
+                                    select.name = "questions[@id].Type";
+                                    select.addEventListener('change', function (questionType) {
+                                              changeComponents(questionType)
+                                          });
+                                </script>
                             </section>
                             <div id="Answer-@id">
 
@@ -36,20 +43,29 @@
                                         for (int j = 0; j < question.AnswerOptions.Length; j++)
                                         {
                                             var option = question.AnswerOptions[j];
-                                            <label id="Label0-@id" class="checkbox-label">
+                                            <label id="Label-@id-@j" class="checkbox-label">
 
                                                 @if (question.CorrectAnswers.Contains(j.ToString()))
                                                 {
-                                                    <input type="checkbox" checked="checked" name="Checkbox1" id="Checkbox-@id-@j">
+                                                    <input type="checkbox" checked="checked" name="Checkbox-@id" id="Checkbox-@id-@j">
                                                 }
                                                 else
                                                 {
-                                                    <input type="checkbox" name="Checkbox1" id="Checkbox-@id-@j">
+                                                    <input type="checkbox" name="Checkbox-@id" id="Checkbox-@id-@j">
                                                 }
-
-                                                <input placeholder="Текст" value="@option" type="text" id="CheckboxText-@id-@j" class="checkbox-text">
+                                                <div class="input-container" id="inputContainer-@id-@j">
+                                                    <input placeholder="Ответ" value="@option" type="text" id="CheckboxText-@id-@j" name="questions[@id].AnswerOptions" class="checkbox-text" onfocus="this.select()">
+                                                    <span class="checkbox-span" id="SpanCheckbox-@id-@j"></span>
+                                                </div>
                                             </label>
                                         }
+                                        <input value="Добавить вариант ответа" type="button" id="AddСheckbox-@id" class="add-checkbox">
+                                        <script>        
+                                            let col = @question.AnswerOptions.Length;
+                                            document.getElementById("AddСheckbox-@id").addEventListener("click", function (e) {
+                                                            addNewCheckbox(e, @id, col++)
+                                                        });
+                                        </script>
                                         break;
                                     }
                                     case QuestionTypeEnum.Radio:
@@ -61,16 +77,25 @@
 
                                                 @if (question.CorrectAnswers.Contains(j.ToString()))
                                                 {
-                                                    <input type="radio" checked="checked" name="Checkbox1" id="Radio-@id-@j">
+                                                    <input type="radio" checked="checked" name="Radio-@id" id="Radio-@id-@j">
                                                 }
                                                 else
                                                 {
-                                                    <input type="radio" name="Checkbox1" id="Radio-@id-@j">
+                                                    <input type="radio" name="Radio-@id" id="Radio-@id-@j">
                                                 }
-
-                                                <input placeholder="Текст" value="@option" type="text" id="RadioText-@id-@j" class="radio-text">
+                                                <div class="input-container" id="inputContainerRadio-@id-@j">
+                                                    <input value="@option" placeholder="Ответ" type="text" name="questions[@id].AnswerOptions" id="RadioText-@id-@j" class="radio-text" onfocus="this.select()">
+                                                    <span class="radio-span" id="SpanRadio-@id-@j"></span>
+                                                </div>
                                             </label>
                                         }
+                                        <input value="Добавить вариант ответа" type="button" id="AddRadio-@id" class="add-radio">
+                                        <script>        
+                                            let col = @question.AnswerOptions.Length;
+                                            document.getElementById("AddRadio-@id").addEventListener("click", function (e) {
+                                                            addNewRadio(e, @id, col++)
+                                                        });
+                                        </script>
                                         break;
                                     }
                                 }
@@ -91,7 +116,3 @@
 </form>
 @await Html.PartialAsync("Tabs")
 </body>
-
-<script>
-import {newField} from 'site.js'
-</script>
