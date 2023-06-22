@@ -1,3 +1,6 @@
+@using FiveMinutesTalk.Domain
+@model FiveMinutesTalk.Domain.Entities.Quiz[]
+
 @{
     ViewData["Title"] = "Главная";
 }
@@ -22,6 +25,14 @@
 </div>
 
 <div style="position: relative; text-align: center; top: 100px;">
+    <h2>Ваши опросы</h2>
+    @foreach (var quiz in Model)
+    {
+        <form asp-controller="Account" asp-action="Quizzes" asp-route-token="@quiz.Id">
+            <button>@quiz.Title</button>
+        </form>
+    }
+    
     <h4>Здесь пока ничего нет</h4>
     <p class="light-text">Если хотите создать опрос, нажмите на кнопку справа внизу</p>
     <img src="/images/empty-polls.svg" alt="no polls here" style="padding-top: 20px">

@@ -21,6 +21,13 @@ public class EFQuizzesRepository : IRepository<Quiz>
         return context.Quizzes
             .FirstOrDefault(x => x.Id == id);
     }
+    
+    public Quiz[] GetItemsByOwnerId(Guid id)
+    {
+        return context.Quizzes
+            .Where(x => x.OwnerId == id)
+            .ToArray();
+    }
 
     public void SaveItem(Quiz entity)
     {
