@@ -8,7 +8,7 @@
             <input type="text" name="quizTitle" class="name-poll" required value="@ViewBag.Title" placeholder="Введите название опроса" onFocus="this.select()"/>
             @{
                 var counter = 0;
-                var id = 1;
+                var id = 0;
                 foreach (var guid in Model)
                 {
                     counter++;
@@ -25,7 +25,7 @@
                                 <script type="module">
                                     let select = document.getElementById("Question-@id").querySelector(".form-select");
                                     select.id = @id;
-                                    select.name = "questions[" + (@id - 1) + "].Type";
+                                    select.name = "questions[@id].Type";
                                     select.addEventListener('change', function (questionType) {
                                               changeComponents(questionType)
                                           });
@@ -44,7 +44,7 @@
                                         for (int j = 0; j < question.AnswerOptions.Length; j++)
                                         {
                                             var option = question.AnswerOptions[j];
-                                            <label id="Label0-@id" class="checkbox-label">
+                                            <label id="Label-@id-@j" class="checkbox-label">
 
                                                 @if (question.CorrectAnswers.Contains(j.ToString()))
                                                 {
