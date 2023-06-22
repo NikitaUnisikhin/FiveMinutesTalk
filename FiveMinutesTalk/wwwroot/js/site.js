@@ -2,8 +2,8 @@
 let adds = document.querySelectorAll('.add-question');
 for (let add of adds)
     add.addEventListener('click', function (ev) {
-    newField(ev)
-});
+        newField(ev)
+    });
 
 // Подключение всех кнопок удаления
 let deletes = document.querySelectorAll('.close-button');
@@ -11,7 +11,9 @@ for (let del of deletes)
     del.addEventListener('click', removeParent);
 
 // Подключение select к функции
-document.querySelector('select').addEventListener('change', function (questionType) {changeComponents(questionType)});
+document.querySelector('select').addEventListener('change', function (questionType) {
+    changeComponents(questionType)
+});
 
 let baseForm = document.getElementById("Form-0");
 
@@ -25,7 +27,7 @@ let questionId = document.querySelectorAll(".question-block").length - 1;
 function validatePassword() {
     let password = document.getElementById("reg-password");
     let confirm_password = document.getElementById("reg-password-confirm");
-    
+
     if (password.value.length < 5)
         password.setCustomValidity("Minimum length 5");
     else
@@ -45,7 +47,7 @@ function newField(ev) {
     questionId++;
     let newCopied = copied.cloneNode(true);
     newCopied.id = "Form-" + questionId;
-    
+
     let formControl = newCopied.getElementsByClassName('name-question')[0];
     formControl.name = `questions[${questionId}].Text`;
     let formSelect = newCopied.getElementsByClassName('form-select')[0];
@@ -85,7 +87,7 @@ function removeParent() {
     let numberQuestion = document.querySelectorAll(".number").length;
     if (numberQuestion === 1)
         return;
-    
+
     revDiv.remove();
     changeNumberQuestions();
 }
@@ -118,7 +120,7 @@ function changeComponents(questionType) {
         textarea.setAttribute("name", `questions[${id - 1}].CorrectAnswers`);
         newDiv.appendChild(textarea);
         
-        var editor = CodeMirror.fromTextArea(textarea, {
+        let editor = CodeMirror.fromTextArea(textarea, {
             lineNumbers: true,
             lineWrapping: true,
             matchBrackets: true,
