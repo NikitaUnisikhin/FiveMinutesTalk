@@ -180,8 +180,8 @@
     }
     
     let statistic = document.querySelector(".statistics");
-    console.log(statistic.childElementCount);
-    if (statistic.childElementCount > 1)
+    let questions = statistic.querySelector("#questions");
+    if (questions.childElementCount > 0)
         statistic.querySelector(".empty-answers").setAttribute("style", "display: none");
     
 </script>
