@@ -47,12 +47,17 @@
 
                                                 @if (question.CorrectAnswers.Contains(j.ToString()))
                                                 {
-                                                    <input type="checkbox" checked="checked" name="Checkbox-@id" id="Checkbox-@id-@j">
+                                                    <input type="checkbox" checked="checked" name="questions[@id].CorrectAnswers" id="Checkbox-@id-@j">
                                                 }
                                                 else
                                                 {
                                                     <input type="checkbox" name="Checkbox-@id" id="Checkbox-@id-@j">
                                                 }
+                                                <script>
+                                                document.getElementById("Checkbox-@id-@j").addEventListener("click", function () {
+                                                                                            checkMark("Checkbox-@id-@j", @id, @j);
+                                                                                        });
+                                                </script>
                                                 <div class="input-container" id="inputContainer-@id-@j">
                                                     <input placeholder="Ответ" value="@option" type="text" id="CheckboxText-@id-@j" name="questions[@id].AnswerOptions" class="checkbox-text" onfocus="this.select()">
                                                     <span class="checkbox-span" id="SpanCheckbox-@id-@j"></span>
@@ -61,9 +66,9 @@
                                         }
                                         <input value="Добавить вариант ответа" type="button" id="AddСheckbox-@id" class="add-checkbox">
                                         <script>        
-                                            let col = @question.AnswerOptions.Length;
+                                            let kol = @question.AnswerOptions.Length;
                                             document.getElementById("AddСheckbox-@id").addEventListener("click", function (e) {
-                                                            addNewCheckbox(e, @id, col++)
+                                                            addNewCheckbox(e, @id, kol++)
                                                         });
                                         </script>
                                         break;
@@ -77,12 +82,17 @@
 
                                                 @if (question.CorrectAnswers.Contains(j.ToString()))
                                                 {
-                                                    <input type="radio" checked="checked" name="Radio-@id" id="Radio-@id-@j">
+                                                    <input type="radio" checked="checked" name="questions[@id].CorrectAnswers" id="Radio-@id-@j">
                                                 }
                                                 else
                                                 {
                                                     <input type="radio" name="Radio-@id" id="Radio-@id-@j">
                                                 }
+                                                <script>
+                                                    document.getElementById("Radio-@id-@j").addEventListener("click", function () {
+                                                                                                checkMark("Radio-@id-@j", @id, @j);
+                                                                                            });
+                                                </script>
                                                 <div class="input-container" id="inputContainerRadio-@id-@j">
                                                     <input value="@option" placeholder="Ответ" type="text" name="questions[@id].AnswerOptions" id="RadioText-@id-@j" class="radio-text" onfocus="this.select()">
                                                     <span class="radio-span" id="SpanRadio-@id-@j"></span>
@@ -91,9 +101,9 @@
                                         }
                                         <input value="Добавить вариант ответа" type="button" id="AddRadio-@id" class="add-radio">
                                         <script>        
-                                            let col = @question.AnswerOptions.Length;
+                                            let k = @question.AnswerOptions.Length;
                                             document.getElementById("AddRadio-@id").addEventListener("click", function (e) {
-                                                            addNewRadio(e, @id, col++)
+                                                            addNewRadio(e, @id, k++)
                                                         });
                                         </script>
                                         break;
