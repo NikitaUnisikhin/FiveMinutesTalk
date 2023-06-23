@@ -9,7 +9,6 @@
 }
 
 <body>
-<form method="post" asp-controller="CreateQuiz" asp-action="SaveChanges">
     <section class="statistics">
         <h1 style="font-size: 32px">Статистика по «@ViewBag.QuizTitle»</h1>
         <section class="empty-answers">
@@ -127,7 +126,6 @@
             @await Html.PartialAsync("Header")
         }
     </section>
-</form>
 @await Html.PartialAsync("Tabs")
 </body>
 <script>
