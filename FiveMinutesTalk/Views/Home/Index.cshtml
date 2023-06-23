@@ -50,7 +50,20 @@
                     </section>
                 </section>
             </form>
+            <script>
+            let now = new Date().getTime();
+            let start = new Date(@quiz.Start.Year, @quiz.Start.Month - 1, @quiz.Start.Day,
+                                            @quiz.Start.Hour, @quiz.Start.Minute, @quiz.Start.Second).getTime();
+            let endTime = new Date(@quiz.End.Year, @quiz.End.Month - 1, @quiz.End.Day,
+                    @quiz.End.Hour, @quiz.End.Minute, @quiz.End.Second).getTime();
             
+            let p = document.querySelectorAll(".poll > .poll-block > .block > .content");
+            console.log(p)
+          
+            if (start > now){
+                
+            }
+            </script>
         }
     </section>
 </section>

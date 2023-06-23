@@ -54,6 +54,11 @@
                                                 {
                                                     <input type="checkbox" name="Checkbox-@id" id="Checkbox-@id-@j">
                                                 }
+                                                <script>
+                                                document.getElementById("Checkbox-@id-@j").addEventListener("click", function () {
+                                                                                            checkMark("Checkbox-@id-@j", @id, @j);
+                                                                                        });
+                                                </script>
                                                 <div class="input-container" id="inputContainer-@id-@j">
                                                     <input placeholder="Ответ" value="@option" type="text" id="CheckboxText-@id-@j" name="questions[@id].AnswerOptions" class="checkbox-text" onfocus="this.select()">
                                                     <span class="checkbox-span" id="SpanCheckbox-@id-@j"></span>

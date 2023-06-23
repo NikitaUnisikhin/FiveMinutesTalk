@@ -20,9 +20,6 @@ let baseForm = document.getElementById("Form-0");
 // Копируем изначальную форму
 const copied = baseForm.cloneNode(true);
 
-// Я предлагаю сделать глобальный id для вопросов, чтобы после удаления у нас не было совпадений id вопросов(СКОРО УДАЛЮ)
-let questionId = document.querySelectorAll(".question-block").length - 1;
-
 // Проверка на совпадение паролей
 function validatePassword() {
     let password = document.getElementById("reg-password");
@@ -44,10 +41,10 @@ function validatePassword() {
 function newField(ev) {
     let addQue = ev.currentTarget;
     let parent = addQue.parentNode;
-    questionId++;
+    let questionId = document.querySelectorAll(".question-block").length;
     let newCopied = copied.cloneNode(true);
     newCopied.id = "Form-" + questionId;
-
+    
     let formControl = newCopied.getElementsByClassName('name-question')[0];
     formControl.name = `questions[${questionId}].Text`;
     let formSelect = newCopied.getElementsByClassName('form-select')[0];
@@ -75,9 +72,88 @@ function newField(ev) {
 
 // Обновляет номера вопросов
 function changeNumberQuestions() {
-    let questionsNumbers = document.querySelectorAll(".number");
+    let questionsNumbers = document.querySelectorAll(".question-block");
     for (let i = 0; i < questionsNumbers.length; i++) {
-        questionsNumbers[i].textContent = `${i + 1}`;
+        let currentQuestion = questionsNumbers[i];
+        currentQuestion.id = "Form-" + i;
+        currentQuestion.querySelector(".question").id = "Question-" + i;
+        
+        currentQuestion.querySelector(".number").textContent = `${i + 1}`;
+        
+        currentQuestion.querySelector(".name-question").name = `questions[${i}].Text`;
+        
+        let select = currentQuestion.querySelector(".form-select");
+        select.id = `${i}`;
+        select.name = `questions[${i}].Type`;
+        
+        let questionType = select.options[select.selectedIndex].value;
+        
+        switch (questionType) {
+            // Текстовое поле
+            case "OpenQuestion":
+                let textQuestion = currentQuestion.querySelector(".text-question");
+                textQuestion.id = "Text-" + i;
+                textQuestion.parentElement.id = "Answer-" + i;
+                break;
+                
+            // Поле с кодом
+            case "Code":
+                let code = currentQuestion.querySelector("textarea");
+                code.id = "Textarea-" + i;
+                code.name = `questions[${i}].CorrectAnswers`;
+                code.parentElement.id = "Answer-" + i;
+                break;
+                
+            // Чекбоксы
+            case "MultipleAnswersQuestion":
+                let labelsCh = currentQuestion.querySelectorAll(".checkbox-label");
+                for (let j = 0; j < labelsCh.length; j++) {
+                    let label = labelsCh[j];
+                    label.id = `Label-${i}-${j}`;
+                    let chId = `Checkbox-${i}-${j}`;
+                    label.firstChild.id = chId;
+                    label.firstChild.name = "Checkbox-" + i;
+
+                    label.querySelector(".input-container").id = `inputContainer-${i}-${j}`;
+                    let chText = label.querySelector(".checkbox-text");
+                    chText.id = `CheckboxText-${i}-${j}`;
+                    chText.name = `questions[${i}].AnswerOptions`;
+                    label.querySelector(".checkbox-span").id = `SpanCheckbox-${i}-${j}`;
+                    
+                    checkMark(chId, i, j);
+
+                    if (j === 0)
+                        labelsCh[0].parentElement.id = "Answer-" + i;
+                }
+                currentQuestion.querySelector(".add-checkbox").id = "AddCheckbox-" + i;
+                break;
+
+            // Радио
+            case "Radio":
+                let labelsR = currentQuestion.querySelectorAll(".radio-label");
+                for (let j = 0; j < labelsR.length; j++) {
+                    let label = labelsR[j];
+                    label.id = `Label-${i}-${j}`;
+                    let rId = `Radio-${i}-${j}`;
+                    label.firstChild.id = rId;
+                    label.firstChild.name = "Radio-" + i;
+
+                    label.querySelector(".input-container").id = `inputContainerRadio-${i}-${j}`;
+                    let rText = label.querySelector(".radio-text");
+                    rText.id = `RadioText-${i}-${j}`;
+                    rText.name = `questions[${i}].AnswerOptions`;
+                    label.querySelector(".radio-span").id = `SpanRadio-${i}-${j}`;
+
+                    checkMark(rId, i, j);
+
+                    if (j === 0)
+                        labelsR[0].parentElement.id = "Answer-" + i;
+                }
+                currentQuestion.querySelector(".add-radio").id = "AddRadio-" + i;
+                break;
+        }
+        
+        currentQuestion.querySelector(".add-question").id = "AddQuestion-" + i;
     }
 }
 
@@ -249,18 +325,12 @@ function addNewRadio(e, id, col) {
 }
 
 // обработка взаимодействия с чекбоксом
-let countCorrectAnswers = new Map();
-
 function checkMark(checkboxId, questionIndex, answerIndex) {
     let checkbox = document.getElementById(checkboxId);
     if (checkbox.checked === true) {
-        if (countCorrectAnswers[questionIndex] === undefined)
-            countCorrectAnswers[questionIndex] = 0;
-        countCorrectAnswers[questionIndex]++;
         checkbox.name = `questions[${questionIndex}].CorrectAnswers`
         checkbox.value = answerIndex;
     } else {
-        countCorrectAnswers[questionIndex]--;
         checkbox.name = '';
     }
 }
