@@ -18,9 +18,6 @@ let baseForm = document.getElementById("Form-0");
 // Копируем изначальную форму
 const copied = baseForm.cloneNode(true);
 
-// Я предлагаю сделать глобальный id для вопросов, чтобы после удаления у нас не было совпадений id вопросов(СКОРО УДАЛЮ)
-let questionId = document.querySelectorAll(".question-block").length - 1;
-
 // Проверка на совпадение паролей
 function validatePassword() {
     let password = document.getElementById("reg-password");
@@ -37,7 +34,7 @@ function validatePassword() {
 function newField(ev) {
     let addQue = ev.currentTarget;
     let parent = addQue.parentNode;
-    questionId++;
+    let questionId = document.querySelectorAll(".question-block").length;
     let newCopied = copied.cloneNode(true);
     newCopied.id = "Form-" + questionId;
     
@@ -313,18 +310,12 @@ function addNewRadio(e, id, col) {
 }
 
 // обработка взаимодействия с чекбоксом
-let countCorrectAnswers = new Map();
-
 function checkMark(checkboxId, questionIndex, answerIndex) {
     let checkbox = document.getElementById(checkboxId);
     if (checkbox.checked === true) {
-        if (countCorrectAnswers[questionIndex] === undefined)
-            countCorrectAnswers[questionIndex] = 0;
-        countCorrectAnswers[questionIndex]++;
         checkbox.name = `questions[${questionIndex}].CorrectAnswers`
         checkbox.value = answerIndex;
     } else {
-        countCorrectAnswers[questionIndex]--;
         checkbox.name = '';
     }
 }
