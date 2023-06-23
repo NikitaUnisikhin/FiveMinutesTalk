@@ -1,9 +1,6 @@
-<div id="tabs">
-    <form asp-controller="Account" asp-action="Quizzes" asp-route-token="@ViewBag.QuizId">
-        <button type="submit" class="tab" id="tab-questions" name="tab-group" value="">Вопросы</button>
-    </form>
-    
-    <form asp-controller="GeneralStatistics" asp-action="Index" asp-route-token="@ViewBag.QuizId">
-       <button type="submit" class="tab" id="tab-answers" name="tab-group" value="">Ответы</button>
-    </form>
-</div>
+<form method="post" asp-controller="Tabs" asp-action="Index" asp-route-quizId="@ViewBag.QuizId">
+    <div id="tabs">
+        <button type="submit" class="tab" id="tab-questions" name="1" value="">Вопросы</button>
+        <button type="submit" class="tab" id="tab-answers" name="2" value="">Ответы</button>
+    </div>
+</form>
