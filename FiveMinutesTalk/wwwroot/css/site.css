@@ -27,7 +27,8 @@ html {
     position: relative;
     min-height: 100%;
     overflow: auto;
-    scrollbar-gutter: stable both-edges;
+    scrollbar-gutter: stable;
+    overflow-x: hidden;
 }
 
 body {

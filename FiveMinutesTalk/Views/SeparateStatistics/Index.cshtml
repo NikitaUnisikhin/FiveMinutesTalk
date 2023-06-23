@@ -8,92 +8,94 @@
 }
 
 <body>
-    <section class="statistics">
-        <h1 style="font-size: 32px">Статистика по «@ViewBag.QuizTitle»</h1>
-        <section class="empty-answers">
-            <p>Пока нет ответов</p>
-            <img src="/images/empty-answers.svg" alt="empty-answers image"/>
-        </section>
-        @await Html.PartialAsync("StatisticsType")
-        @{
-            var answerNumber = 0;
-            foreach (var quizAnswerId in Model)
-            {
-                answerNumber++;
-                var questionContainerId = $"question_{answerNumber}";
-                var questionAnswerIds = ((EFQuizQuestionAnswerRepository)ViewBag.DataManager.QuizQuestionAnswers)
-                    .GetQuestionAnswerIdsByQuizAnswerId(quizAnswerId);
-                var questionNumber = 0;
-                <div id="@questionContainerId" class="separate-statistic">
-                    <h3>#Ответ @answerNumber</h3>
-                        @foreach (var id in questionAnswerIds)
-                        {
-                            QuestionAnswer answer = ViewBag.DataManager.QuestionAnswers.GetItemById(id);
-                            Question question = ViewBag.DataManager.Questions.GetItemById(answer.QuestionId);
-                            var textAreaId = $"Textarea-{answerNumber}-{questionNumber}";
+<section class="statistics">
+    <h1 style="font-size: 32px">Статистика по «@ViewBag.QuizTitle»</h1>
+    <section class="empty-answers">
+        <p>Пока нет ответов</p>
+        <img src="/images/empty-answers.svg" alt="empty-answers image"/>
+    </section>
+    @await Html.PartialAsync("StatisticsType")
+    <section class="separate-content">
+    @{
+        var answerNumber = 0;
+        foreach (var quizAnswerId in Model)
+        {
+            answerNumber++;
+            var questionContainerId = $"question_{answerNumber}";
+            var questionAnswerIds = ((EFQuizQuestionAnswerRepository)ViewBag.DataManager.QuizQuestionAnswers)
+                .GetQuestionAnswerIdsByQuizAnswerId(quizAnswerId);
+            var questionNumber = 0;
+            <div id="@questionContainerId" class="separate-block">
+                <h3>#Ответ @answerNumber</h3>
+                <section id="questions">
+                @foreach (var id in questionAnswerIds)
+                {
+                    QuestionAnswer answer = ViewBag.DataManager.QuestionAnswers.GetItemById(id);
+                    Question question = ViewBag.DataManager.Questions.GetItemById(answer.QuestionId);
+                    var textAreaId = $"Textarea-{answerNumber}-{questionNumber}";
 
-                            <section class="question">
-                                <section  class="hat-question">
-                                    <div class="number-question">
-                                        <div class="number">@(questionNumber + 1)</div>
-                                        <div class="dot">.</div>
-                                    </div>
-                                    <div class="name-question">@question.Text</div>
-                                </section>
-                                <section>
-                                    @switch (question.Type)
+                    <section class="question">
+                        <section class="hat-question">
+                            <div class="number-question">
+                                <div class="number">@(questionNumber + 1)</div>
+                                <div class="dot">.</div>
+                            </div>
+                            <div class="name-question">@question.Text</div>
+                        </section>
+                        <section>
+                            @switch (question.Type)
+                            {
+                                case QuestionTypeEnum.OpenQuestion:
+                                {
+                                    <div class="text-question">@answer.Answers[0]</div>
+                                    break;
+                                }
+                                case QuestionTypeEnum.MultipleAnswersQuestion:
+                                {
+                                    for (int i = 0; i < question.AnswerOptions.Length; i++)
                                     {
-                                        case QuestionTypeEnum.OpenQuestion:
-                                        {
-                                            <div class="text-question">@answer.Answers[0]</div>
-                                            break;
-                                        }
-                                        case QuestionTypeEnum.MultipleAnswersQuestion:
-                                        {
-                                            for (int i = 0; i < question.AnswerOptions.Length; i++)
+                                        var option = question.AnswerOptions[i];
+                                        <label class="checkbox-label">
+                                            @if (answer.Answers.Contains(i.ToString()))
                                             {
-                                                var option = question.AnswerOptions[i];
-                                                <label class="checkbox-label">
-                                                    @if (answer.Answers.Contains(i.ToString()))
-                                                    {
-                                                        <input type="checkbox" class="checkbox-text" checked disabled>
-                                                        @option
-                                                    }
-                                                    else
-                                                    {
-                                                        <input type="checkbox" class="checkbox-text" disabled>
-                                                        @option
-                                                    }
-                                                </label>
+                                                <input type="checkbox" class="checkbox-text" checked disabled>
+                                                @option
                                             }
-                                            break;
-                                        }
-                                        case QuestionTypeEnum.Radio:
-                                        {
-                                            for (int i = 0; i < question.AnswerOptions.Length; i++)
+                                            else
                                             {
-                                                var option = question.AnswerOptions[i];
-                                                <label class="radio-label">
-                                                    @if (answer.Answers.Contains(i.ToString()))
-                                                    {
-                                                        <input type="radio" class="radio-text" checked>
-                                                        @option
-                                                    }
-                                                    else
-                                                    {
-                                                        <input type="radio" class="radio-text" disabled>
-                                                        @option
-                                                    }
-                                                </label>
+                                                <input type="checkbox" class="checkbox-text" disabled>
+                                                @option
                                             }
-                                            break;
-                                        }
-                                        case QuestionTypeEnum.Code:
-                                        {
-                                            <label>
-                                                @{
-                                                    <textarea id="@textAreaId" style="display: none"></textarea>
-                                                    <script>
+                                        </label>
+                                    }
+                                    break;
+                                }
+                                case QuestionTypeEnum.Radio:
+                                {
+                                    for (int i = 0; i < question.AnswerOptions.Length; i++)
+                                    {
+                                        var option = question.AnswerOptions[i];
+                                        <label class="radio-label">
+                                            @if (answer.Answers.Contains(i.ToString()))
+                                            {
+                                                <input type="radio" class="radio-text" checked>
+                                                @option
+                                            }
+                                            else
+                                            {
+                                                <input type="radio" class="radio-text" disabled>
+                                                @option
+                                            }
+                                        </label>
+                                    }
+                                    break;
+                                }
+                                case QuestionTypeEnum.Code:
+                                {
+                                    <label>
+                                        @{
+                                            <textarea id="@textAreaId" style="display: none"></textarea>
+                                            <script>
                                                         var textarea = document.getElementById("@textAreaId");
                                                         var editor = CodeMirror.fromTextArea(textarea, {
                                                         lineNumbers: true,
@@ -109,26 +111,28 @@
 
                                                         editor.getDoc().setValue("@answer.Answers.FirstOrDefault()");
                                                     </script>
-                                                }
-                                            </label>
-                                            break;
                                         }
-                                    }
-                                </section>
-                            </section>
-                            questionNumber += 1;
-                        }
-                    </div>
-            }
-
+                                    </label>
+                                    break;
+                                }
+                            }
+                        </section>
+                    </section>
+                    questionNumber += 1;
+                }
+                </section>
+            </div>
         }
-        @await Html.PartialAsync("Header")
+
+    }
     </section>
+    @await Html.PartialAsync("Header")
+</section>
 </body>
 @await Html.PartialAsync("Tabs")
 
 <script>
     let statistic = document.querySelector(".statistics");
-    if (statistic.childElementCount > 4)
+    if (statistic.childElementCount > 1)
         statistic.querySelector(".empty-answers").setAttribute("style", "display: none");
 </script>

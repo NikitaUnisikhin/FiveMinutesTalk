@@ -332,9 +332,11 @@ window.addEventListener('load', () => {
     now.setMilliseconds(null)
     now.setSeconds(null)
 
-    let calendars = document.querySelectorAll('input[type=datetime-local]');
+    let start = document.querySelector('#start-time');
+    let end = document.querySelector('#end-time');
 
-    for (let calendar of calendars)
-        calendar.value = now.toISOString().slice(0, -1);
+    start.value = now.toISOString().slice(0, -1);
+    now.setDate(now.getDate() + 1);
+    end.value = now.toISOString().slice(0, -1);
 });
 

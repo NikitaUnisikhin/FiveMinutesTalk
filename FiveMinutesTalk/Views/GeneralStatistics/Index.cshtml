@@ -9,31 +9,32 @@
 }
 
 <body>
-    <section class="statistics">
-        <h1 style="font-size: 32px">Статистика по «@ViewBag.QuizTitle»</h1>
-        <section class="empty-answers">
-            <p>Пока нет ответов</p>
-            <img src="/images/empty-answers.svg" alt="empty-answers image"/>
-        </section>
-        @await Html.PartialAsync("StatisticsType")
-        @{
-            var questionNumber = 1;
-            var textAreaId = $"Textarea{questionNumber}";
-            var answersIds = ((EFQuestionAnswersRepository)ViewBag.DataManager.QuestionAnswers)
-                .GetQuestionAnswerIdByQuizId(Model);
-            var statisticsContainer = new Dictionary<Guid, StatisticsContainer>();
-            foreach (var answerId in answersIds)
-            {
-                QuestionAnswer answer = ViewBag.DataManager.QuestionAnswers.GetItemById(answerId);
-                statisticsContainer.TryAdd(answer.QuestionId, new StatisticsContainer()
-                {
-                    QuestionType = answer.QuestionType
-                });
-                statisticsContainer[answer.QuestionId].Answers = statisticsContainer[answer.QuestionId]
-                    .Answers.Concat(answer.Answers).ToList();
-            }
+<section class="statistics">
+    <h1 style="font-size: 32px">Статистика по «@ViewBag.QuizTitle»</h1>
+    <section class="empty-answers">
+        <p>Пока нет ответов</p>
+        <img src="/images/empty-answers.svg" alt="empty-answers image"/>
+    </section>
 
-            foreach (var questionStatistics in statisticsContainer)
+    @await Html.PartialAsync("StatisticsType")
+    @{
+        var questionNumber = 1;
+        var textAreaId = $"Textarea{questionNumber}";
+        var answersIds = ((EFQuestionAnswersRepository)ViewBag.DataManager.QuestionAnswers)
+            .GetQuestionAnswerIdByQuizId(Model);
+        var statisticsContainer = new Dictionary<Guid, StatisticsContainer>();
+        foreach (var answerId in answersIds)
+        {
+            QuestionAnswer answer = ViewBag.DataManager.QuestionAnswers.GetItemById(answerId);
+            statisticsContainer.TryAdd(answer.QuestionId, new StatisticsContainer()
+            {
+                QuestionType = answer.QuestionType
+            });
+            statisticsContainer[answer.QuestionId].Answers = statisticsContainer[answer.QuestionId]
+                .Answers.Concat(answer.Answers).ToList();
+        }
+        <section id="questions">
+            @foreach (var questionStatistics in statisticsContainer)
             {
                 <div class="question">
                     @{
@@ -92,7 +93,7 @@
                             }
                             case QuestionTypeEnum.Code:
                             {
-                                <label>
+                                <label class="answers">
                                     @{
                                         var c = 0;
                                         foreach (var ans in questionStatistics.Value.Answers)
@@ -122,11 +123,11 @@
                 </div>
                 questionNumber += 1;
             }
-
-            @await Html.PartialAsync("Header")
-        }
-    </section>
-@await Html.PartialAsync("Tabs")
+        </section>
+        @await Html.PartialAsync("Header")
+    }
+    @await Html.PartialAsync("Tabs")
+</section>
 </body>
 <script>
     //Для диаграмм
@@ -179,7 +180,8 @@
     }
     
     let statistic = document.querySelector(".statistics");
-    if (statistic.childElementCount > 4)
+    console.log(statistic.childElementCount);
+    if (statistic.childElementCount > 1)
         statistic.querySelector(".empty-answers").setAttribute("style", "display: none");
     
 </script>

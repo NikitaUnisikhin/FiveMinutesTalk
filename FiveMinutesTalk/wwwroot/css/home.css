@@ -190,6 +190,7 @@
 .content-head > p {
     height: 14px;
     color: black;
+    width: 100%;
     font-size: 14px;
     font-weight: 300;
     word-wrap: break-word;
