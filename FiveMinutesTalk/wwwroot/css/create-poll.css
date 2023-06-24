@@ -537,7 +537,8 @@
     padding: 15px;
     border-bottom: 2px solid var(--green);
     border-top: 2px solid var(--green);
-    border-radius: 10px 25px
+    border-radius: 10px 25px;
+    z-index: 5;
 }
 
 .empty-answers {
