@@ -41,26 +41,15 @@ function validatePassword() {
 function newField(ev) {
     let addQue = ev.currentTarget;
     let parent = addQue.parentNode;
-    let questionId = document.querySelectorAll(".question-block").length;
     let newCopied = copied.cloneNode(true);
-    newCopied.id = "Form-" + questionId;
-    
-    let formControl = newCopied.getElementsByClassName('name-question')[0];
-    formControl.name = `questions[${questionId}].Text`;
-    let formSelect = newCopied.getElementsByClassName('form-select')[0];
-    formSelect.name = `questions[${questionId}].Type`;
 
     let select = newCopied.querySelector("select");
-    select.id = String(questionId);
     select.addEventListener('change', function (questionType) {
         changeComponents(questionType)
     });
-    newCopied.querySelector("#Question-0").id = "Question-" + questionId;
-    newCopied.querySelector("#Answer-0").id = "Answer-" + questionId;
     newCopied.querySelector(".close-button").addEventListener('click', removeParent);
 
     let addQuestion = newCopied.querySelector("#AddQuestion-0");
-    addQuestion.id = "AddQuestion-" + questionId;
     addQuestion.addEventListener('click', function (ev) {
         newField(ev)
     });
