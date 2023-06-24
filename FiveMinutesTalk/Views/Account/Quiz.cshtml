@@ -55,8 +55,8 @@
                                                     <input type="checkbox" name="Checkbox-@id" id="Checkbox-@id-@j">
                                                 }
                                                 <script>
-                                                document.getElementById("Checkbox-@id-@j").addEventListener("click", function () {
-                                                                                            checkMark("Checkbox-@id-@j", @id, @j);
+                                                document.getElementById("Checkbox-@id-@j").addEventListener("click", function (e) {
+                                                                                            checkMarkImproved(e);
                                                                                         });
                                                 </script>
                                                 <div class="input-container" id="inputContainer-@id-@j">
@@ -90,8 +90,8 @@
                                                     <input type="radio" name="Radio-@id" id="Radio-@id-@j">
                                                 }
                                                 <script>
-                                                    document.getElementById("Radio-@id-@j").addEventListener("click", function () {
-                                                                                                checkMark("Radio-@id-@j", @id, @j);
+                                                    document.getElementById("Radio-@id-@j").addEventListener("click", function (e) {
+                                                                                                checkMarkImproved(e);
                                                                                             });
                                                 </script>
                                                 <div class="input-container" id="inputContainerRadio-@id-@j">

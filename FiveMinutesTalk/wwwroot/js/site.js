@@ -112,8 +112,8 @@ function changeNumberQuestions() {
                     let label = labelsCh[j];
                     label.id = `Label-${i}-${j}`;
                     let chId = `Checkbox-${i}-${j}`;
-                    label.firstChild.id = chId;
-                    label.firstChild.name = "Checkbox-" + i;
+                    label.firstElementChild.id = chId;
+                    label.firstElementChild.name = "Checkbox-" + i;
 
                     label.querySelector(".input-container").id = `inputContainer-${i}-${j}`;
                     let chText = label.querySelector(".checkbox-text");
@@ -136,8 +136,8 @@ function changeNumberQuestions() {
                     let label = labelsR[j];
                     label.id = `Label-${i}-${j}`;
                     let rId = `Radio-${i}-${j}`;
-                    label.firstChild.id = rId;
-                    label.firstChild.name = "Radio-" + i;
+                    label.firstElementChild.id = rId;
+                    label.firstElementChild.name = "Radio-" + i;
 
                     label.querySelector(".input-container").id = `inputContainerRadio-${i}-${j}`;
                     let rText = label.querySelector(".radio-text");
