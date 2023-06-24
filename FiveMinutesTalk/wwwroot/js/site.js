@@ -93,6 +93,7 @@ function changeNumberQuestions() {
             case "OpenQuestion":
                 let textQuestion = currentQuestion.querySelector(".text-question");
                 textQuestion.id = "Text-" + i;
+                textQuestion.name = `questions[${i}].CorrectAnswers`;
                 textQuestion.parentElement.id = "Answer-" + i;
                 break;
                 
@@ -187,13 +188,13 @@ function changeComponents(questionType) {
         text.setAttribute("placeholder", "Ответ");
         text.setAttribute("class", "text-question");
         text.setAttribute("id", "Text-" + id);
-        text.setAttribute("name", `questions[${id - 1}].CorrectAnswers`)
+        text.setAttribute("name", `questions[${id}].CorrectAnswers`)
         newDiv.appendChild(text);
 
     } else if (selectedValue === "Code") {
         let textarea = document.createElement("textarea");
         textarea.setAttribute("id", "Textarea-" + id);
-        textarea.setAttribute("name", `questions[${id - 1}].CorrectAnswers`);
+        textarea.setAttribute("name", `questions[${id}].CorrectAnswers`);
         newDiv.appendChild(textarea);
         
         let editor = CodeMirror.fromTextArea(textarea, {
@@ -252,9 +253,9 @@ function addNewCheckbox(e, col) {
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("name", "Checkbox-" + id)
     checkbox.setAttribute("id", "Checkbox-" + id + `-${col}`);
-    checkbox.onclick = () => {
-        checkMark(checkbox.id, id, col);
-    };
+    checkbox.addEventListener("click", function (e) {
+        checkMarkImproved(e);
+    });
 
     let inputContainer = document.createElement("div");
     inputContainer.setAttribute("class", "input-container");
@@ -296,9 +297,9 @@ function addNewRadio(e, col) {
     radio.setAttribute("type", "radio");
     radio.setAttribute("name", "Radio-" + id)
     radio.setAttribute("id", "Radio-" + id + `-${col}`);
-    radio.onclick = () => {
-        checkMark(radio.id, id, col);
-    };
+    radio.addEventListener("click", function (e) {
+        checkMarkImproved(e);
+    });
 
     let inputContainer = document.createElement("div");
     inputContainer.setAttribute("class", "input-container");
@@ -329,6 +330,22 @@ function addNewRadio(e, col) {
 // обработка взаимодействия с чекбоксом
 function checkMark(checkboxId, questionIndex, answerIndex) {
     let checkbox = document.getElementById(checkboxId);
+    if (checkbox.checked === true) {
+        checkbox.name = `questions[${questionIndex}].CorrectAnswers`
+        checkbox.value = answerIndex;
+    } else {
+        checkbox.name = '';
+    }
+}
+
+// Адаптивная функция checkMark
+function checkMarkImproved(e) {
+    let checkbox =  e.currentTarget;
+    
+    let arr = checkbox.id.split("-");
+    let questionIndex = arr[1];
+    let answerIndex = arr[2];
+    
     if (checkbox.checked === true) {
         checkbox.name = `questions[${questionIndex}].CorrectAnswers`
         checkbox.value = answerIndex;
