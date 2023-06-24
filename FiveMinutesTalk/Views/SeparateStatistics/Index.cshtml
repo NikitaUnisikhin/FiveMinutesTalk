@@ -21,11 +21,13 @@
         foreach (var quizAnswerId in Model)
         {
             answerNumber++;
-            var questionContainerId = $"question_{answerNumber}";
+            
             var questionAnswerIds = ((EFQuizQuestionAnswerRepository)ViewBag.DataManager.QuizQuestionAnswers)
                 .GetQuestionAnswerIdsByQuizAnswerId(quizAnswerId);
+            
             var questionNumber = 0;
-            <div id="@questionContainerId" class="separate-block">
+            
+            <div id="question_@answerNumber" class="separate-block">
                 <h3>#Ответ @answerNumber</h3>
                 <section id="questions">
                 @foreach (var id in questionAnswerIds)

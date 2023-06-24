@@ -1,3 +1,5 @@
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using FiveMinutesTalk.Domain;
 using FiveMinutesTalk.Domain.Entities;
 using FiveMinutesTalk.Domain.Entities.QuestionsTypes;
@@ -50,6 +52,11 @@ builder.Services.AddAuthorization(x =>
 builder.Services.AddControllersWithViews(x =>
 {
     x.Conventions.Add(new UserAreaAuthorization("User", "UserArea"));
+});
+
+builder.Services.AddWebEncoders(options =>
+{
+    options.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All);
 });
 
 var app = builder.Build();

@@ -1,13 +1,13 @@
 ﻿// Подключение кнопок добавления к функции.
-let adds = document.querySelectorAll('.add-question');
-for (let add of adds)
+var adds = document.querySelectorAll('.add-question');
+for (var add of adds)
     add.addEventListener('click', function (ev) {
         newField(ev)
     });
 
 // Подключение всех кнопок удаления
-let deletes = document.querySelectorAll('.close-button');
-for (let del of deletes)
+var deletes = document.querySelectorAll('.close-button');
+for (var del of deletes)
     del.addEventListener('click', removeParent);
 
 // Подключение select к функции
@@ -15,13 +15,13 @@ document.querySelector('select').addEventListener('change', function (questionTy
     changeComponents(questionType)
 });
 
-let baseForm = document.getElementById("Form-0");
+var baseForm = document.getElementById("Form-0");
 
 // Копируем изначальную форму
-const copied = baseForm.cloneNode(true);
+var copied = baseForm.cloneNode(true);
 
 // Я предлагаю сделать глобальный id для вопросов, чтобы после удаления у нас не было совпадений id вопросов(СКОРО УДАЛЮ)
-let questionId = document.querySelectorAll(".question-block").length - 1;
+var questionId = document.querySelectorAll(".question-block").length - 1;
 
 // Проверка на совпадение паролей
 function validatePassword() {
@@ -248,8 +248,17 @@ function addNewRadio(e, id, col) {
     addRad.before(label);
 }
 
+function checkCheckbox(checkbox, optionNumber){
+    if (checkbox.checked) {
+        checkbox.value = optionNumber;
+    }
+    else {
+        checkbox.removeAttribute('value');
+    }
+}
+
 // обработка взаимодействия с чекбоксом
-let countCorrectAnswers = new Map();
+var countCorrectAnswers = new Map();
 
 function checkMark(checkboxId, questionIndex, answerIndex) {
     let checkbox = document.getElementById(checkboxId);
