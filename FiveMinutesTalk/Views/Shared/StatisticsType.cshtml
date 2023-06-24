@@ -1,6 +1,10 @@
 <form method="post" asp-controller="Statistics" asp-action="Index" asp-route-quizId="@ViewBag.QuizId">
-        <section class="switch-statistic">
-                <input type="submit" name="1" value="Общая" />
-                <input type="submit" name="2" value="Отдельные ответы" />
-        </section>
+    <section class="switch-statistic">
+        <button class="switch-button" type="submit" name="1">
+            Общая
+        </button>
+        <button class="switch-button" type="submit" name="2">
+            Раздельная
+        </button>
+    </section>
 </form>

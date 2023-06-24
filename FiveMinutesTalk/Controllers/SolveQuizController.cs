@@ -25,7 +25,7 @@ public class SolveQuizController : Controller
         var quiz = dataManager.Quizzes.GetItemById(token);
 
         if (quiz.Start > DateTime.Now || DateTime.Now > quiz.End)
-            return Empty;
+            return View("PollNotActive");
         
         ViewBag.End = quiz.End;
         ViewBag.QuizTitle = quiz.Title;
