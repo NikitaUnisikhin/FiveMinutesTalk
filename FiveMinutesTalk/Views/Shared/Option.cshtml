@@ -1,0 +1,22 @@
+@model string[]
+
+<label id="option_@(ViewBag.QuestionNumber)_@(ViewBag.OptionNumb)" class="@Model[0]-label">
+    <input type="@Model[0]"
+           onchange="checkCheckbox(this, @ViewBag.OptionNumb)"
+           name="answers[@ViewBag.QuestionNumber].Answers"
+           class="@Model[0]-text">
+    
+    @if (ViewBag.WithAnswers != 1)
+    {
+        <span>@ViewBag.OptionText</span>
+    }
+    
+    @if (ViewBag.WithAnswers == 1)
+    {
+        <div class="input-container" id="inputContainer-@ViewBag.QuestionNumber-@ViewBag.OptionNumb">
+            <input placeholder="Ответ" value="@ViewBag.OptionText" type="text" id="@(Model[1])Text-@ViewBag.QuestionNumber-@ViewBag.OptionNumb"
+                   name="questions[@ViewBag.QuestionNumber].AnswerOptions" class="@Model[0]-text" onfocus="this.select()">
+            <span class="@Model[0]-span" id="Span@(Model[1])-@ViewBag.QuestionNumber-@ViewBag.OptionNumb"></span>
+        </div>
+    }
+</label>

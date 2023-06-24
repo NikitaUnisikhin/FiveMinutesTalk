@@ -1,0 +1,37 @@
+@using FiveMinutesTalk.Domain.Entities.QuestionsTypes
+
+<section id="answer-@ViewBag.QuestionNumber">
+    @{
+        var optionsView = ViewBag.WithAnswers == 1 ? "OptionsWithAnswer" : "Options";
+        
+        switch (ViewBag.Question.Type)
+        {
+            case QuestionTypeEnum.OpenQuestion:
+                @await Html.PartialAsync("OpenQuestion")
+                break;
+
+            case QuestionTypeEnum.MultipleAnswersQuestion:
+            {
+                @await Html.PartialAsync(optionsView,
+                           new[] { "checkbox", "Checkbox" })
+                break;
+            }
+            case QuestionTypeEnum.Radio:
+            {
+                @await Html.PartialAsync(optionsView,
+                           new[] { "radio", "Radio" })
+                break;
+            }
+            case QuestionTypeEnum.Code:
+            {
+                @await Html.PartialAsync("CodeAnswer")
+                break;
+            }
+        }
+    }
+</section>
+<script>
+    if (@ViewBag.WithAnswers === 0) { 
+        document.getElementById("answer-@ViewBag.QuestionNumber").setAttribute("class", "answer");
+    }
+</script>
