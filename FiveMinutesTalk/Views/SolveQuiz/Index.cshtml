@@ -6,15 +6,6 @@
 }
 
 <script>
-    function checkCheckbox(checkbox, optionNumber){
-        if (checkbox.checked) {
-            checkbox.value = optionNumber;
-        }
-        else {
-            checkbox.removeAttribute('value');
-        }
-    }
-    
     //Таймер
     let endTime = new Date(@ViewBag.End.Year, @ViewBag.End.Month - 1, @ViewBag.End.Day,
         @ViewBag.End.Hour, @ViewBag.End.Minute, @ViewBag.End.Second).getTime();
@@ -34,111 +25,35 @@
     
         document.getElementById("time").textContent = hours + "h " + minutes + "m " + seconds + "s ";
     }, 1000);
-    </script>
-
+</script>
 <body>
 <form method="post" asp-controller="SolveQuiz" asp-action="SaveResult">
     <section class="solve-content">
     <h1 class="name-poll">@ViewBag.QuizTitle</h1>
     @{
-        var questionNumber = 0;
+        ViewBag.QuestionNumber = 0;
         foreach (var id in Model)
         {
             var question = (Question)ViewBag.DataMangager.Questions.GetItemById(id);
-            <input type="text" readonly name="answers[@questionNumber].QuestionId" value="@question.Id" hidden="hidden">
-            <input type="text" readonly name="answers[@questionNumber].QuestionType" value="@question.Type" hidden="hidden">
-            <input type="text" readonly name="answers[@questionNumber].QuizId" value="@ViewBag.QuidId" hidden="hidden">
-            var questionContainerId = $"question_{questionNumber}";
+            
+            <input type="text" readonly name="answers[@ViewBag.QuestionNumber].QuestionId" value="@question.Id" hidden="hidden">
+            <input type="text" readonly name="answers[@ViewBag.QuestionNumber].QuestionType" value="@question.Type" hidden="hidden">
+            <input type="text" readonly name="answers[@ViewBag.QuestionNumber].QuizId" value="@ViewBag.QuidId" hidden="hidden">
+            
+            ViewBag.QuestionContainerId = $"question_{ViewBag.QuestionNumber}";
+            ViewBag.QuestionNumber = ViewBag.QuestionNumber;
+            ViewBag.QuestionText = question.Text;
+            ViewBag.QuestionAnswerOptions = question.AnswerOptions;
+            ViewBag.Question = question;
+            ViewBag.WithAnswers = 0;
+            
             <section class="question-solve">
-                <section id=@questionContainerId class="hat-question">
-                    <div class="number-question">
-                        <div class="number">@(questionNumber + 1)</div>
-                        <div class="dot">.</div>
-                    </div>
-                    <div class="name-question">@question.Text</div>
+                <section id="@ViewBag.QuestionContainerId" class="hat-question">
+                    @await Html.PartialAsync("QuestionTitle")
                 </section>
-                <section class="answer">
-                    @switch (question.Type)
-                    {
-                        case QuestionTypeEnum.OpenQuestion:
-                        {
-                            var inputId = $"answer_{questionNumber}";
-                            <label>
-                                <input class="text-question" type="text" id=@inputId placeholder="Ответ"
-                                       name="answers[@questionNumber].Answers">
-                            </label>
-                            break;
-                        }
-                        case QuestionTypeEnum.MultipleAnswersQuestion:
-                        {
-                            <label>
-                                @{
-                                    var optionNumb = 0;
-                                    foreach (var option in question.AnswerOptions)
-                                    {
-                                        var optionId = $"option_{questionNumber}_{optionNumb}";
-                                        <label id=@optionId class="checkbox-label">
-                                            <input type="checkbox"
-                                                   onchange="checkCheckbox(this, @optionNumb)"
-                                                   name="answers[@questionNumber].Answers"
-                                                   class="checkbox-text">
-                                            <span>@option</span>
-                                        </label>
-                                        optionNumb++;
-                                    }
-                                }
-                            </label>
-                            break;
-                        }
-                        case QuestionTypeEnum.Radio:
-                        {
-                            <label>
-                                @{
-                                    var optionNumb = 0;
-                                    foreach (var option in question.AnswerOptions)
-                                    {
-                                        var optionId = $"option_{questionNumber}_{optionNumb}";
-                                        <label id=@optionId class="radio-label">
-                                            <input type="radio"
-                                                   onchange="checkCheckbox(this, @optionNumb)"
-                                                   name="answers[@questionNumber].Answers"
-                                                   class="radio-text">
-                                            <span>@option</span>
-                                        </label>
-                                        optionNumb++;
-                                    }
-                                }
-                            </label>
-                            break;
-                        }
-                        case QuestionTypeEnum.Code:
-                        {
-                            <label>
-                                @{
-                                    <textarea id="code_@questionNumber" name="answers[@questionNumber].Answers"></textarea>
-                                    <script>
-                                        var textarea = document.getElementById("code_@questionNumber");
-                                        var editor = CodeMirror.fromTextArea(textarea, {
-                                            lineNumbers: true,
-                                            lineWrapping: true,
-                                            matchBrackets: true,
-                                            indentUnit: 5,
-                                            lint: true,
-                                        });
-                                        
-                                        editor.on('change', function () {
-                                            textarea.value = editor.getValue();
-                                        });
-                                    </script>
-                                }
-                            </label>
-                            break;
-                        }
-                    }
-
-                </section>
+                @await Html.PartialAsync("QuestionAnswer")
             </section>
-            questionNumber++;
+            ViewBag.QuestionNumber++;
         }
     }
     <button class="submit-button" id="send-answers">Отправить</button>

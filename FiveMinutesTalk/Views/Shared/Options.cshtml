@@ -1,0 +1,16 @@
+@using FiveMinutesTalk.Domain.Entities.QuestionsTypes
+@model string[]
+
+<script src="js/site.js"></script>
+<label>
+    @{
+        var optionNumb = 0;
+        foreach (var option in ((Question)ViewBag.Question).AnswerOptions)
+        {
+            ViewBag.OptionNumb = optionNumb;
+            ViewBag.OptionText = option;
+            @await Html.PartialAsync("Option", Model)
+            optionNumb++;
+        }
+    }
+</label>

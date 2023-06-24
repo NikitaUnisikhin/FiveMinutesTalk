@@ -1,0 +1,28 @@
+@using FiveMinutesTalk.Domain.Entities.QuestionsTypes
+@model string[]
+
+@{
+    for (int j = 0; j < ViewBag.Question.AnswerOptions.Length; j++)
+    {
+        var option = ViewBag.Question.AnswerOptions[j];
+        ViewBag.OptionText = option;
+        ViewBag.OptionNumb = j;
+        
+        @await Html.PartialAsync("Option", Model)
+                                            
+        if (((Question)ViewBag.Question).CorrectAnswers.Contains(j.ToString()))
+        {
+            <script>
+                document.getElementById("option_@(ViewBag.QuestionNumber)_@j")
+                    .getElementsByClassName("@Model[0]-text")[0].checked = "checked"
+            </script>
+        }
+    }
+    <input value="Добавить вариант ответа" type="button" id="Add@(Model[1])-@ViewBag.QuestionNumber" class="add-@Model[0]">
+    <script>        
+        var col = @ViewBag.Question.AnswerOptions.Length;
+        document.getElementById("Add@(Model[1])-@ViewBag.QuestionNumber").addEventListener("click", function (e) {
+            addNew@(Model[1])(e, @ViewBag.QuestionNumber, col++)
+        });
+    </script>
+}
