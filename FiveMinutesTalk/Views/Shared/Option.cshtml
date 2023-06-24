@@ -1,5 +1,15 @@
 @model string[]
 
+<script>
+    function checkCheckbox(checkbox, optionNumber){
+        if (checkbox.checked) {
+            checkbox.value = optionNumber;
+        }
+        else {
+            checkbox.removeAttribute('value');
+        }
+    }
+</script>
 <label id="option_@(ViewBag.QuestionNumber)_@(ViewBag.OptionNumb)" class="@Model[0]-label">
     <input type="@Model[0]"
            onchange="checkCheckbox(this, @ViewBag.OptionNumb)"

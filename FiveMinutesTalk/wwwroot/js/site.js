@@ -18,7 +18,7 @@ document.querySelector('select').addEventListener('change', function (questionTy
 let baseForm = document.getElementById("Form-0");
 
 // Копируем изначальную форму
-const copied = baseForm.cloneNode(true);
+let copied = baseForm.cloneNode(true);
 
 // Проверка на совпадение паролей
 function validatePassword() {

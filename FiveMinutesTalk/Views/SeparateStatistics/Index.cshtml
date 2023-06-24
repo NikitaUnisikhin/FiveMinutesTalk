@@ -108,8 +108,14 @@
                                                         editor.on('change', function () {
                                                             textarea.value = editor.getValue();
                                                         });
-
-                                                        editor.getDoc().setValue("@answer.Answers.FirstOrDefault()");
+                                                        
+                                                        function decodeHtml(html) {
+                                                            var txt = document.createElement("textarea");
+                                                            txt.innerHTML = html;
+                                                            return txt.value;
+                                                        }
+                                                        
+                                                        editor.getDoc().setValue(decodeHtml("@answer.Answers.FirstOrDefault()"));
                                                     </script>
                                                 }
                                             </label>

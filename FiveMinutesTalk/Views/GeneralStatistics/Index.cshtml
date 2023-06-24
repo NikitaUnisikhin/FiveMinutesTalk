@@ -111,7 +111,13 @@
                                                 lint: true,
                                                 });
                                                 
-                                                editor.getDoc().setValue("@ans");
+                                                function decodeHtml(html) {
+                                                    var txt = document.createElement("textarea");
+                                                    txt.innerHTML = html;
+                                                    return txt.value;
+                                                }
+                                                
+                                                editor.getDoc().setValue(decodeHtml("@ans"));
                                             </script>
                                         }
                                     }
