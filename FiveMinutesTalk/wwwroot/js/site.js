@@ -216,7 +216,7 @@ function changeComponents(questionType) {
         addCheckbox.setAttribute("id", "AddСheckbox-" + id);
         let col = 0;
         addCheckbox.addEventListener("click", function (e) {
-            addNewCheckbox(e, id, col++)
+            addNewCheckbox(e, col++)
         });
 
         addCheckbox.setAttribute("class", "add-checkbox");
@@ -229,7 +229,7 @@ function changeComponents(questionType) {
         addRadio.setAttribute("id", "AddRadio-" + id);
         let col = 0;
         addRadio.addEventListener("click", function (e) {
-            addNewRadio(e, id, col++)
+            addNewRadio(e, col++)
         });
         addRadio.setAttribute("class", "add-radio");
         newDiv.appendChild(addRadio);
@@ -240,8 +240,9 @@ function changeComponents(questionType) {
 }
 
 // функция по добавлению новых label с checkbox и вводом
-function addNewCheckbox(e, id, col) {
+function addNewCheckbox(e, col) {
     let addCheck = e.currentTarget;
+    let id = addCheck.id.split("-")[1];
 
     let label = document.createElement("label");
     label.setAttribute("id", "Label-" + id + `-${col}`);
@@ -282,9 +283,10 @@ function addNewCheckbox(e, id, col) {
 }
 
 // функция по добавлению новых label с ratio и вводом
-function addNewRadio(e, id, col) {
+function addNewRadio(e, col) {
     // получаем из события нажатия, на каком объекте это произошло
     let addRad = e.currentTarget;
+    let id = addRad.id.split("-")[1];
 
     let label = document.createElement("label");
     label.setAttribute("id", "Label-" + id + `-${col}`);
