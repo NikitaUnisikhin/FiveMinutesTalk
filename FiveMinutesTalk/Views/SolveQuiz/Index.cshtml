@@ -117,15 +117,19 @@
                         {
                             <label>
                                 @{
-                                    <textarea id="code_@questionNumber"></textarea>
+                                    <textarea id="code_@questionNumber" name="answers[@questionNumber].Answers"></textarea>
                                     <script>
-                                 CodeMirror.fromTextArea(document.getElementById("code_@questionNumber"), {
+                                    let textarea = document.getElementById("code_@questionNumber");
+                                    let editor = CodeMirror.fromTextArea(document.getElementById("code_@questionNumber"), {
                                      lineNumbers: true,
                                      lineWrapping: true,
                                      matchBrackets: true,
                                      indentUnit: 5,
                                      lint: true
                                  });
+                                    editor.on('change', function () {
+                                                    textarea.value = editor.getValue();
+                                                });
                             </script>
 
                                 }
