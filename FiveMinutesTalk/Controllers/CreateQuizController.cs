@@ -17,7 +17,7 @@ public class CreateQuizController : Controller
     {
         this.dataManager = dataManager;
     }
-    
+
     [HttpGet]
     public IActionResult Index()
     {
@@ -29,7 +29,7 @@ public class CreateQuizController : Controller
     {
         var quizId = Guid.NewGuid();
         ViewBag.QuizId = quizId;
-        
+
         dataManager.Quizzes.SaveItem(new Quiz()
         {
             Id = quizId,
@@ -52,9 +52,9 @@ public class CreateQuizController : Controller
 
             newQuestion.AnswerOptions = question.AnswerOptions;
             newQuestion.CorrectAnswers = question.CorrectAnswers;
-            
+
             dataManager.Questions.SaveItem(newQuestion);
-            
+
             dataManager.QuizQuestions.SaveItem(new QuizQuestion()
             {
                 Id = Guid.NewGuid(),
@@ -62,7 +62,7 @@ public class CreateQuizController : Controller
                 QuizId = quizId
             });
         }
-        
+
         return View("PopUp", quizId);
     }
 }

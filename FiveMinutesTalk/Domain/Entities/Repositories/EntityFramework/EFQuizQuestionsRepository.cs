@@ -12,7 +12,7 @@ public class EFQuizQuestionsRepository : IRepository<QuizQuestion>
     {
         this.context = context;
     }
-    
+
     public IQueryable<QuizQuestion> GetItems()
     {
         return context.QuizQuestions;
@@ -25,7 +25,7 @@ public class EFQuizQuestionsRepository : IRepository<QuizQuestion>
             .Select(x => x.QuestionId)
             .ToArray();
     }
-    
+
     public QuizQuestion GetItemById(Guid id)
     {
         return context.QuizQuestions

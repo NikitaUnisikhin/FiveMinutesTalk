@@ -10,7 +10,7 @@ public class EFQuizQuestionAnswerRepository : IRepository<QuizQuestionAnswer>
     {
         this.context = context;
     }
-    
+
     public IQueryable<QuizQuestionAnswer> GetItems()
     {
         return context.QuizQuestionAnswers;
@@ -21,7 +21,7 @@ public class EFQuizQuestionAnswerRepository : IRepository<QuizQuestionAnswer>
         return context.QuizQuestionAnswers
             .FirstOrDefault(x => x.Id == id);
     }
-    
+
     public Guid[] GetQuestionAnswerIdsByQuizAnswerId(Guid id)
     {
         return context.QuizQuestionAnswers
@@ -44,5 +44,4 @@ public class EFQuizQuestionAnswerRepository : IRepository<QuizQuestionAnswer>
         });
         context.SaveChanges();
     }
-   
 }

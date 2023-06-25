@@ -12,7 +12,7 @@ public class AccountController : Controller
     private readonly UserManager<IdentityUser> userManager;
     private readonly SignInManager<IdentityUser> signInManager;
     private readonly DataManager dataManager;
-    
+
     public AccountController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signinMgr,
         DataManager dataManager)
     {
@@ -32,47 +32,47 @@ public class AccountController : Controller
         {
             return Redirect("~/CreateQuiz/Index");
         }
+
         ViewBag.QuizId = token;
         var questionIds = ((EFQuizQuestionsRepository)dataManager.QuizQuestions)
             .GetQuestionsIdByQuizId(token);
         ViewBag.DataManager = dataManager;
         return View("Quiz", questionIds);
     }
-    
+
     [HttpGet]
     public IActionResult Register()
     {
         return View();
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Register(RegisterViewModel model)
     {
-        if(ModelState.IsValid)
+        if (!ModelState.IsValid) return View(model);
+        var user = new IdentityUser()
         {
-            var user = new IdentityUser()
-            {
-                UserName = model.Email,
-                Email = model.Email
-            };
+            UserName = model.Email,
+            Email = model.Email
+        };
 
-            var result = await userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
+        var result = await userManager.CreateAsync(user, model.Password);
+        if (result.Succeeded)
+        {
+            await signInManager.SignInAsync(user, false);
+            return RedirectToAction("Index", "Home");
+        }
+        else
+        {
+            foreach (var error in result.Errors)
             {
-                await signInManager.SignInAsync(user, false);
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                ModelState.AddModelError(string.Empty, error.Description);
             }
         }
+
         return View(model);
     }
-    
+
     [HttpGet]
     public IActionResult Login(string returnUrl = null)
     {
@@ -89,14 +89,17 @@ public class AccountController : Controller
             if (user != null)
             {
                 await signInManager.SignOutAsync();
-                Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
+                Microsoft.AspNetCore.Identity.SignInResult result =
+                    await signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
                     return Redirect(returnUrl ?? "/");
                 }
             }
+
             ModelState.AddModelError(nameof(LoginViewModel.UserName), "Неверный логин или пароль");
         }
+
         return View(model);
     }
 

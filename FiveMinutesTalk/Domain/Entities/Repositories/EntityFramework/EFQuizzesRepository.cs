@@ -10,7 +10,7 @@ public class EFQuizzesRepository : IRepository<Quiz>
     {
         this.context = context;
     }
-    
+
     public IQueryable<Quiz> GetItems()
     {
         return context.Quizzes;
@@ -21,7 +21,7 @@ public class EFQuizzesRepository : IRepository<Quiz>
         return context.Quizzes
             .FirstOrDefault(x => x.Id == id);
     }
-    
+
     public Quiz[] GetItemsByOwnerId(Guid id)
     {
         return context.Quizzes

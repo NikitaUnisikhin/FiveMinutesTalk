@@ -14,13 +14,15 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
     public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
     public DbSet<QuizQuestionAnswer> QuizQuestionAnswers { get; set; }
     public DbSet<QuizAnswer> QuizAnswers { get; set; }
-        
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-    
+
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    {
+    }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        
+
         builder.Entity<IdentityRole>().HasData(new IdentityRole
         {
             Id = "A09B4B9F-27F3-47C4-B83B-CEE4C5C5C874",
@@ -45,7 +47,7 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
             RoleId = "A09B4B9F-27F3-47C4-B83B-CEE4C5C5C874",
             UserId = "BCF8F1A1-A9BA-480F-A16C-88DBDCFAA9AC"
         });
-        
+
         builder.Entity<IdentityRole>().HasData(new IdentityRole
         {
             Id = "C8F61226-0EE8-4AEB-9C57-BE198614A1E8",
@@ -75,16 +77,16 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
         {
             Id = new Guid("92EF0486-B6C5-4706-A9C8-2C994F43159D"),
             Text = "Как зовут альфу?",
-            CorrectAnswers = new [] { "Саша" },
+            CorrectAnswers = new[] { "Саша" },
             Type = QuestionTypeEnum.OpenQuestion
         });
-        
+
         builder.Entity<Question>().HasData(new Question()
         {
             Id = new Guid("8B95163B-8485-40D6-BAFD-51785AD6E9D2"),
             Text = "Назови имена создателей сайта?",
-            AnswerOptions = new [] { "Саша", "Никита", "Сша" },
-            CorrectAnswers = new [] { "Саша", "Никита" },
+            AnswerOptions = new[] { "Саша", "Никита", "Сша" },
+            CorrectAnswers = new[] { "Саша", "Никита" },
             Type = QuestionTypeEnum.MultipleAnswersQuestion
         });
 
@@ -100,7 +102,7 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
             QuizId = new Guid("4043B854-C29F-4DCA-900C-0387DE52D250"),
             QuestionId = new Guid("8B95163B-8485-40D6-BAFD-51785AD6E9D2")
         });
-        
+
         builder.Entity<QuizQuestion>().HasData(new QuizQuestion()
         {
             Id = new Guid("B1FCFF97-0713-4815-B3A8-40232DB7FF90"),

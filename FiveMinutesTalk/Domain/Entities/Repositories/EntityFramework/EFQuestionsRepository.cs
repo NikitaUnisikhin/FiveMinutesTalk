@@ -11,7 +11,7 @@ public class EFQuestionsRepository : IRepository<Question>
     {
         this.context = context;
     }
-    
+
     public IQueryable<Question> GetItems()
     {
         return context.Questions;

@@ -8,13 +8,12 @@ namespace FiveMinutesTalk.Controllers;
 public class GeneralStatisticsController : Controller
 {
     private readonly DataManager dataManager;
-    
+
     public GeneralStatisticsController(DataManager dataManager)
     {
         this.dataManager = dataManager;
     }
-    
-    // 4043b854-c29f-4dca-900c-0387de52d250
+
     public IActionResult Index(Guid token)
     {
         ViewBag.QuizId = token;
@@ -26,6 +25,7 @@ public class GeneralStatisticsController : Controller
         {
             return Redirect("~/CreateQuiz/Index");
         }
+
         ViewBag.DataManager = dataManager;
         return View(token);
     }

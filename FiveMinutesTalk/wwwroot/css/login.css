@@ -33,7 +33,7 @@
     border-radius: 20px;
 }
 
-.inputs-login{
+.inputs-login {
     display: flex;
     flex-direction: column;
     gap: 40px;

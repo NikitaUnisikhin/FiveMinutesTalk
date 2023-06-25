@@ -3,7 +3,7 @@
 <section id="answer-@ViewBag.QuestionNumber">
     @{
         var optionsView = ViewBag.WithAnswers == 1 ? "OptionsWithAnswer" : "Options";
-        
+
         switch (ViewBag.Question.Type)
         {
             case QuestionTypeEnum.OpenQuestion:

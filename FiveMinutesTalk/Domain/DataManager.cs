@@ -13,8 +13,8 @@ public class DataManager
     public IRepository<QuizAnswer> QuizAnswers { get; set; }
     public IRepository<QuizQuestionAnswer> QuizQuestionAnswers { get; set; }
 
-    public DataManager(IRepository<Question> questions, IRepository<Quiz> quizzes, 
-        IRepository<QuizQuestion> quizQuestions, IRepository<QuestionAnswer> questionAnswers, 
+    public DataManager(IRepository<Question> questions, IRepository<Quiz> quizzes,
+        IRepository<QuizQuestion> quizQuestions, IRepository<QuestionAnswer> questionAnswers,
         IRepository<QuizAnswer> quizAnswers, IRepository<QuizQuestionAnswer> quizQuestionAnswers)
     {
         Questions = questions;

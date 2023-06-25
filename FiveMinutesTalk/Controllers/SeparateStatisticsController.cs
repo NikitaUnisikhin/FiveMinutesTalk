@@ -9,13 +9,12 @@ namespace FiveMinutesTalk.Controllers;
 public class SeparateStatisticsController : Controller
 {
     private readonly DataManager dataManager;
-    
+
     public SeparateStatisticsController(DataManager dataManager)
     {
         this.dataManager = dataManager;
     }
-    
-    // 4043b854-c29f-4dca-900c-0387de52d250
+
     public IActionResult Index(Guid token)
     {
         ViewBag.QuizId = token;

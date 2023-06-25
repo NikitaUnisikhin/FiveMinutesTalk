@@ -11,13 +11,12 @@ namespace FiveMinutesTalk.Controllers;
 public class SolveQuizController : Controller
 {
     private readonly DataManager dataManager;
-    
+
     public SolveQuizController(DataManager dataManager)
     {
         this.dataManager = dataManager;
     }
-    
-    // 4043b854-c29f-4dca-900c-0387de52d250
+
     [HttpGet]
     public IActionResult Index(Guid token)
     {
@@ -26,7 +25,7 @@ public class SolveQuizController : Controller
 
         if (quiz.Start > DateTime.Now || DateTime.Now > quiz.End)
             return View("PollNotActive");
-        
+
         ViewBag.End = quiz.End;
         ViewBag.QuizTitle = quiz.Title;
         ViewBag.QuidId = quiz.Id;
@@ -40,7 +39,7 @@ public class SolveQuizController : Controller
     {
         if (answers.Length == 0)
             View("GetResult");
-        
+
         var quizAnswerId = Guid.NewGuid();
         dataManager.QuizAnswers.SaveItem(new QuizAnswer()
         {

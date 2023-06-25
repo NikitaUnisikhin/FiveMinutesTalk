@@ -44,7 +44,7 @@ function newField(ev) {
     let questionId = document.querySelectorAll(".question-block").length;
     let newCopied = copied.cloneNode(true);
     newCopied.id = "Form-" + questionId;
-    
+
     let formControl = newCopied.getElementsByClassName('name-question')[0];
     formControl.name = `questions[${questionId}].Text`;
     let formSelect = newCopied.getElementsByClassName('form-select')[0];
@@ -64,7 +64,7 @@ function newField(ev) {
     addQuestion.addEventListener('click', function (ev) {
         newField(ev)
     });
-    
+
     setupSelector(newCopied.querySelector('.custom-select'));
     parent.after(newCopied);
     changeNumberQuestions();
@@ -77,17 +77,17 @@ function changeNumberQuestions() {
         let currentQuestion = questionsNumbers[i];
         currentQuestion.id = "Form-" + i;
         currentQuestion.querySelector(".question").id = "Question-" + i;
-        
+
         currentQuestion.querySelector(".number").textContent = `${i + 1}`;
-        
+
         currentQuestion.querySelector(".name-question").name = `questions[${i}].Text`;
-        
+
         let select = currentQuestion.querySelector(".form-select");
         select.id = `${i}`;
         select.name = `questions[${i}].Type`;
-        
+
         let questionType = select.options[select.selectedIndex].value;
-        
+
         switch (questionType) {
             // Текстовое поле
             case "OpenQuestion":
@@ -95,7 +95,7 @@ function changeNumberQuestions() {
                 textQuestion.id = "Text-" + i;
                 textQuestion.parentElement.id = "Answer-" + i;
                 break;
-                
+
             // Поле с кодом
             case "Code":
                 let code = currentQuestion.querySelector("textarea");
@@ -103,7 +103,7 @@ function changeNumberQuestions() {
                 code.name = `questions[${i}].CorrectAnswers`;
                 code.parentElement.id = "Answer-" + i;
                 break;
-                
+
             // Чекбоксы
             case "MultipleAnswersQuestion":
                 let labelsCh = currentQuestion.querySelectorAll(".checkbox-label");
@@ -119,7 +119,7 @@ function changeNumberQuestions() {
                     chText.id = `CheckboxText-${i}-${j}`;
                     chText.name = `questions[${i}].AnswerOptions`;
                     label.querySelector(".checkbox-span").id = `SpanCheckbox-${i}-${j}`;
-                    
+
                     checkMark(chId, i, j);
 
                     if (j === 0)
@@ -152,7 +152,7 @@ function changeNumberQuestions() {
                 currentQuestion.querySelector(".add-radio").id = "AddRadio-" + i;
                 break;
         }
-        
+
         currentQuestion.querySelector(".add-question").id = "AddQuestion-" + i;
     }
 }
@@ -195,7 +195,7 @@ function changeComponents(questionType) {
         textarea.setAttribute("id", "Textarea-" + id);
         textarea.setAttribute("name", `questions[${id - 1}].CorrectAnswers`);
         newDiv.appendChild(textarea);
-        
+
         let editor = CodeMirror.fromTextArea(textarea, {
             lineNumbers: true,
             lineWrapping: true,
@@ -203,11 +203,11 @@ function changeComponents(questionType) {
             indentUnit: 5,
             lint: true,
         });
-        
+
         editor.on('change', function () {
             textarea.value = editor.getValue();
         });
-        
+
     } else if (selectedValue === "MultipleAnswersQuestion") {
         // здесь создаем кнопку, которая добавляет новый label с checkbox кнопкой и вводом
         let addCheckbox = document.createElement("input");

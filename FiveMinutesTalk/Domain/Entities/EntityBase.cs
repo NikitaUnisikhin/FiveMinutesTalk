@@ -4,6 +4,5 @@ namespace FiveMinutesTalk.Domain.Entities;
 
 public abstract class EntityBase
 {
-    [Required]
-    public Guid Id { get; set; }
+    [Required] public Guid Id { get; set; }
 }

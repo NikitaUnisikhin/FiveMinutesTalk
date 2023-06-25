@@ -5,12 +5,11 @@ namespace FiveMinutesTalk.Domain.Entities;
 
 public class Quiz : EntityBase
 {
-    [Required] 
-    public string Title { get; set; } = "Опрос";
-    
+    [Required] public string Title { get; set; } = "Опрос";
+
     public DateTime Start { get; set; }
     public DateTime End { get; set; }
     public DateTime CreationDate { get; set; }
-    
+
     public Guid OwnerId { get; set; }
 }
