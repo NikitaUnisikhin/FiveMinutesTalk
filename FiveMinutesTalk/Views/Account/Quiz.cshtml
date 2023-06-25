@@ -128,7 +128,12 @@
                                                         textarea.value = editor.getValue();
                                                     });
                                                     
-                                                    editor.getDoc().setValue("@question.CorrectAnswers.FirstOrDefault()");
+                                                    editor.getDoc().setValue(decodeHtml("@question.CorrectAnswers.FirstOrDefault()"));
+                                                    function decodeHtml(html){
+                                                        let txt = document.createElement("textarea");
+                                                        txt.innerHTML = html;
+                                                        return txt.value;
+                                                    }
                                             </script>
                                             }
                                         </label>

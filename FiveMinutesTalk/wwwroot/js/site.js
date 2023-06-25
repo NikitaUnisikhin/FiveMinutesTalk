@@ -418,3 +418,9 @@ window.addEventListener('load', () => {
     end.value = now.toISOString().slice(0, -1);
 });
 
+function decodeHtml(html){
+    let txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+}
+
